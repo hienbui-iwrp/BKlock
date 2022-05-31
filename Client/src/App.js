@@ -22,7 +22,7 @@ function App() {
         <Route path="/introduction" element={<IntroPage />} exact />
         <Route path="/news" element={<NewsPage />} exact />
         <Route path="/signup" element={<SignupPage />} exact />
-        <Route path="/signin" element={<SignupPage />} exact />
+        <Route path="/signin" element={<SigninPage />} exact />
         <Route path="*" element={<h1>Page not found</h1>} />
       </Routes>
     </BrowserRouter>
