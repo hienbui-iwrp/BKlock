@@ -6,9 +6,7 @@ import Products from '../component/user/products';
 export default function ProductPage() {
     return <>
         <Navbar />
-        <div style={{ marginTop: 60 }}>
-            <Products />
-        </div>
+        <Products />
         <Footer />
     </>
 }
