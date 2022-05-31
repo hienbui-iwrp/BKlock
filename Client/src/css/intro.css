@@ -1,0 +1,48 @@
+:root {
+    --bg-color: rgb(74, 244, 159);
+    --selected-color: rgb(0, 222, 192);
+    ;
+}
+
+.intro {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.intro__side-bar {
+    background-color: var(--bg-color);
+}
+
+.side-bar__item {
+    text-decoration: underline;
+    padding: 4px;
+    cursor: pointer;
+
+}
+
+.side-bar__item__selected {
+    border-radius: 5px;
+    background-color: var(--selected-color);
+    position: relative;
+}
+
+.side-bar__item__selected::after {
+    content: "";
+    width: 30%;
+    height: 100%;
+    background-color: #ccc;
+    position: absolute;
+    right: -20%;
+    top: 0;
+    background-color: var(--selected-color);
+
+}
+
+.intro__content {
+    background-color: var(--selected-color);
+}
+
+.intro__body {
+    padding: 20px 0;
+}
