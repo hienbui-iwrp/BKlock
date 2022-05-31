@@ -32,7 +32,7 @@ export default function ProductCard() {
                         onMouseLeave={() => setVariant("outline")}
                         variant={variant}
                     >
-                        <Text weight={500} align='right' size="lg">Buy now</Text>
+                        <Text weight={500} size="lg">Buy now</Text>
                     </Button>
 
                     <Button fullWidth
@@ -40,7 +40,7 @@ export default function ProductCard() {
                         onMouseLeave={() => setVariant1("outline")}
                         variant={variant1}
                     >
-                        <Text weight={500} align='right' size="lg">Add to cart</Text>
+                        <Text weight={500} size="lg">Add to cart</Text>
                     </Button>
 
                 </Group>
