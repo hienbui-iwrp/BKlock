@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Image, Text, Button, Group } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import "../../css/productCard.css";
+import "../../css/product.css";
 
 export default function ProductCard() {
     const [variant, setVariant] = React.useState("outline");
@@ -21,26 +21,28 @@ export default function ProductCard() {
                     <Text weight={500} className="product-name">Rolex abc xyz</Text>
                 </Link>
 
-
                 <Text size="sm" style={{ lineHeight: 1.5 }}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.
                 </Text>
                 <Text weight={500} color="red" align='right' size="lg">$2,000</Text>
                 <Group direction='row' grow style={{ marginTop: 10 }}>
+
                     <Button fullWidth
                         onMouseEnter={() => setVariant("filled")}
                         onMouseLeave={() => setVariant("outline")}
                         variant={variant}
                     >
-                        Buy now
+                        <Text weight={500} align='right' size="lg">Buy now</Text>
                     </Button>
+
                     <Button fullWidth
                         onMouseEnter={() => setVariant1("filled")}
                         onMouseLeave={() => setVariant1("outline")}
                         variant={variant1}
                     >
-                        Add to cart
+                        <Text weight={500} align='right' size="lg">Add to cart</Text>
                     </Button>
+
                 </Group>
 
             </Card>
