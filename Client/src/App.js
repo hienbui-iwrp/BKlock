@@ -8,7 +8,7 @@ import IntroPage from './page/introPage';
 import NewsPage from './page/newsPage';
 import SignupPage from './page/signupPage';
 import SigninPage from './page/signinPage';
-
+import ProductPage from './page/productPage';
 
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
         <Route path="/news" element={<NewsPage />} exact />
         <Route path="/signup" element={<SignupPage />} exact />
         <Route path="/signin" element={<SignupPage />} exact />
+        <Route path="/product" element={<ProductPage />} exact />
         <Route path="*" element={<h1>Page not found</h1>} />
       </Routes>
     </BrowserRouter>
