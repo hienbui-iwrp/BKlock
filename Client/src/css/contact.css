@@ -1,0 +1,32 @@
+.contact{
+    margin-top: 60px;
+    padding-left: 30px;
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+
+.contact1, .contact2{
+    width: 100%;
+    /* max-width: 960px; */
+}
+
+.contact1{
+    display: flex;
+}
+
+.contact1 > div{
+    width: 45%;
+}
+
+.contact2 > div{
+    width: 95%;
+    max-width: 95%;
+}
+
+.contact > button{
+    margin-left: 2.5%;
+}
+
+.contact2 textarea{
+    min-height: 150px;
+}
