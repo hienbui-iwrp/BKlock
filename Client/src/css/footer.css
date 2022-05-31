@@ -1,0 +1,19 @@
+.footer{
+    width: 100%;
+    height: fit-content;
+    background-color: #868e96;
+    padding-top: 20px;
+}
+
+.footer > .footer-grid{
+    min-height: 200px !important;
+    margin: 0;
+}
+
+.footer > .footer-grid > div{
+    min-height: 200px !important;
+}
+
+.footer img{
+    border-radius: 100%;
+}
