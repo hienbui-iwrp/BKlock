@@ -10,7 +10,7 @@ export default function Products() {
     const total = Math.ceil(arr.length / maxItemPerPage);
 
     return <>
-        <Grid>
+        <Grid style={{ marginTop: 60 }}>
             <Grid.Col lg={3}></Grid.Col>
             <Grid.Col lg={9}>
                 <Grid>
