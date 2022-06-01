@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from '../../component/general/productCard';
-import { Grid, Pagination } from '@mantine/core';
+import { Grid, Pagination, Group } from '@mantine/core';
+import Slider from '../general/slider';
 import "../../css/product.css";
 
 export default function Products() {
@@ -8,11 +9,18 @@ export default function Products() {
     const [activePage, setPage] = React.useState(1);
     const maxItemPerPage = 6;
     const total = Math.ceil(arr.length / maxItemPerPage);
-
+    const items = [
+        "https://cdn.watchstore.vn/uploads/brands/orient-logo.jpg",
+        "https://cdn.watchstore.vn/uploads/brands/tissot-logo.jpg",
+        "https://cdn.watchstore.vn/uploads/brands/casio-logo.jpg",
+        "https://cdn.watchstore.vn/uploads/brands/seiko-logo.jpg",
+        "https://cdn.watchstore.vn/uploads/brands/citizen-logo.jpg",
+    ]
     return <>
-        <Grid>
+        <Grid style={{ marginTop: 60 }}>
             <Grid.Col lg={3}></Grid.Col>
             <Grid.Col lg={9}>
+                <Slider type="image" items={items} />
                 <Grid>
                     {arr.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(x => {
                         return (

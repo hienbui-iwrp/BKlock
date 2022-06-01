@@ -1,39 +1,40 @@
 import React from "react";
 import "../../css/home.css";
-import { Container, Text } from "@mantine/core";
-import { Carousel, Thumbs, CarouselProps } from "react-responsive-carousel";
+import { Title } from "@mantine/core";
+import Slider from "../general/slider";
+import ProductCard from "../general/productCard";
+const items = [
+    "https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg",
+    "https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg",
+    "https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg",
+    "https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg",
+    "https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg",
+    "https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg",
+    "https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg",
+];
 
+const products = [
+    <ProductCard key={1} />,
+    <ProductCard key={2} />,
+    <ProductCard key={3} />,
+    <ProductCard key={4} />,
+    <ProductCard key={5} />,
+    <ProductCard key={6} />,
+    <ProductCard key={7} />,
+];
 export default function Home() {
     return (
         <>
             <div className="home">
-                <Container>
-                    <Text>Sản phẩm bán chạy nhất</Text>
-                    <Carousel
-                        showArrows={true}
-                        // onChange={onChange}
-                        // onClickItem={onClickItem}
-                        // onClickThumb={Thumbs}
-                    >
-                        <div>
-                            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" />
-                            <p className="legend">Legend 1</p>
-                        </div>
-                        <div>
-                            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" />
-                            <p className="legend">Legend 2</p>
-                        </div>
-                        <div>
-                            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" />
-                            <p className="legend">Legend 3</p>
-                        </div>
-                        <div>
-                            <img src="https://kenh14cdn.com/2019/9/12/photo-4-15682544730301888465967.jpg" />
-                            <p className="legend">Legend 4</p>
-                        </div>
-                    </Carousel>
-                </Container>
-                <Container>Sản phẩm mới nhất</Container>
+                <Slider type="image" items={items} />
+                <Title align="center" order={2} className="home-title">
+                    Sản phẩm bán chạy nhất
+                </Title>
+                <Slider type="product" items={products} />
+                <Title align="center" order={2} className="home-title">
+                    Sản phẩm mới nhất
+                </Title>
+                <Slider type="product" items={products} />
             </div>
         </>
     );

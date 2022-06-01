@@ -1,4 +1,8 @@
-.home{
+.home {
     margin-top: 60px;
 }
 
+.home-title {
+    margin: 15px;
+    font-weight: 600;
+}
