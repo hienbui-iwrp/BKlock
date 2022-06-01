@@ -1,0 +1,15 @@
+.home-ads-text {
+    color: #fff;
+    width: 50%;
+}
+
+.home-ads-group {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+}
+
+.home-ads-btn {
+    color: #fff;
+    border: 2px solid white;
+}
