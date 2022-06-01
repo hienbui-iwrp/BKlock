@@ -20,7 +20,7 @@ export default function Introduction() {
                     },
                 },
             }}>
-            <Container size="85%" px="xs" >
+            <Container size="85%" px="xs" style={{ marginTop: "80px", marginBottom: "80px" }}>
                 <Grid gutter={0} column={12} justify="center" className="intro">
                     <Grid.Col xs={12} sm={3} md={3} lg={3} xl={3} className="intro__side-bar">
                         <Container size="85%" className="intro__body">
