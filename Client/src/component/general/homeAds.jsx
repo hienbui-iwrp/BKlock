@@ -8,18 +8,21 @@ import {
     MediaQuery,
 } from "@mantine/core";
 import "../../css/homeAds.css";
+import { Link } from "react-router-dom";
 
 export default function HomeAds({ img }) {
     return (
         <Container className="home-ads-container" fluid>
-            <MediaQuery
-                query="(max-width: 1800px) and (min-width: 800px)"
-                styles={{
-                    height: "120vh",
-                }}
-            >
-                <Image src={img} className="home-ads-image" />
-            </MediaQuery>
+            <Link to="/detail">
+                <MediaQuery
+                    query="(max-width: 1800px) and (min-width: 800px)"
+                    styles={{
+                        height: "120vh",
+                    }}
+                >
+                    <Image src={img} className="home-ads-image" />
+                </MediaQuery>
+            </Link>
             <Group className="home-ads-group" direction="column">
                 <MediaQuery
                     query="(max-width: 1800px) and (min-width: 800px)"
@@ -33,10 +36,18 @@ export default function HomeAds({ img }) {
                     </Text>
                 </MediaQuery>
                 <Group>
-                    <Button variant="outline" className="home-ads-btn">
+                    <Button
+                        variant="outline"
+                        className="home-ads-btn"
+                        uppercase
+                    >
                         Show more
                     </Button>
-                    <Button variant="outline" className="home-ads-btn">
+                    <Button
+                        variant="outline"
+                        className="home-ads-btn"
+                        uppercase
+                    >
                         Buy now
                     </Button>
                 </Group>

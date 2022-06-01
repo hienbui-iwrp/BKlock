@@ -8,11 +8,11 @@ export default function ProductCard() {
     const [variant1, setVariant1] = React.useState("outline");
 
     return (
-        <div style={{ width: 340, margin: 'auto' }}>
-            <Card shadow="sm" p="lg">
+        <div style={{ width: "auto", marginLeft: 10, marginRight: 10 }}>
+            <Card shadow="md" p="lg">
                 <Card.Section>
                     <Link to="/detail">
-                        <Image src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png" height={350} alt="watch" className='product-img-zoom' />
+                        <Image src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png" height="50vh" alt="watch" className='product-img-zoom' />
                     </Link>
                 </Card.Section>
 

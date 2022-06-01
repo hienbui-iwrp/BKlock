@@ -53,6 +53,7 @@ export default function Slider({ type, items }) {
             showDots={true}
             autoPlay
             autoPlaySpeed={5000}
+            transitionDuration={500}
         >
             {items.map((item) => {
                 return type === "image" ? (
