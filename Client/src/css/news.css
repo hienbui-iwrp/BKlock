@@ -1,0 +1,14 @@
+.news{
+    margin-top: 60px;
+}
+
+.new-item{
+    width: 400px;
+    margin: auto;
+}
+
+.news-head{
+    width: 100%;
+    background-color: aqua;
+    max-width: 90%;
+}
