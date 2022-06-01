@@ -20,11 +20,7 @@ export default function ProductCard() {
                 <Link to="/detail" style={{ textDecoration: 'none' }}>
                     <Text weight={500} className="product-name">Rolex abc xyz</Text>
                 </Link>
-
-                <Text size="sm" style={{ lineHeight: 1.5 }}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.
-                </Text>
-                <Text weight={500} color="red" align='right' size="lg">$2,000</Text>
+                <Text weight={500} color="red" align='right' size="xl">$2,000</Text>
                 <Group direction='row' grow style={{ marginTop: 10 }}>
 
                     <Button fullWidth
