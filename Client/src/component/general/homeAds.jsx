@@ -14,18 +14,11 @@ export default function HomeAds({ img }) {
     return (
         <Container className="home-ads-container" fluid>
             <Link to="/detail">
-                <MediaQuery
-                    query="(max-width: 1800px) and (min-width: 800px)"
-                    styles={{
-                        height: "120vh",
-                    }}
-                >
-                    <Image src={img} className="home-ads-image" />
-                </MediaQuery>
+                <Image src={img} className="home-ads-image" fit="contain" />
             </Link>
             <Group className="home-ads-group" direction="column">
                 <MediaQuery
-                    query="(max-width: 1800px) and (min-width: 800px)"
+                    query="(max-width: 1800px) and (min-width: 768px)"
                     styles={{
                         fontSize: 40,
                     }}
@@ -35,21 +28,37 @@ export default function HomeAds({ img }) {
                         elit. Fugiat, aliquam.
                     </Text>
                 </MediaQuery>
-                <Group>
-                    <Button
-                        variant="outline"
-                        className="home-ads-btn"
-                        uppercase
+                <Group direction="row">
+                    <MediaQuery
+                        query="(max-width: 768px) and (min-width: 0px)"
+                        styles={{
+                            transform: "scale(0.75, 0.75)",
+                            marginLeft: "-6%",
+                        }}
                     >
-                        Show more
-                    </Button>
-                    <Button
-                        variant="outline"
-                        className="home-ads-btn"
-                        uppercase
+                        <Button
+                            variant="outline"
+                            className="home-ads-btn"
+                            uppercase
+                        >
+                            Show more
+                        </Button>
+                    </MediaQuery>
+                    <MediaQuery
+                        query="(max-width: 768px) and (min-width: 0px)"
+                        styles={{
+                            transform: "scale(0.75, 0.75)",
+                            marginLeft: "-12%",
+                        }}
                     >
-                        Buy now
-                    </Button>
+                        <Button
+                            variant="outline"
+                            className="home-ads-btn"
+                            uppercase
+                        >
+                            Buy now
+                        </Button>
+                    </MediaQuery>
                 </Group>
             </Group>
         </Container>

@@ -47,13 +47,43 @@ export default function Slider({ type, items }) {
         };
     }
 
+    const CustomDot = ({ onMove, index, onClick, active }) => {
+        // onMove means if dragging or swiping in progress.
+        // active is provided by this lib for checking if the item is active or not.
+        return (
+            <li
+                className={active ? "active" : "inactive"}
+                onClick={() => onClick()}
+            >
+                <div></div>
+            </li>
+        );
+    };
+
     return (
         <Carousel
             responsive={responsive}
-            showDots={true}
+            additionalTransfrom={0}
+            arrows
+            autoPlaySpeed={3000}
             autoPlay
-            autoPlaySpeed={5000}
-            transitionDuration={500}
+            centerMode={false}
+            className={type == "homeads" ? "home-ads-slider" : ""}
+            dotListClass=""
+            draggable
+            focusOnSelect={false}
+            infinite
+            itemClass={type == "homeads" ? "home-ads-slider-item" : ""}
+            keyBoardControl
+            minimumTouchDrag={80}
+            renderButtonGroupOutside={false}
+            renderDotsOutside={false}
+            showDots={type == "product" || type == "image" ? false : true}
+            sliderClass=""
+            slidesToSlide={1}
+            swipeable
+            customDot={<CustomDot />}
+            customTransition="transform 0.5s ease-in-out"
         >
             {items.map((item) => {
                 return type === "image" ? (

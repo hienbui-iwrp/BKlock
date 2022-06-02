@@ -1,6 +1,6 @@
 import React from "react";
 import "../../css/home.css";
-import { Title } from "@mantine/core";
+import { Title, Group } from "@mantine/core";
 import Slider from "../general/slider";
 import ProductCard from "../general/productCard";
 import HomeAds from "../general/homeAds";
@@ -23,7 +23,7 @@ const items = [
     />,
     <HomeAds
         img={
-            "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+            "https://images.unsplash.com/photo-1639006570490-79c0c53f1080?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
         }
     />,
     <HomeAds
@@ -33,7 +33,7 @@ const items = [
     />,
     <HomeAds
         img={
-            "https://images.unsplash.com/photo-1541778480-fc1752bbc2a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1296&q=80"
+            "https://images.unsplash.com/photo-1613710774862-d813121e6d44?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
         }
     />,
 ];
@@ -42,14 +42,18 @@ export default function Home() {
         <>
             <div className="home">
                 <Slider type="homeads" items={items} />
-                <Title align="center" order={2} className="home-title">
-                    Sản phẩm bán chạy nhất
-                </Title>
-                <Slider type="product" items={products} />
-                <Title align="center" order={2} className="home-title">
-                    Sản phẩm mới nhất
-                </Title>
-                <Slider type="product" items={products} />
+                <div className="feature-products-site">
+                    <Title align="center" order={2} className="home-title">
+                        Sản phẩm nổi bật
+                    </Title>
+                    <Slider type="product" items={products} />
+                </div>
+                <div className="new-products-site">
+                    <Title align="center" order={2} className="home-title">
+                        Sản phẩm mới nhất
+                    </Title>
+                    <Slider type="product" items={products} />
+                </div>
             </div>
         </>
     );
