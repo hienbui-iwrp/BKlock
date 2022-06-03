@@ -1,0 +1,111 @@
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.web-image-container {
+    width: 60%;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.logn {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f8f9fd;
+    width: 40%;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  
+  input[type="submit"] {
+    cursor: pointer;
+    font-size: 15px;
+    background: #01d28e;
+    border: 1px solid #01d28e;
+    color: #fff;
+    padding: 10px 20px;
+    width: 97%;
+  }
+  
+  input[type="submit"]:hover {
+    background: #6cf0c2;
+
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .login-form {
+    background-color: white;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin: 0;
+  }
+  
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .title {
+    font-size: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  .forgotPass {
+      align-self: flex-end;
+      padding-right: 5%;
+      text-decoration: underline;
+      font-size: 15px;
+      margin: 0;
+  }
+  div > label {
+      padding-left: 2vw;
+  }
+  .extend-container {
+      height: 4vh;
+      justify-content:center;
+      margin: 0;
+  }
+ .button-container img {
+    border-radius: 100%;
+    margin-top: 0 auto;
+
+}
+.homeButton {
+        text-align: end;
+      padding-right: 5%;
+      text-decoration: underline;
+      font-size: 20px;
+      color: #000;
+      font-weight: 900;
+    
+}
+.signup {
+    display: flex;
+    justify-content: end;
+    padding-right: 5rem;
+    margin-top: 3rem;
+}
+.signupButton {
+    font-size: 15px;color: #000;
+      font-weight: 700;
+      text-decoration: underline;
+}
