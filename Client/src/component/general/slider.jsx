@@ -68,17 +68,17 @@ export default function Slider({ type, items }) {
             autoPlaySpeed={3000}
             autoPlay
             centerMode={false}
-            className={type == "homeads" ? "home-ads-slider" : ""}
+            className={type === "homeads" ? "home-ads-slider" : ""}
             dotListClass=""
             draggable
             focusOnSelect={false}
             infinite
-            itemClass={type == "homeads" ? "home-ads-slider-item" : ""}
+            itemClass={type === "homeads" ? "home-ads-slider-item" : ""}
             keyBoardControl
             minimumTouchDrag={80}
             renderButtonGroupOutside={false}
             renderDotsOutside={false}
-            showDots={type == "product" || type == "image" ? false : true}
+            showDots={type === "product" || type == "image" ? false : true}
             sliderClass=""
             slidesToSlide={1}
             swipeable
