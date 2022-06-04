@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Image, Text, Button, Group } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { SiCashapp } from "react-icons/si";
 import "../../css/product.css";
 
 export default function ProductCard() {
@@ -23,20 +25,20 @@ export default function ProductCard() {
                 <Text weight={500} color="red" align='right' size="xl">$2,000</Text>
                 <Group direction='row' grow style={{ marginTop: 10 }}>
 
-                    <Button fullWidth
+                    <Button fullWidth leftIcon={<SiCashapp />}
                         onMouseEnter={() => setVariant("filled")}
                         onMouseLeave={() => setVariant("outline")}
                         variant={variant}
                     >
-                        <Text weight={500} size="lg">Buy now</Text>
+                        Buy now
                     </Button>
 
-                    <Button fullWidth
+                    <Button fullWidth leftIcon={<MdOutlineAddShoppingCart />}
                         onMouseEnter={() => setVariant1("filled")}
                         onMouseLeave={() => setVariant1("outline")}
                         variant={variant1}
                     >
-                        <Text weight={500} size="lg">Add to cart</Text>
+                        Add to cart
                     </Button>
 
                 </Group>

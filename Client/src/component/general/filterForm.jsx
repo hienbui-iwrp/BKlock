@@ -1,9 +1,13 @@
 import React from "react";
+import { Box } from "@mantine/core";
 
 export default function FilterForm() {
     return (
-        <div>
-            <h3>Filter list</h3>
-        </div>
+        <Box
+            sx={() => ({
+                height: "100vh",
+                backgroundColor: "black",
+            })}
+        ></Box>
     );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ProductCard from '../../component/general/productCard';
 import { Grid, Pagination, Group } from '@mantine/core';
 import Slider from '../general/slider';
+import FilterForm from '../../component/general/filterForm';
 import "../../css/product.css";
 
 export default function Products() {
@@ -18,7 +19,9 @@ export default function Products() {
     ]
     return <>
         <Grid style={{ marginTop: 60 }}>
-            <Grid.Col lg={3}></Grid.Col>
+            <Grid.Col lg={3}>
+                <FilterForm />
+            </Grid.Col>
             <Grid.Col lg={9}>
                 <Slider type="image" items={items} />
                 <Grid>

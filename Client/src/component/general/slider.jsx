@@ -1,11 +1,14 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Image } from "@mantine/core";
+import { Image, Button } from "@mantine/core";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import "../../css/slider.css";
 
 export default function Slider({ type, items }) {
     let responsive;
+    const [hover, setHover] = React.useState(false);
+
     if (type === "homeads") {
         responsive = {
             superLargeDesktop: {
@@ -60,44 +63,89 @@ export default function Slider({ type, items }) {
         );
     };
 
+    const CustomRightArrow = ({ onClick, ...rest }) => {
+        const {
+            onMove,
+            carouselState: { currentSlide, deviceType },
+        } = rest;
+        // onMove means if dragging or swiping in progress.
+        return (
+            <Button
+                className="custom-right-arrow"
+                onClick={() => onClick()}
+                variant="subtle"
+            >
+                <FaChevronRight size={30} />
+            </Button>
+        );
+    };
+
+    const CustomLeftArrow = ({ onClick, ...rest }) => {
+        const {
+            onMove,
+            carouselState: { currentSlide, deviceType },
+        } = rest;
+        // onMove means if dragging or swiping in progress.
+        return (
+            <Button
+                className="custom-left-arrow"
+                onClick={() => onClick()}
+                variant="subtle"
+            >
+                <FaChevronLeft size={30} />
+            </Button>
+        );
+    };
+
     return (
-        <Carousel
-            responsive={responsive}
-            additionalTransfrom={0}
-            arrows
-            autoPlaySpeed={3000}
-            autoPlay
-            centerMode={false}
-            className={type === "homeads" ? "home-ads-slider" : ""}
-            dotListClass=""
-            draggable
-            focusOnSelect={false}
-            infinite
-            itemClass={type === "homeads" ? "home-ads-slider-item" : ""}
-            keyBoardControl
-            minimumTouchDrag={80}
-            renderButtonGroupOutside={false}
-            renderDotsOutside={false}
-            showDots={type === "product" || type == "image" ? false : true}
-            sliderClass=""
-            slidesToSlide={1}
-            swipeable
-            customDot={<CustomDot />}
-            customTransition="transform 0.5s ease-in-out"
+        <div
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            className="carousel-control"
         >
-            {items.map((item) => {
-                return type === "image" ? (
-                    <Image
-                        src={item}
-                        alt="img"
-                        fit="contain"
-                        height={80}
-                        style={{ border: "1px solid black", margin: 5 }}
-                    ></Image>
-                ) : (
-                    item
-                );
-            })}
-        </Carousel>
+            <Carousel
+                responsive={responsive}
+                additionalTransfrom={0}
+                arrows={hover ? true : false}
+                autoPlaySpeed={3000}
+                autoPlay
+                centerMode={false}
+                className="home-ads-slider"
+                dotListClass=""
+                focusOnSelect={false}
+                infinite
+                itemClass={type === "homeads" ? "home-ads-slider-item" : ""}
+                minimumTouchDrag={80}
+                renderButtonGroupOutside={false}
+                renderDotsOutside={false}
+                showDots={type === "product" || type == "image" ? false : true}
+                sliderClass=""
+                slidesToSlide={1}
+                swipeable={true}
+                customDot={<CustomDot />}
+                customRightArrow={<CustomRightArrow />}
+                customLeftArrow={<CustomLeftArrow />}
+                customTransition="transform 0.5s ease-in-out"
+            >
+                {items.map((item) => {
+                    return type === "image" ? (
+                        <Image
+                            src={item}
+                            key={item}
+                            alt="img"
+                            fit="contain"
+                            height={80}
+                            style={{
+                                border: "1px solid black",
+                                margin: 5,
+                                cursor: "pointer",
+                            }}
+                        ></Image>
+                    ) : (
+                        item
+                    );
+                })}
+            </Carousel>
+        </div>
     );
 }
