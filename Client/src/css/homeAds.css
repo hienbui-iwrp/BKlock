@@ -5,11 +5,19 @@
 
 .home-ads-group {
     position: absolute;
-    bottom: 5%;
+    bottom: 10%;
     left: 5%;
 }
 
 .home-ads-btn {
     color: #fff;
     border: 2px solid white;
+}
+
+.home-ads-image {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    left: 0;
 }
