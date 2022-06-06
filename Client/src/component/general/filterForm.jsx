@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Text, Divider, Button, Badge, ActionIcon } from "@mantine/core";
 import { HiOutlineFilter, HiX } from "react-icons/hi";
 import CheckBoxes from "./checkBoxGroup";
+import Selects from "./multiSelect";
 
 const prices = [
     { value: "0 - 1.000.000đ", checked: false },
@@ -34,6 +35,7 @@ export default function FilterForm() {
     const [filters, setFilters] = React.useState([]);
     const [unCheck, setUnCheck] = React.useState(false);
     const [badgeValue, setBadgeValue] = React.useState(null);
+    const [size, setSize] = React.useState([0, 0]);
 
     const handleClear = () => {
         setUnCheck(true);
@@ -58,6 +60,15 @@ export default function FilterForm() {
             </ActionIcon>
         );
     };
+
+    React.useLayoutEffect(() => {
+        function updateSize() {
+            setSize([window.innerWidth, window.innerHeight]);
+        }
+        window.addEventListener("resize", updateSize);
+        updateSize();
+        return () => window.removeEventListener("resize", updateSize);
+    }, []);
 
     return (
         <Grid>
@@ -97,61 +108,105 @@ export default function FilterForm() {
                     </Button>
                 ) : null}
             </Grid.Col>
-            <Grid.Col>
-                <Divider size="md" />
+            {size[0] > 768 ? (
+                <Grid.Col>
+                    <Divider size="md" />
+                </Grid.Col>
+            ) : null}
+            <Grid.Col xl={12} lg={12} md={6} sm={6} xs={12}>
+                {size[0] > 768 ? (
+                    <CheckBoxes
+                        items={prices}
+                        label="Mức giá"
+                        filters={filters}
+                        setFilters={setFilters}
+                        uncheck={unCheck}
+                        setUnCheck={setUnCheck}
+                        badgeValue={badgeValue}
+                    />
+                ) : (
+                    <Selects
+                        items={prices}
+                        label="Mức giá"
+                        filters={filters}
+                        setFilters={setFilters}
+                    />
+                )}
             </Grid.Col>
-            <Grid.Col>
-                <CheckBoxes
-                    items={prices}
-                    label="Mức giá"
-                    filters={filters}
-                    setFilters={setFilters}
-                    uncheck={unCheck}
-                    setUnCheck={setUnCheck}
-                    badgeValue={badgeValue}
-                />
+            {size[0] > 768 ? (
+                <Grid.Col>
+                    <Divider size="md" />
+                </Grid.Col>
+            ) : null}
+            <Grid.Col xl={12} lg={12} md={6} sm={6} xs={12}>
+                {size[0] > 768 ? (
+                    <CheckBoxes
+                        items={brands}
+                        label="Thương hiệu"
+                        filters={filters}
+                        setFilters={setFilters}
+                        uncheck={unCheck}
+                        setUnCheck={setUnCheck}
+                        badgeValue={badgeValue}
+                    />
+                ) : (
+                    <Selects
+                        items={brands}
+                        label="Thương hiệu"
+                        filters={filters}
+                        setFilters={setFilters}
+                    />
+                )}
             </Grid.Col>
-            <Grid.Col>
-                <Divider size="md" />
+            {size[0] > 768 ? (
+                <Grid.Col>
+                    <Divider size="md" />
+                </Grid.Col>
+            ) : null}
+            <Grid.Col xl={12} lg={12} md={6} sm={6} xs={12}>
+                {size[0] > 768 ? (
+                    <CheckBoxes
+                        items={category}
+                        label="Loại đồng hồ"
+                        filters={filters}
+                        setFilters={setFilters}
+                        uncheck={unCheck}
+                        setUnCheck={setUnCheck}
+                        badgeValue={badgeValue}
+                    />
+                ) : (
+                    <Selects
+                        items={category}
+                        label="Loại đồng hồ"
+                        filters={filters}
+                        setFilters={setFilters}
+                    />
+                )}
             </Grid.Col>
-            <Grid.Col>
-                <CheckBoxes
-                    items={brands}
-                    label="Thương hiệu"
-                    filters={filters}
-                    setFilters={setFilters}
-                    uncheck={unCheck}
-                    setUnCheck={setUnCheck}
-                    badgeValue={badgeValue}
-                />
-            </Grid.Col>
-            <Grid.Col>
-                <Divider size="md" />
-            </Grid.Col>
-            <Grid.Col>
-                <CheckBoxes
-                    items={category}
-                    label="Loại đồng hồ"
-                    filters={filters}
-                    setFilters={setFilters}
-                    uncheck={unCheck}
-                    setUnCheck={setUnCheck}
-                    badgeValue={badgeValue}
-                />
-            </Grid.Col>
-            <Grid.Col>
-                <Divider size="md" />
-            </Grid.Col>
-            <Grid.Col>
-                <CheckBoxes
-                    items={type}
-                    label="Dòng máy"
-                    filters={filters}
-                    setFilters={setFilters}
-                    uncheck={unCheck}
-                    setUnCheck={setUnCheck}
-                    badgeValue={badgeValue}
-                />
+            {size[0] > 768 ? (
+                <Grid.Col>
+                    <Divider size="md" />
+                </Grid.Col>
+            ) : null}
+            <Grid.Col xl={12} lg={12} md={6} sm={6} xs={12}>
+                {size[0] > 768 ? (
+                    <CheckBoxes
+                        items={type}
+                        label="Dòng máy"
+                        filters={filters}
+                        setFilters={setFilters}
+                        uncheck={unCheck}
+                        setUnCheck={setUnCheck}
+                        badgeValue={badgeValue}
+                    />
+                ) : (
+                    <Selects
+                        items={type}
+                        label="Dòng máy"
+                        filters={filters}
+                        setFilters={setFilters}
+                    />
+                )}
             </Grid.Col>
         </Grid>
     );

@@ -10,3 +10,7 @@
     font-weight: bold;
     font-size: 18px;
 }
+
+.mantine-MultiSelect-searchInput {
+    border: none !important;
+}
