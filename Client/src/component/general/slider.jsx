@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Image, Button } from "@mantine/core";
+import { Image, Button, Transition } from "@mantine/core";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import "../../css/slider.css";
 
@@ -70,13 +70,22 @@ export default function Slider({ type, items }) {
         } = rest;
         // onMove means if dragging or swiping in progress.
         return (
-            <Button
-                className="custom-right-arrow"
-                onClick={() => onClick()}
-                variant="subtle"
+            <Transition
+                mounted={hover}
+                transition="scale"
+                duration={10000}
+                timingFunction="ease-in-out"
             >
-                <FaChevronRight size={30} />
-            </Button>
+                {() => (
+                    <Button
+                        className="custom-right-arrow"
+                        onClick={() => onClick()}
+                        variant="subtle"
+                    >
+                        <FaChevronRight size={30} />
+                    </Button>
+                )}
+            </Transition>
         );
     };
 
@@ -106,7 +115,7 @@ export default function Slider({ type, items }) {
             <Carousel
                 responsive={responsive}
                 additionalTransfrom={0}
-                arrows={hover ? true : false}
+                arrows={hover}
                 autoPlaySpeed={3000}
                 autoPlay
                 centerMode={false}
