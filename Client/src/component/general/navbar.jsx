@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mantine/core";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 import "../../css/nav-bar.css";
 
 export default function Navbar() {
@@ -52,7 +53,7 @@ export default function Navbar() {
                         uppercase
                         className="nav-bar-right"
                     >
-                        Giỏ hàng
+                        <HiOutlineShoppingBag size={30} />
                     </Button>
                 </Link>
             </div>
