@@ -22,6 +22,8 @@
   input[type="password"] {
     height: 25px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    height: 5vh;
+    border-radius: 8px;
   }
   
   input[type="submit"] {
