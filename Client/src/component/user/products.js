@@ -1,11 +1,18 @@
 import React from 'react';
 import ProductCard from '../../component/general/productCard';
-import { Grid, Pagination, Text, Image, MediaQuery, Box } from '@mantine/core';
+import { Grid, Pagination, Text, Image, MediaQuery } from '@mantine/core';
 import Slider from '../general/slider';
 import FilterForm from '../../component/general/filterForm';
+import { useLocation } from 'react-router-dom';
+import { useWindowScroll } from '@mantine/hooks';
+import BreadCrumbs from '../general/breadCrumb';
 import "../../css/product.css";
 
+
 export default function Products() {
+    let location = useLocation();
+    const [scroll, scrollTo] = useWindowScroll();
+    const [size, setSize] = React.useState([0, 0]);
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     const [activePage, setPage] = React.useState(1);
     const maxItemPerPage = 6;
@@ -16,7 +23,17 @@ export default function Products() {
         "https://cdn.watchstore.vn/uploads/brands/casio-logo.jpg",
         "https://cdn.watchstore.vn/uploads/brands/seiko-logo.jpg",
         "https://cdn.watchstore.vn/uploads/brands/citizen-logo.jpg",
-    ]
+    ];
+
+    React.useLayoutEffect(() => {
+        function updateSize() {
+            setSize([window.innerWidth, window.innerHeight]);
+        }
+        window.addEventListener("resize", updateSize);
+        updateSize();
+        return () => window.removeEventListener("resize", updateSize);
+    }, []);
+
     return <>
         <Grid style={{ marginTop: 60 }}>
             <Grid.Col lg={12} className="product-ad-container">
@@ -25,6 +42,7 @@ export default function Products() {
                     Products
                 </Text>
             </Grid.Col>
+            <BreadCrumbs location={location} size={size[0]} />
             <Grid.Col>
                 <MediaQuery
                     query="(max-width: 1800px) and (min-width: 1200px)"
@@ -52,7 +70,7 @@ export default function Products() {
         </Grid>
         <Pagination onChange={(page) => {
             setPage(page);
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            scrollTo({ y: 0 })
         }} total={total} position="right" withEdges className='product-pagination'
         />;
     </>

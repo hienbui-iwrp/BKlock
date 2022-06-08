@@ -1,32 +1,51 @@
-.contact{
-    margin-top: 60px;
-    padding-left: 30px;
-    padding-right: 30px;
-    box-sizing: border-box;
+.mantine-TextInput-root > label {
+    font-size: 18px;
+    margin-left: -30px;
 }
 
-.contact1, .contact2{
+.mantine-Textarea-root > label {
+    font-size: 18px;
+    margin-left: -30px;
+}
+
+.contact-submit-container {
     width: 100%;
-    /* max-width: 960px; */
-}
-
-.contact1{
     display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
-.contact1 > div{
-    width: 45%;
+.contact-submit-btn {
+    width: 96.5%;
+    transition: background-color 0.3s;
 }
 
-.contact2 > div{
-    width: 95%;
-    max-width: 95%;
+.contact-submit-btn:hover {
+    background-color: red;
+    color: #fff;
 }
 
-.contact > button{
-    margin-left: 2.5%;
+.contact-description {
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.contact2 textarea{
-    min-height: 150px;
+.contact-company-logo {
+    background: transparent;
+    color: black;
+    transition: color 0.3s;
+}
+
+.contact-company-logo:hover {
+    background: transparent;
+    color: #495057;
+}
+
+.contact-company-logo-text {
+    font-size: 26px;
+}
+
+.contact-company-name {
+    font-size: 24px;
+    font-weight: 600;
 }

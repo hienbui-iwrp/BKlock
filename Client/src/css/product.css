@@ -62,3 +62,12 @@
     filter: blur(2px);
     -webkit-filter: blur(2px);
 }
+
+.product-card-btn {
+    transition: background-color 0.5s;
+}
+
+.product-card-btn:hover {
+    background-color: #228be6;
+    color: white;
+}
