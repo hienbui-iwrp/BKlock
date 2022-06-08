@@ -6,9 +6,6 @@ import { SiCashapp } from "react-icons/si";
 import "../../css/product.css";
 
 export default function ProductCard() {
-    const [variant, setVariant] = React.useState("outline");
-    const [variant1, setVariant1] = React.useState("outline");
-
     return (
         <div style={{ width: "auto", marginLeft: 10, marginRight: 10 }}>
             <Card shadow="md" p="lg">
@@ -26,17 +23,15 @@ export default function ProductCard() {
                 <Group direction='row' grow style={{ marginTop: 10 }}>
 
                     <Button fullWidth leftIcon={<SiCashapp />}
-                        onMouseEnter={() => setVariant("filled")}
-                        onMouseLeave={() => setVariant("outline")}
-                        variant={variant}
+                        variant="outline"
+                        className="product-card-btn"
                     >
                         Buy now
                     </Button>
 
                     <Button fullWidth leftIcon={<MdOutlineAddShoppingCart />}
-                        onMouseEnter={() => setVariant1("filled")}
-                        onMouseLeave={() => setVariant1("outline")}
-                        variant={variant1}
+                        variant="outline"
+                        className="product-card-btn"
                     >
                         Add to cart
                     </Button>

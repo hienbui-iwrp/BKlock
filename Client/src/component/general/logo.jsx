@@ -7,7 +7,15 @@ export default function Logo({ classname }) {
     return (
         <Link to="/">
             <Button color="gray" radius="xs" uppercase className={classname}>
-                <Text weight={700} className={classname + "-text"}>
+                <Text
+                    weight={700}
+                    className={classname + "-text"}
+                    style={{
+                        padding: 5,
+                        border: "3px solid white",
+                        borderRadius: 30,
+                    }}
+                >
                     B<SiClockify />
                     lock
                 </Text>

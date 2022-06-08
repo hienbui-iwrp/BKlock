@@ -1,54 +1,110 @@
 import React from "react";
 import "../../css/contact.css";
-import { Text, Input, Button, Textarea, Container, Space } from "@mantine/core";
+import Logo from "../general/logo";
+import {
+    Grid,
+    TextInput,
+    Button,
+    Textarea,
+    Container,
+    Space,
+    Text,
+    Image,
+} from "@mantine/core";
 
 export default function Contact() {
     return (
         <>
-            <div className="contact">
-                <Space h="xl" />
-                <div className="contact1">
-                    <Container>
-                        <Text>Email:</Text>
-                        <Space h="xs" />
-                        <Input placeholder="123@gmail.com" />
+            <Grid style={{ paddingTop: 80 }}>
+                <Grid.Col>
+                    <Container className="contact-submit-container">
+                        <Text
+                            transform="capitalize"
+                            className="contact-company-name"
+                        >
+                            Công ty cổ phần 4 thành viên
+                            <Logo classname="contact-company-logo" />
+                        </Text>
                     </Container>
                     <Container>
-                        <Text>Số điện thoại:</Text>
-                        <Space h="xs" />
-                        <Input placeholder="0123456789" />
+                        <Grid>
+                            <Grid.Col>
+                                <Text className="contact-description">
+                                    Nếu có bất kì thắc mắc gì về sản phẩm, chính
+                                    sách,... của công ty, xin quý khách vui lòng
+                                    cho chúng tôi biết bằng cách điền vào mẫu
+                                    dưới đây.
+                                </Text>
+                            </Grid.Col>
+                            <Space h="xl" />
+                            <Grid.Col xl={6} lg={6} md={6} sm={12} xs={12}>
+                                <Container>
+                                    <Space h="xs" />
+                                    <TextInput
+                                        placeholder="123@gmail.com"
+                                        label="Email:"
+                                        required
+                                    />
+                                </Container>
+                            </Grid.Col>
+                            <Grid.Col xl={6} lg={6} md={6} sm={12} xs={12}>
+                                <Container>
+                                    <Space h="xs" />
+                                    <TextInput
+                                        placeholder="0123456789"
+                                        label="Số điện thoại:"
+                                        required
+                                    />
+                                </Container>
+                            </Grid.Col>
+                            <Space h="xl" />
+                            <Grid.Col xl={6} lg={6} md={6} sm={12} xs={12}>
+                                <Container>
+                                    <Space h="xs" />
+                                    <TextInput
+                                        placeholder="Nguyễn Văn A"
+                                        label="Tên:"
+                                        required
+                                    />
+                                </Container>
+                            </Grid.Col>
+                            <Grid.Col xl={6} lg={6} md={6} sm={12} xs={12}>
+                                <Container>
+                                    <Space h="xs" />
+                                    <TextInput
+                                        placeholder="268 Lý Thường Kiệt, Phường 14, Quận 10, TPHCM"
+                                        label="Địa chỉ:"
+                                        required
+                                    />
+                                </Container>
+                            </Grid.Col>
+                            <Space h="xl" />
+                            <Grid.Col>
+                                <Container>
+                                    <Space h="xs" />
+                                    <Textarea
+                                        placeholder="Quý khách vui lòng điền thắc mắc của mình"
+                                        label="Nội dung:"
+                                        required
+                                    />
+                                </Container>
+                            </Grid.Col>
+                            <Space h="xl" />
+                            <Grid.Col className="contact-submit-container">
+                                <Button
+                                    size="md"
+                                    color="red"
+                                    className="contact-submit-btn"
+                                    variant="outline"
+                                >
+                                    Gửi
+                                </Button>
+                            </Grid.Col>
+                            <Space h="xl" />
+                        </Grid>
                     </Container>
-                </div>
-                <Space h="xl" />
-                <div className="contact1">
-                    <Container>
-                        <Text>Tên:</Text>
-                        <Space h="xs" />
-                        <Input placeholder="Nguyễn Văn A" />
-                    </Container>
-                    <Container>
-                        <Text>Địa chỉ:</Text>
-                        <Space h="xs" />
-                        <Input placeholder="268 Lý Thường Kiệt, Phường 14, Quận 10, TPHCM" />
-                    </Container>
-                </div>
-                <Space h="xl" />
-                <div className="contact2">
-                    <Container>
-                        <Text>Nội dung:</Text>
-                        <Space h="xs" />
-                        <Textarea
-                            placeholder="Mặt hàng này mlem mlem quá"
-                            required
-                        />
-                    </Container>
-                </div>
-                <Space h="xl" />
-                <Button size="md" color="gray">
-                    Gửi
-                </Button>
-                <Space h="xl" />
-            </div>
+                </Grid.Col>
+            </Grid>
         </>
     );
 }
