@@ -24,6 +24,11 @@ input[type="password"] {
 }
 
 input[type="submit"] {
+    height: 5vh;
+    border-radius: 8px;
+  }
+  
+  input[type="submit"] {
     cursor: pointer;
     font-size: 15px;
     background: #01d28e;
