@@ -33,16 +33,18 @@
 .contact-company-logo {
     background: transparent;
     color: black;
+    transition: color 0.3s;
 }
 
 .contact-company-logo:hover {
     background: transparent;
-    color: black;
+    color: #495057;
 }
 
 .contact-company-logo-text {
     font-size: 26px;
 }
+
 .contact-company-name {
     font-size: 24px;
     font-weight: 600;

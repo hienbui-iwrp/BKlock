@@ -9,13 +9,18 @@ import {
     Container,
     Space,
     Text,
-    Image,
 } from "@mantine/core";
+import BreadCrumbs from "../general/breadCrumb";
+import { useViewportSize } from "@mantine/hooks";
+import { useLocation } from "react-router-dom";
 
 export default function Contact() {
+    let location = useLocation();
+    const { height, width } = useViewportSize();
     return (
         <>
             <Grid style={{ paddingTop: 80 }}>
+                <BreadCrumbs location={location} size={width} />
                 <Grid.Col>
                     <Container className="contact-submit-container">
                         <Text

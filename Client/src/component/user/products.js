@@ -1,26 +1,16 @@
 import React from 'react';
 import ProductCard from '../../component/general/productCard';
-import { Grid, Pagination, Text, Image, MediaQuery, Breadcrumbs, Anchor } from '@mantine/core';
+import { Grid, Pagination, Text, Image, MediaQuery } from '@mantine/core';
 import Slider from '../general/slider';
 import FilterForm from '../../component/general/filterForm';
 import { useLocation } from 'react-router-dom';
 import { useWindowScroll } from '@mantine/hooks';
+import BreadCrumbs from '../general/breadCrumb';
 import "../../css/product.css";
 
 
-const anchorUtil = (location) => {
-    let locations = "Home" + location.pathname;
-    locations = locations.split("/");
-    return locations.map((item, index) => (
-        <Anchor href={item === "Home" ? "/" : item} key={index}>
-            {item}
-        </Anchor>
-    ));
-}
-
 export default function Products() {
     let location = useLocation();
-    let anchors = anchorUtil(location);
     const [scroll, scrollTo] = useWindowScroll();
     const [size, setSize] = React.useState([0, 0]);
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
@@ -52,7 +42,7 @@ export default function Products() {
                     Products
                 </Text>
             </Grid.Col>
-            {size[0] > 768 ? <Grid.Col><Breadcrumbs style={{ marginLeft: "8%" }}>{anchors}</Breadcrumbs></Grid.Col> : null}
+            <BreadCrumbs location={location} size={size[0]} />
             <Grid.Col>
                 <MediaQuery
                     query="(max-width: 1800px) and (min-width: 1200px)"
