@@ -1,50 +1,40 @@
-:root {
-    --price-color: red;
+.cart-page-container {
+    background-color: #eceff4;
+    height: 100%;
+    position: relative;
+    margin-top: -20px;
 }
 
-
-.cart {}
-
-.cart__item {
-    margin: 10px 0;
-    border: None;
-    border-radius: 10px;
-    overflow: hidden;
-    border-top: 20px solid transparent;
-    box-shadow: 0px 5px 3px #aaa;
-    text-align: center !important;
+.cart-container {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
 }
 
-.cart__element {
-    text-align: center
+.cart-card-container {
+    border-bottom: 1px solid #cfcfcf;
 }
 
-.cart__quantity {
-    display: inline-block;
-    padding: 0 16px;
-
+.cart-card-product-container {
+    margin-left: auto;
 }
 
-.cart__price {
-    color: var(--price-color);
-    text-align: center
+.cart-card-quantity-container {
+    width: fit-content;
+    border: 1px solid #eceff4;
+    padding: 10px;
 }
 
-.cart__payment {
-    min-width: 500px;
-    margin-right: 10%;
-
-    border: 1px solid #aaa;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border-radius: 10px;
+.cart-card-btn-check,
+.cart-card-btn-delete {
+    transition: color 0.3s;
 }
 
-@media (max-width: 600px) {
-    .cart__payment {
-        min-width: auto;
-        width: 90%;
-        margin-right: 2%;
+.cart-card-btn-check:hover {
+    background-color: transparent;
+    color: #f59f00;
+}
 
-    }
+.cart-card-btn-delete:hover {
+    background-color: transparent;
+    color: #862e9c;
 }

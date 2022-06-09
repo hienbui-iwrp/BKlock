@@ -4,7 +4,6 @@ import { MantineProvider, Grid, Container, Stack, Title, Text, Tabs, Image } fro
 import BreadCrumbs from "../general/breadCrumb";
 import { useViewportSize } from "@mantine/hooks";
 import { useLocation } from "react-router-dom";
-import Logo from "../general/logo";
 
 export default function Introduction() {
     let location = useLocation();

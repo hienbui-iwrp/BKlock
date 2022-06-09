@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Image, Text, Button, Group } from '@mantine/core';
+import { Card, Image, Text, Button, Group, Badge } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { SiCashapp } from "react-icons/si";
@@ -15,7 +15,9 @@ export default function ProductCard() {
                     </Link>
                 </Card.Section>
 
-                <Text weight={700} color="red">Rolex</Text>
+                <Badge size="lg" color="red">
+                    Rolex
+                </Badge>
                 <Link to="/detail" style={{ textDecoration: 'none' }}>
                     <Text weight={500} className="product-name">Rolex abc xyz</Text>
                 </Link>
