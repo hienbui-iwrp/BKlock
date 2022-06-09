@@ -1,4 +1,13 @@
-import { Badge, Button, Grid, Group, Image, Text } from "@mantine/core";
+import {
+    Badge,
+    Button,
+    Grid,
+    Group,
+    Image,
+    Text,
+    Tooltip,
+    Checkbox,
+} from "@mantine/core";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import React from "react";
@@ -14,6 +23,10 @@ export default function CartCard({
 }) {
     const [count, setCount] = React.useState(quantity);
     const [totalLocal, setTotalLocal] = React.useState(0);
+    const [checked, setChecked] = React.useState(false);
+    const [tooltip1, setTooltip1] = React.useState(false);
+    const [tooltip2, setTooltip2] = React.useState(false);
+
     const handleIncrement = () => {
         setCount(count + 1);
     };
@@ -89,20 +102,37 @@ export default function CartCard({
             </Grid.Col>
             <Grid.Col xl={2} lg={2} md={2}>
                 <Group direction="column">
-                    <Button
-                        color="green"
-                        variant="subtle"
-                        className="cart-card-btn-check"
-                    >
-                        <AiOutlineCheckCircle size={30} />
-                    </Button>
-                    <Button
-                        color="red"
-                        variant="subtle"
-                        className="cart-card-btn-delete"
-                    >
-                        <AiOutlineCloseCircle size={30} />
-                    </Button>
+                    {!checked ? (
+                        <Tooltip label="Xác nhận" opened={tooltip1}>
+                            <Button
+                                color="green"
+                                variant="subtle"
+                                className="cart-card-btn-check"
+                                onMouseEnter={() => setTooltip1(true)}
+                                onMouseLeave={() => setTooltip1(false)}
+                                onClick={() => setChecked(true)}
+                            >
+                                <AiOutlineCheckCircle size={30} />
+                            </Button>
+                        </Tooltip>
+                    ) : (
+                        <Checkbox
+                            checked={true}
+                            className="cart-card-checkbox"
+                            color="green"
+                        />
+                    )}
+                    <Tooltip label="Xóa" opened={tooltip2}>
+                        <Button
+                            color="red"
+                            variant="subtle"
+                            className="cart-card-btn-delete"
+                            onMouseEnter={() => setTooltip2(true)}
+                            onMouseLeave={() => setTooltip2(false)}
+                        >
+                            <AiOutlineCloseCircle size={30} />
+                        </Button>
+                    </Tooltip>
                 </Group>
             </Grid.Col>
         </Grid>
