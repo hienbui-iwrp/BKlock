@@ -1,8 +1,11 @@
+.payment-container {
+    position: relative;
+}
+
 .payment-col-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 
 .payment-form-wrapper {

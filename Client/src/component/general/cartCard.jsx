@@ -20,6 +20,7 @@ export default function CartCard({
     quantity,
     brand,
     setTotal,
+    payment,
 }) {
     const [count, setCount] = React.useState(quantity);
     const [totalLocal, setTotalLocal] = React.useState(0);
@@ -66,28 +67,33 @@ export default function CartCard({
                 </Grid>
             </Grid.Col>
             <Grid.Col xl={2} lg={2} md={2}>
+                <Text weight={600} size="lg">
+                    Số lượng
+                </Text>
                 <Group direction="row" className="cart-card-quantity-container">
                     <Text weight={600} size="lg">
                         {count}
                     </Text>
-                    <Group direction="column" align="center">
-                        <Button
-                            onClick={() => handleIncrement()}
-                            variant="light"
-                            color="dark"
-                            size="xs"
-                        >
-                            <BiUpArrow />
-                        </Button>
-                        <Button
-                            onClick={() => handleDecrement()}
-                            variant="light"
-                            color="dark"
-                            size="xs"
-                        >
-                            <BiDownArrow />
-                        </Button>
-                    </Group>
+                    {!payment ? (
+                        <Group direction="column" align="center">
+                            <Button
+                                onClick={() => handleIncrement()}
+                                variant="light"
+                                color="dark"
+                                size="xs"
+                            >
+                                <BiUpArrow />
+                            </Button>
+                            <Button
+                                onClick={() => handleDecrement()}
+                                variant="light"
+                                color="dark"
+                                size="xs"
+                            >
+                                <BiDownArrow />
+                            </Button>
+                        </Group>
+                    ) : null}
                 </Group>
             </Grid.Col>
             <Grid.Col xl={3} lg={3} md={3}>
@@ -101,39 +107,41 @@ export default function CartCard({
                 </Group>
             </Grid.Col>
             <Grid.Col xl={2} lg={2} md={2}>
-                <Group direction="column">
-                    {!checked ? (
-                        <Tooltip label="Xác nhận" opened={tooltip1}>
-                            <Button
+                {!payment ? (
+                    <Group direction="column">
+                        {!checked ? (
+                            <Tooltip label="Xác nhận" opened={tooltip1}>
+                                <Button
+                                    color="green"
+                                    variant="subtle"
+                                    className="cart-card-btn-check"
+                                    onMouseEnter={() => setTooltip1(true)}
+                                    onMouseLeave={() => setTooltip1(false)}
+                                    onClick={() => setChecked(true)}
+                                >
+                                    <AiOutlineCheckCircle size={30} />
+                                </Button>
+                            </Tooltip>
+                        ) : (
+                            <Checkbox
+                                checked={true}
+                                className="cart-card-checkbox"
                                 color="green"
+                            />
+                        )}
+                        <Tooltip label="Xóa" opened={tooltip2}>
+                            <Button
+                                color="red"
                                 variant="subtle"
-                                className="cart-card-btn-check"
-                                onMouseEnter={() => setTooltip1(true)}
-                                onMouseLeave={() => setTooltip1(false)}
-                                onClick={() => setChecked(true)}
+                                className="cart-card-btn-delete"
+                                onMouseEnter={() => setTooltip2(true)}
+                                onMouseLeave={() => setTooltip2(false)}
                             >
-                                <AiOutlineCheckCircle size={30} />
+                                <AiOutlineCloseCircle size={30} />
                             </Button>
                         </Tooltip>
-                    ) : (
-                        <Checkbox
-                            checked={true}
-                            className="cart-card-checkbox"
-                            color="green"
-                        />
-                    )}
-                    <Tooltip label="Xóa" opened={tooltip2}>
-                        <Button
-                            color="red"
-                            variant="subtle"
-                            className="cart-card-btn-delete"
-                            onMouseEnter={() => setTooltip2(true)}
-                            onMouseLeave={() => setTooltip2(false)}
-                        >
-                            <AiOutlineCloseCircle size={30} />
-                        </Button>
-                    </Tooltip>
-                </Group>
+                    </Group>
+                ) : null}
             </Grid.Col>
         </Grid>
     );
