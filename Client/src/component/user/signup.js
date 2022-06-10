@@ -1,125 +1,85 @@
 import React, { useState } from "react";
-// import ReactDOM from "react-dom";
 import { Link } from 'react-router-dom';
-import { Image} from '@mantine/core';
-
-import "../../css/signup.css";
+import { TextInput, Button, Container, PasswordInput, Grid, Image, Space, Text } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import Logo from "../general/logo";
+import { useViewportSize } from "@mantine/hooks";
+import "../../css/signin.css";
 
 export default function Signup() {
-  // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
+  const { height, width } = useViewportSize();
+  const form = useForm({
+    initialValues: {
+      username: '',
+      password: '',
+      repassword: '',
+      phonenum: ''
     },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
-
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
-  const handleSubmit = (event) => {
-    //Prevent page reload
-    event.preventDefault();
-
-    var { uname, pass } = document.forms[0];
-
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
-  };
-
-  // Generate JSX code for error message
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
-
-  // JSX code for login form
-  const renderForm = (
-      <>
-    <div className="form">
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label>Username </label>
-          <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
-        </div>
-        <div className="input-container">
-          <label>Phone number </label>
-          <input type="number" name="uname" required />
-          {renderErrorMessage("uname")}
-        </div>
-        <div className="input-container">
-          <label>Address </label>
-          <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
-        </div>
-        <div className="input-container">
-          <label>Password </label>
-          <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
-        </div>
-        <div className="input-container">
-          <label>Repeat your password </label>
-          <input type="password" name="pass" required />
-          {renderErrorMessage("pass")}
-        </div>
-        <div className="button-container">
-          <input type="submit" value={"Sign up"}/>
-        </div>
-      </form>
-    </div>
-    </>
-  );
+  });
 
   return (
-    <div className="container">
-    <div className="web-image-container">
-    <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNxQlEMcwJvXH61n0osCCKdiJ4I4ooZX_KPQ&usqp=CAU" alt="watch" className='web-image' />
-    </div>
-    <div className="logn">
-        <Link to="/" style={{height:50}}>
-        <p className="homeButton">Home</p>
-                    </Link>
-        <div className="button-container">
-            <Image
-                                style={{ width: 70, height: 70 }}
-                                src="https://i.pinimg.com/736x/76/13/43/7613439f9864c0a5ae9ac965ca527e91.jpg"
-                                alt="Logo"
-                            />
-        </div>
-      <div className="login-form">
-        <div className="title">Create your account</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
-      </div>
-    </div>
-    </div>
+    <Grid>
+      <Grid.Col xl={4} lg={4} md={5} sm={6} xs={12} style={{ display: "flex" }}>
+        <Container mx="auto" className="form-signin-container">
+          <Logo classname="form-company-logo" />
+          <Text style={width > 768 ? { fontSize: 34 } : { fontSize: 24 }} weight={500}>Đăng kí</Text>
+          <Space h="md" />
+          <form onSubmit={form.onSubmit((values) => console.log(values))}>
+            <TextInput
+              label="Tài khoản"
+              placeholder="username"
+              {...form.getInputProps('username')}
+              className="form-username-input"
+            />
+            <Space h="md" />
+            <PasswordInput
+              label="Mật khẩu"
+              placeholder="password"
+              {...form.getInputProps('password')}
+              className="form-password-input"
+              onPaste={(e) => {
+                e.preventDefault()
+                return false;
+              }} onCopy={(e) => {
+                e.preventDefault()
+                return false;
+              }}
+            />
+            <Space h="md" />
+            <PasswordInput
+              label="Nhập lại mật khẩu"
+              placeholder="password"
+              {...form.getInputProps('repassword')}
+              className="form-password-input"
+              onPaste={(e) => {
+                e.preventDefault()
+                return false;
+              }} onCopy={(e) => {
+                e.preventDefault()
+                return false;
+              }}
+            />
+            <Space h="md" />
+            <TextInput
+              label="Số điện thoại"
+              placeholder="phone number"
+              {...form.getInputProps('phonenum')}
+              className="form-username-input"
+            />
+            <Space h="md" />
+            <Button type="submit" color="dark" className="form-signin-submit-btn">ĐĂNG KÍ</Button>
+            <Space h="sm" />
+            <Text color="gray">Đã có tài khoản ? Đăng nhập ngay <Link to="/signin">tại đây</Link></Text>
+          </form>
+        </Container>
+      </Grid.Col>
+      {width > 768 ? <Grid.Col xl={8} lg={8} md={7} sm={6}>
+        <Image src="https://images.unsplash.com/photo-1533139502658-0198f920d8e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=742&q=80"
+          height="100vh"
+          style={{ marginBottom: "-10px" }}
+          fit="cover"
+        />
+      </Grid.Col> : null}
+    </Grid >
   );
 }
-
-// export default function Signup() {
-//     return <>
-//         <h1>Signup</h1>
-//     </>
-// }

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Button, Container, Grid, Group, Text, Title } from '@mantine/core';
 import '../../css/cart.css';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import CartCard from '../general/cartCard';
-
+import { PaymentItemsContext } from '../general/paymentItemsContext';
+import { Link } from 'react-router-dom';
 
 export default function Cart() {
     const [total, setTotal] = useState(0);
+    const [paymentItems, setPaymentItems] = useContext(PaymentItemsContext);
+
     let [cartList, setCartList] = useState([
         {
             "image": "https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png",
@@ -51,10 +54,12 @@ export default function Cart() {
                 <Grid.Col>
                     <Group direction="row" position="right">
                         <Text style={{ fontSize: 30, fontWeight: '500' }}>Tổng tiền: ${total}</Text>
-                        <Button variant='outline' color="#339af0" size='lg'>Thanh toán</Button>
+                        <Link to="/payment">
+                            <Button variant='outline' color="#339af0" size='lg' onClick={() => setPaymentItems(cartList)}>Thanh toán</Button>
+                        </Link>
                     </Group>
                 </Grid.Col>
             </Grid>
-        </Container>
+        </Container >
     );
 }
