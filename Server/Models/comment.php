@@ -5,7 +5,7 @@
 
         public static function getCommentOfProduct($id){
             $query = "SELECT * FROM `comment` WHERE productid = " . $id;
-            $temp = getData($query);
+            $temp = Sql::getInstance()->getData($query);
             $temp_array = array();
 
             if($temp->num_rows >0){
@@ -19,7 +19,7 @@
 
         public static function postComment($cmt){
             $query = "INSERT INTO `comment` VALUES ('" . $cmt->id . "', '" . $cmt->content . "', '".$cmt->comDate."', '".$cmt->productId."', '".$cmt->adminId."');";
-            $temp = updateData($query);
+            $temp = Sql::getInstance()->updateData($query);
             return $temp;
         }
     }

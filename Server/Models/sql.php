@@ -1,38 +1,51 @@
 <?php
-    function getData($query){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "bklock";
-        $conn = new mysqli($servername, $username, $password, $database);
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+    class Sql{
+        private static $instances = [];
+        
+        private $servername = "localhost";
+        private $username = "root";
+        private $password = "";
+        private $database = "bklock";
+
+        public static function getInstance(): Sql
+        {
+            $cls = static::class;
+            if (!isset(self::$instances[$cls])) {
+                self::$instances[$cls] = new static();
+            }
+
+            return self::$instances[$cls];
         }
 
-        $result = $conn->query($query);
+        public function Sql::getInstance()->getData($query){
+            $conn = new mysqli($this->servername, $this->username, $this->password, $this->database);
 
-        $conn->close();
-        return $result;
-    }
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
 
-    function updateData($query){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "bklock";
-        $conn = new mysqli($servername, $username, $password, $database);
+            $result = $conn->query($query);
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        if ($conn->query($query) === TRUE) {
             $conn->close();
-            return true;
-        } else {
-            $conn->close();
-            return false;
+            return $result;
         }
+
+        public function updateData($query){
+            $conn = new mysqli($this->servername, $this->username, $this->password, $this->database);
+
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            if ($conn->query($query) === TRUE) {
+                $conn->close();
+                return true;
+            } else {
+                $conn->close();
+                return false;
+            }
+        }
+
     }
 ?>
