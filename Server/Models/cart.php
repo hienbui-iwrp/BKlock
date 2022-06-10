@@ -5,7 +5,7 @@
 
         public static function getCart($id){
             $query = "SELECT * FROM `adds` WHERE customId = " . $id;
-            $temp = getData($query);
+            $temp = Sql::getInstance()->getData($query);
             $temp_array = array();
 
             if($temp->num_rows >0){
@@ -19,14 +19,14 @@
 
         public static function updateCart($prod){
             $query = "UPDATE `adds` SET `quantity` = '".$prod->quantity."' WHERE `adds`.`customId` = ".$prod->customId." AND `adds`.`productId` = ".$prod->productId.";";
-            $temp = updateData($query);
+            $temp = Sql::getInstance()->updateData($query);
             return $temp;
         }
 
         
         public static function deleteCart($prod){
             $query = "DELETE FROM `adds` WHERE `adds`.`customId` = ".$prod->customId." AND `adds`.`productId` = ".$prod->productId.";";
-            $temp = updateData($query);
+            $temp = Sql::getInstance()->updateData($query);
             return $temp;
         }
     }

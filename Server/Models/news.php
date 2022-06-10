@@ -5,7 +5,7 @@
 
         public static function getNews($id){
             $query = "SELECT * FROM `news` WHERE id = " . $id;
-            $temp = getData($query);
+            $temp = Sql::getInstance()->getData($query);
             $temp_array = array();
 
             if($temp->num_rows >0){

@@ -5,7 +5,7 @@
 
         public static function login($username, $password){
             $query = "SELECT * FROM customer WHERE userName = '".$username."' and password = '".$password."'";
-            $result = getData($query);
+            $result = Sql::getInstance()->getData($query);
             if ($result->num_rows > 0){
                 return true;
             }else{
@@ -14,8 +14,8 @@
         }
 
         public static function signup($username, $password, $phonenum){
-            $query = "INSERT INTO `customer` VALUES ('1111', '" . $username . "', '" . $password . "', '2022-06-10', NULL, '" . $phonenum . "');";
-            $result = updateData($query);
+            $query = "INSERT INTO `customer` VALUES ('1111', '" . $username . "', '" . $password . "', '" . date("Y-m-d") . "', NULL, '" . $phonenum . "');";
+            $result = Sql::getInstance()->updateData($query);
             return $result;
         }
 
