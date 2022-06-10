@@ -1,5 +1,4 @@
 <?php
-
     class Sql{
         private static $instances = [];
         
@@ -18,7 +17,7 @@
             return self::$instances[$cls];
         }
 
-        public function Sql::getInstance()->getData($query){
+        public function getData($query){
             $conn = new mysqli($this->servername, $this->username, $this->password, $this->database);
 
             if ($conn->connect_error) {

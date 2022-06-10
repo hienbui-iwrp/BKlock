@@ -1,8 +1,8 @@
 <?php
     // Get 
-    // http://localhost/controllers/getproductindex.php?index=1
-    include "../models/product.php";
-    include "./api.php";
+    // http://localhost/controllers/product/getproduct.php?index=1
+    include "../../models/product.php";
+    include "../api.php";
     
     $queries = array();
     parse_str($_SERVER['QUERY_STRING'], $queries);
