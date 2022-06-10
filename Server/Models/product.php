@@ -1,5 +1,5 @@
 <?php
-    include "../models/sql.php";
+    include "../../Models/sql.php";
 
     class Product{
 
@@ -67,8 +67,24 @@
         }
 
         public static function addProduct($prod){
-
+            $query = "INSERT INTO `product` VALUES (NULL, '".$prod->name."', '".$prod->image."', '".$prod->brand."', '".$prod->category."', '".$prod->price."')";
+            $result = Sql::getInstance()->updateData($query);
+            return $result;
         }
+
+        public static function updateProduct($prod){
+            $query = "UPDATE `product` SET `price` = '".$prod->price."', `name` = '".$prod->name."', `image` = '".$prod->image."', `brand` = '".$prod->brand."', `category` = '".$prod->category."' WHERE `product`.`id` = ".$prod->id."; ";
+            $result = Sql::getInstance()->updateData($query);
+            return $result;
+        }
+
+        public static function deleteProduct($id){
+            $query = "DELETE FROM `product` WHERE `product`.`id` = " . $id;
+            $result = Sql::getInstance()->updateData($query);
+            return $result;
+        }
+
+
 
     }
 ?>

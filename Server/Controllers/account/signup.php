@@ -1,6 +1,6 @@
 <?php
     // Post
-    // http://localhost/controllers/signup.php
+    // http://localhost/controllers/account/signup.php
 
     // body json:
     // {
@@ -8,8 +8,8 @@
     //     "password": "",
     //     "phonenum": ""
     // }
-    include "../models/account.php";
-    include "./api.php";
+    include "../../models/account.php";
+    include "../api.php";
 
     $temp = json_decode(file_get_contents("php://input"));
 

@@ -1,8 +1,8 @@
 <?php
     // Get 
-    // http://localhost/controllers/getnews.php?id=1
-    include "../models/news.php";
-    include "./api.php";
+    // http://localhost/controllers/news/get.php?id=1
+    include "../../models/news.php";
+    include "../api.php";
     
     $queries = array();
     parse_str($_SERVER['QUERY_STRING'], $queries);
