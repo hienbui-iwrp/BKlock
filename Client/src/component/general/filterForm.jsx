@@ -70,6 +70,10 @@ export default function FilterForm() {
         return () => window.removeEventListener("resize", updateSize);
     }, []);
 
+    React.useEffect(() => {
+        console.log(filters);
+    }, [filters]);
+
     return (
         <Grid>
             <Grid.Col>

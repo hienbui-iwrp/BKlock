@@ -1,0 +1,23 @@
+1. Đăng nhập/ đăng ký (post)
+- Đăng nhập: obj(username, password) => return string
+- Đăng kí: obj(username, password, phonenum) => return string
+2. Trang chủ (get)
+- Nổi bật: get random khoảng 10 cái. => return mảng obj
+- Mới nhất: get 10 cái mới nhất theo ngày. => return mảng obj
+3. Product page (get)
+- get số lượng sản phẩm => return int.
+- get sản phẩm theo index trang => return mảng obj (6 cái)
+- bộ lọc: gửi data để lọc từ fe => xử lí lọc bằng 1 api => return mảng obj
+4. Detail
+- get sản phẩm theo id => return obj
+- get comment của sản phẩm theo id sản phẩm => return mảng obj
+- post comment của người dùng
+5. Tin tức
+- get tin tức theo id => return obj
+6. Giỏ hàng
+- get giỏ hàng theo id => return obj
+- update số lượng hàng của sản phẩm trong giỏ hàng
+- delete hàng đã mua
+7. Thanh toán
+- post (userid, arr[productid]).
+
