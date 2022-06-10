@@ -10,6 +10,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import "../../css/payment.css";
 import Logo from "./logo";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const stripePromise = loadStripe(
     "pk_test_51L5VsBHihNXOYuTY3oM7Tf3knsg5gaElFMpmJ83reKHkYVU8EVZF7Na9VlfuL45nm7aJX1qEVjfHgc6zX1SftPe700qT0FsdZd"
@@ -39,6 +40,7 @@ const handleSubmit =
 const PaymentForm = ({ total }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const navigate = useNavigate();
     const [failed, setFailed] = useState(false);
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState("");
@@ -74,7 +76,10 @@ const PaymentForm = ({ total }) => {
             </Popover>
             <Modal
                 opened={success}
-                onClose={() => setSuccess(false)}
+                onClose={() => {
+                    navigate("/");
+                    setSuccess(false);
+                }}
                 size={300}
                 withCloseButton={false}
                 centered

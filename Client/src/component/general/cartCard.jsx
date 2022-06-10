@@ -30,6 +30,7 @@ export default function CartCard({
 
     const handleIncrement = () => {
         setCount(count + 1);
+        quantity = count;
     };
 
     const handleDecrement = () => {
@@ -39,6 +40,7 @@ export default function CartCard({
     React.useEffect(() => {
         setTotal((money) => money + count * price - totalLocal);
         setTotalLocal(count * price);
+        console.log(quantity);
     }, [count]);
 
     return (
