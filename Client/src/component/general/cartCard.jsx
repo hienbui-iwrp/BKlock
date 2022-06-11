@@ -36,6 +36,9 @@ export default function CartCard({
     const handleDecrement = () => {
         count > 0 ? setCount(count - 1) : setCount(0);
     };
+    React.useEffect(() => {
+        console.log(totalLocal);
+    }, []);
 
     React.useEffect(() => {
         setTotal((money) => money + count * price - totalLocal);
@@ -45,16 +48,16 @@ export default function CartCard({
 
     return (
         <Grid className="cart-card-container" align="center">
-            <Grid.Col xl={2} lg={2} md={2} className="cart-card-img-container">
+            <Grid.Col xl={3} lg={3} md={3} className="cart-card-img-container">
                 <Image
                     src={img}
                     className="cart-card-img"
                     height="25vh"
-                    width="auto"
+                    width="100%"
                     fit="contain"
                 />
             </Grid.Col>
-            <Grid.Col xl={3} lg={3} md={3}>
+            <Grid.Col xl={2} lg={2} md={2}>
                 <Grid className="cart-card-product-container">
                     <Grid.Col>
                         <Badge size="lg" color="red">
@@ -101,10 +104,22 @@ export default function CartCard({
             <Grid.Col xl={3} lg={3} md={3}>
                 <Group direction="column">
                     <Text weight={500} color="red" align="right" size="xl">
-                        Giá: <b>${price}</b>
+                        Giá:{" "}
+                        <b>
+                            {new Intl.NumberFormat("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }).format(price)}
+                        </b>
                     </Text>
                     <Text weight={500} color="red" align="right" size="xl">
-                        Thành tiền: <b>${totalLocal}</b>
+                        Thành tiền:{" "}
+                        <b>
+                            {new Intl.NumberFormat("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }).format(totalLocal)}
+                        </b>
                     </Text>
                 </Group>
             </Grid.Col>

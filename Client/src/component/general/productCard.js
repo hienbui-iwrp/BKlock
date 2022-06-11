@@ -4,10 +4,13 @@ import { useWindowScroll } from '@mantine/hooks';
 import { Link } from 'react-router-dom';
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { SiCashapp } from "react-icons/si";
+import { PaymentItemsContext } from '../general/paymentItemsContext';
 import "../../css/product.css";
 
 export default function ProductCard({ id, img, brand, name, price }) {
     const [scroll, scrollTo] = useWindowScroll();
+    const [paymentItems, setPaymentItems] = React.useContext(PaymentItemsContext);
+
     return (
         <div style={{ width: "auto", marginLeft: 10, marginRight: 10 }}>
             <Card shadow="md" p="lg">
@@ -25,15 +28,19 @@ export default function ProductCard({ id, img, brand, name, price }) {
                 </Link>
                 <Text weight={500} color="red" align='right' size="xl">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}</Text>
                 <Group direction='row' grow style={{ marginTop: 10 }}>
-
-                    <Button fullWidth leftIcon={<SiCashapp />}
-                        variant="outline"
-                        className="product-card-btn"
-                        onClick={() => scrollTo({ y: 0 })}
-                    >
-                        Mua ngay
-                    </Button>
-
+                    <Link to="/payment" style={{ textDecoration: 'none' }}>
+                        <Button fullWidth leftIcon={<SiCashapp />}
+                            variant="outline"
+                            className="product-card-btn"
+                            onClick={() => {
+                                setPaymentItems([{
+                                    id, img, brand, name, price
+                                }]); scrollTo({ y: 0 })
+                            }}
+                        >
+                            Mua ngay
+                        </Button>
+                    </Link>
                     <Button fullWidth leftIcon={<MdOutlineAddShoppingCart />}
                         variant="outline"
                         className="product-card-btn"

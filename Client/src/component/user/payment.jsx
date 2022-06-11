@@ -20,10 +20,10 @@ export default function Payment() {
                 {paymentItems.map((item) => (
                     <Grid.Col>
                         <CartCard
-                            img={item.image}
+                            img={item.img}
                             name={item.name}
                             price={item.price}
-                            quantity={item.quantity}
+                            quantity={item.quantity ? item.quantity : 1}
                             brand={item.brand}
                             setTotal={setTotal}
                             payment={true}

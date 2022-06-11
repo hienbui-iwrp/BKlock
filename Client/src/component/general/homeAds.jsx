@@ -8,6 +8,7 @@ import {
     MediaQuery,
 } from "@mantine/core";
 import "../../css/homeAds.css";
+import { Link } from "react-router-dom";
 
 export default function HomeAds({ img }) {
     return (
@@ -33,13 +34,15 @@ export default function HomeAds({ img }) {
                             marginLeft: "-6%",
                         }}
                     >
-                        <Button
-                            variant="outline"
-                            className="home-ads-btn"
-                            uppercase
-                        >
-                            Xem thêm chi tiết
-                        </Button>
+                        <Link to="/products">
+                            <Button
+                                variant="outline"
+                                className="home-ads-btn"
+                                uppercase
+                            >
+                                Xem thêm
+                            </Button>
+                        </Link>
                     </MediaQuery>
                 </Group>
             </Group>

@@ -9,6 +9,7 @@ export default function CommentSection({ id }) {
     const { height, width } = useViewportSize();
     const [comments, setComments] = React.useState([]);
     const arr = [1, 2, 3, 4, 5];
+    const user = sessionStorage.getItem("userName");
 
     React.useEffect(() => {
         console.log(id);
@@ -39,15 +40,23 @@ export default function CommentSection({ id }) {
                 </MediaQuery>
             </Grid.Col>
             <Grid.Col>
-                <Textarea
-                    placeholder="Bình luận của bạn"
-                    label="Bình luận của bạn"
-                    radius="md"
-                    size="md"
-                />
-                <Group position="right" style={{ marginTop: 10 }}>
-                    <Button>Đăng</Button>
-                </Group>
+                {user ? (
+                    <>
+                        <Textarea
+                            placeholder="Bình luận của bạn"
+                            label="Bình luận của bạn"
+                            radius="md"
+                            size="md"
+                        />
+                        <Group position="right" style={{ marginTop: 10 }}>
+                            <Button>Đăng</Button>
+                        </Group>{" "}
+                    </>
+                ) : (
+                    <Text size={width > 900 ? "xl" : "lg"} align="left">
+                        Vui lòng đăng nhập để bình luận
+                    </Text>
+                )}
             </Grid.Col>
             <Grid.Col>
                 {comments.length === 0 ? (

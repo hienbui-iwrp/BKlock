@@ -62,7 +62,11 @@ const PaymentForm = ({ total }) => {
             </Text>
             <Space h="md" />
             <Text style={{ fontSize: 30, fontWeight: "500" }}>
-                Tổng tiền: ${total}
+                Tổng tiền:{" "}
+                {new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                }).format(total)}
             </Text>
             <Popover
                 opened={failed}

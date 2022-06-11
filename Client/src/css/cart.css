@@ -12,6 +12,7 @@
 
 .cart-card-container {
     border-bottom: 1px solid #cfcfcf;
+    height: fit-content;
 }
 
 .cart-card-product-container {
