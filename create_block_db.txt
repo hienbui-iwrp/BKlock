@@ -1,0 +1,102 @@
+
+drop database if exists bklock;
+CREATE DATABASE IF NOT EXISTS bklock;
+USE bklock;
+
+CREATE TABLE admin (
+    id INT auto_increment,
+    userName VARCHAR(50) not null unique,
+    firstName NVARCHAR(9),
+    midName NVARCHAR(9),
+    lastName NVARCHAR(9),
+    password VARCHAR(40) not null,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE customer (
+    id INT auto_increment,
+    userName VARCHAR(50) not null,
+    firstName NVARCHAR(9),
+    midName NVARCHAR(9),
+    lastName NVARCHAR(9),
+    address VARCHAR(50),
+    password VARCHAR(40) not null,
+    bDate DATE not null,
+    phoneNum VARCHAR(12),
+    PRIMARY KEY (id),
+    UNIQUE (userName)
+);
+
+CREATE TABLE product (
+    id INT auto_increment,
+    name NVARCHAR(50) not null unique,
+    image VARCHAR(200),
+    descript NVARCHAR(700),
+    brand VARCHAR(30),
+    category VARCHAR(30) not null,
+    sex NVARCHAR(20),
+    price INT not null,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE news (
+    id INT auto_increment,
+    title NVARCHAR(200) NOT NULL,
+    content VARCHAR(5000),
+    newDate DATE not null,
+    view INT default 0,
+    liked INT default 0,
+    adminId INT not null,
+    PRIMARY KEY (id),
+    FOREIGN KEY (adminId)
+        REFERENCES  admin (id) on delete cascade,
+    FULLTEXT(title)
+);
+
+CREATE TABLE comment (
+    id INT auto_increment,
+    content VARCHAR(500) not null,
+    comDate DATE not null,
+    productId INT not null,
+    userName VARCHAR(30),
+    PRIMARY KEY (id),
+    FOREIGN KEY (productId)
+        REFERENCES  product (id) on delete cascade,
+    FOREIGN KEY (userName)
+        REFERENCES  customer (userName) on delete cascade    
+);
+
+CREATE TABLE adds (
+    customId INT,
+    productId INT,
+    addDate DATE not null,
+    quantity INT not null,
+    PRIMARY KEY (customId, productId),
+    FOREIGN KEY (productId)
+        REFERENCES  product (id) on delete cascade,
+    FOREIGN KEY (customId) 
+        REFERENCES customer (id) on delete cascade
+);
+
+CREATE TABLE ordered_item (
+    id INT,
+    quantity INT,
+    orderDate DATE not null,
+    cusId INT,
+    PRIMARY KEY (id, cusId),
+    FOREIGN KEY (cusId)
+        REFERENCES  customer (id) on delete cascade
+);
+
+CREATE TABLE belong (
+    ordItemId INT,
+    ordCusId INT,
+    productId INT,
+    quantity INT not null,
+    PRIMARY KEY (ordItemId, ordCusId , productId),
+    FOREIGN KEY (productId)
+        REFERENCES  product (id) on delete cascade,
+    FOREIGN KEY (ordItemId, ordCusId) 
+        REFERENCES ordered_item (id, cusId) on delete cascade
+);
+
