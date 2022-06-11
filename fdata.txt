@@ -1,7 +1,7 @@
 --Admin
 INSERT INTO admin (userName,password) VALUES ('admin','admin');
 --User
-INSERT INTO customer (userName,firstName,midName,lastName,bdate,address,phoneNum,password) VALUES ('toby','Backend python','2001-05-15','Cố đô Huế','0911123456','toby');
+INSERT INTO customer (userName,fullName,bdate,address,phoneNum,password) VALUES ('toby','Backend python','2001-05-15','Cố đô Huế','0911123456','toby');
 INSERT INTO customer (userName,bdate,address,phoneNum,password) VALUES ('BuEmFullStack','2001-06-15','Cố đô Huế','0911666666','buemfullstack');
 INSERT INTO customer (userName,bdate,address,phoneNum,password) VALUES ('hienbui','2001-06-11','Cao nguyên Lâm Viên','0911444444','hienbui');
 
