@@ -4,18 +4,43 @@ import { TextInput, Button, Container, PasswordInput, Grid, Image, Space, Text }
 import { useForm } from '@mantine/form';
 import Logo from "../general/logo";
 import { useViewportSize } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../../css/signin.css";
 
 export default function Signup() {
   const { height, width } = useViewportSize();
+  const navigate = useNavigate();
   const form = useForm({
     initialValues: {
       username: '',
       password: '',
       repassword: '',
-      phonenum: ''
+      phonenumber: ''
     },
+
+    validate: {
+      username: (value) => value.length === 0 ? "Vui lòng nhập tên đăng nhập" : null,
+      password: (value) => value.length === 0 ? "Vui lòng nhập mật khẩu" : null,
+      repassword: (value, values) =>
+        value !== values.password ? 'Mật khẩu không chính xác' : null,
+      phonenumber: (value) => /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/.test(value) ? null : " Số điện thoại không hợp lệ"
+    }
   });
+
+  const handleSignup = (values) => {
+    const obj = { username: values.username, password: values.password, phonenum: values.phonenumber };
+    axios.post('http://localhost/Server/controllers/signup.php', obj).then((response) => {
+      if (response.data === 'success') {
+        console.log("signup successful");
+        navigate("/signin");
+      } else {
+        console.log("signup failed");
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
 
   return (
     <Grid>
@@ -24,7 +49,7 @@ export default function Signup() {
           <Logo classname="form-company-logo" />
           <Text style={width > 768 ? { fontSize: 34 } : { fontSize: 24 }} weight={500}>Đăng kí</Text>
           <Space h="md" />
-          <form onSubmit={form.onSubmit((values) => console.log(values))}>
+          <form onSubmit={form.onSubmit((values) => handleSignup(values))}>
             <TextInput
               label="Tài khoản"
               placeholder="username"
@@ -63,7 +88,7 @@ export default function Signup() {
             <TextInput
               label="Số điện thoại"
               placeholder="phone number"
-              {...form.getInputProps('phonenum')}
+              {...form.getInputProps('phonenumber')}
               className="form-username-input"
             />
             <Space h="md" />
