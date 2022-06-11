@@ -14,7 +14,7 @@
         }
 
         public static function signup($username, $password, $phonenum){
-            $query = "INSERT INTO `customer` VALUES ('1111', '" . $username . "', '" . $password . "', '" . date("Y-m-d") . "', NULL, '" . $phonenum . "');";
+            $query = "INSERT INTO `customer`(`userName`, `password`, `bDate`, `attribute`, `phoneNum`) VALUES ('" . $username . "', '" . $password . "', '" . date("Y-m-d") . "', NULL, '" . $phonenum . "');";
             $result = Sql::getInstance()->updateData($query);
             return $result;
         }

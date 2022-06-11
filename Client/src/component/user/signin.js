@@ -25,7 +25,7 @@ export default function Signin() {
   });
 
   const handleLogin = (values) => {
-    axios.post('http://localhost/Server/controllers/login.php', values).then((response) => {
+    axios.post('http://localhost/Server/controllers/account/login.php', values).then((response) => {
       if (response.data === 'success') {
         console.log("login successful");
         sessionStorage.setItem('user', values.username);

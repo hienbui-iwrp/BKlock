@@ -29,8 +29,9 @@ export default function Signup() {
   });
 
   const handleSignup = (values) => {
-    const obj = { username: values.username, password: values.password, phonenum: values.phonenumber };
-    axios.post('http://localhost/Server/controllers/signup.php', obj).then((response) => {
+    const obj = JSON.stringify({ "username": values.username, "password": values.password, "phonenum": values.phonenumber });
+    console.log(obj);
+    axios.post('http://localhost/Server/controllers/account/signup.php', obj).then((response) => {
       if (response.data === 'success') {
         console.log("signup successful");
         navigate("/signin");
