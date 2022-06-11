@@ -6,6 +6,7 @@ import {
     HiUserCircle,
     HiUser,
     HiOutlineLogout,
+    HiOutlineLogin,
 } from "react-icons/hi";
 import Logo from "../general/logo";
 import MenuModal from "../general/menuModal";
@@ -190,21 +191,67 @@ export default function Navbar() {
                                     </Text>
                                 </Button>
                             </Link>
-                            <Link
-                                to="/signin"
-                                onClick={() => scrollTo({ y: 0 })}
-                            >
+                            {!user ? (
+                                <Link
+                                    to="/signin"
+                                    onClick={() => scrollTo({ y: 0 })}
+                                >
+                                    <Button
+                                        color="gray"
+                                        radius="xs"
+                                        uppercase
+                                        className="nav-bar-btn"
+                                    >
+                                        <Text className="nav-bar-btn-text">
+                                            <HiOutlineLogin size={30} />
+                                        </Text>
+                                    </Button>
+                                </Link>
+                            ) : (
                                 <Button
                                     color="gray"
                                     radius="xs"
                                     uppercase
-                                    className="nav-bar-btn"
+                                    className="nav-bar-right nav-bar-btn"
+                                    onClick={() => setOpened((o) => !o)}
                                 >
-                                    <Text className="nav-bar-btn-text">
-                                        <HiUserCircle size={30} />
-                                    </Text>
+                                    <Popover
+                                        opened={opened}
+                                        onClose={() => setOpened(false)}
+                                        target={
+                                            <Text className="nav-bar-btn-text">
+                                                <HiUserCircle size={30} />
+                                            </Text>
+                                        }
+                                        width="auto"
+                                        position="bottom"
+                                    >
+                                        <Group direction="column">
+                                            <Text
+                                                variant="link"
+                                                component="a"
+                                                href="/user_info"
+                                            >
+                                                Xem thông tin{" "}
+                                                <HiUserCircle size={25} />
+                                            </Text>
+                                            <Text
+                                                variant="link"
+                                                component="a"
+                                                onClick={() =>
+                                                    sessionStorage.removeItem(
+                                                        "user"
+                                                    )
+                                                }
+                                                href="/"
+                                            >
+                                                Đăng xuất{" "}
+                                                <HiOutlineLogout size={25} />
+                                            </Text>
+                                        </Group>
+                                    </Popover>
                                 </Button>
-                            </Link>
+                            )}
                         </div>
                     </>
                 )}
