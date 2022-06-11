@@ -12,23 +12,37 @@ class Payment
         foreach ($products as $product) {
             if ($first) {
                 $first = false;
-                $where .= "id = " . $product["id"];
+                $where .= "productId = " . $product["id"];
             } else {
-                $where .= " or id = " . $product["id"];
+                $where .= " or productId = " . $product["id"];
             }
         }
-        $query = "delete from adds " . $where . " and customid =" . $user;
-        $temp = Sql::getInstance()->updateData($query);
+        $query1 = "delete from adds " . $where . " and customId =" . $user;
+        $result1 = Sql::getInstance()->updateData($query1);
 
+        $tempQuery = "select max(id) from `ordered_item` where cusId = " . $user;
+
+        $temp = Sql::getInstance()->getData($tempQuery);
+        if ($temp->num_rows > 0) {
+            $curId = intval($temp->fetch_assoc()["max(id)"]) + 1;
+        } else {
+            $curId = 1;
+        }
         // add order item
-        $query = "";
+        $query2 = "";
         foreach ($products as $product) {
-            $query .= "insert into ordered_item(quantity, orderDate, cusId) values(" . $product["quantity"] . ", NOW()," . $user . ")";
+            $query2 .= "insert into ordered_item(id, orderDate, cusId) values(" . $curId . ", NOW()," . $user . ")";
         }
 
+        $result2 = Sql::getInstance()->updateData($query2);
 
-        $temp = Sql::getInstance()->updateData($query);
+        $query3 = "";
+        foreach ($products as $product) {
+            $query3 .= "insert into belong (ordCusId, ordItemId, productId, quantity) values(" . $user . ", " . $curId . ", " . $product["id"] . ", " . $product["quantity"] . ");";
+        }
 
-        return $temp;
+        $result3 = Sql::getInstance()->updateData($query3);
+
+        return $result1 && $result2 && $result3;
     }
 }

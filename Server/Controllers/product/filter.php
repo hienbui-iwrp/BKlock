@@ -8,8 +8,7 @@ include "../../models/product.php";
 include "../api.php";
 
 
-$body = json_decode(file_get_contents("php://input"));
+$body = json_decode(file_get_contents("php://input"), true);;
 
-
-
-sendResponse(200, json_encode(Product::filterProduct($body["price"], $body["branch"], $body["sex"], $body["category"])), "application/json");
+// sendResponse(200, json_encode($body), "application/json");
+sendResponse(200, json_encode(Product::filterProduct($body)), "application/json");

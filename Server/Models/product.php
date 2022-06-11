@@ -74,10 +74,15 @@ class Product
         };
     }
 
-    public static function filterProduct($prices, $branchs, $types, $categories)
+    public static function filterProduct($body)
     {
+        $prices = $body['price'];
+        $brands = $body['brand'];
+        $types = $body['sex'];
+        $categories = $body['category'];
+
         $query = "select * from product ";
-        if (count($prices) != 0 || count($branchs) != 0 || count($types) != 0 || count($categories) != 0) {
+        if (count($prices) != 0 || count($brands) != 0 || count($types) != 0 || count($categories) != 0) {
             $query .= "where ";
             // filter price
             $first = true;
@@ -87,87 +92,91 @@ class Product
                     $query .= "(";
                     switch ($price) {
                         case 0:
-                            $query .= "price < 1000000";
+                            $query .= "price < 1000000 ";
                             break;
                         case 1:
-                            $query .= "(price>=1000000 and price<2000000)";
+                            $query .= " (price>=1000000 and price<2000000) ";
                             break;
                         case 2:
-                            $query .= "(price>=2000000 and price<3000000)";
+                            $query .= " (price>=2000000 and price<3000000) ";
                             break;
                         case 3:
-                            $query .= "(price>=3000000 and price<5000000)";
+                            $query .= " (price>=3000000 and price<5000000) ";
                             break;
                         case 4:
-                            $query .= "(price>=5000000 and price<10000000)";
+                            $query .= " (price>=5000000 and price<10000000) ";
                             break;
                         case 5:
-                            $query .= "price>=10000000";
+                            $query .= " price>=10000000 ";
                             break;
                     }
                 } else {
                     switch ($price) {
                         case 0:
-                            $query .= "or price < 1000000";
+                            $query .= " or price < 1000000 ";
                             break;
                         case 1:
-                            $query .= "or (price>=1000000 and price<2000000)";
+                            $query .= " or (price>=1000000 and price<2000000) ";
                             break;
                         case 2:
-                            $query .= "or (price>=2000000 and price<3000000)";
+                            $query .= " or (price>=2000000 and price<3000000) ";
                             break;
                         case 3:
-                            $query .= "or (price>=3000000 and price<5000000)";
+                            $query .= " or (price>=3000000 and price<5000000) ";
                             break;
                         case 4:
-                            $query .= "or (price>=5000000 and price<10000000)";
+                            $query .= " or (price>=5000000 and price<10000000) ";
                             break;
                         case 5:
-                            $query .= "or price>=10000000";
+                            $query .= " or price>=10000000 ";
                             break;
                     }
                 }
             }
-            $query = $query[strlen($query) - 1] == '(' ? substr($query, 0, strlen($query) - 2) : $query . ')';
+            $query = count($prices) > 0 ? $query . ')' : $query;
 
             // filter branchs
             $first = true;
-            foreach ($branchs as $branch) {
+            foreach ($brands as $brand) {
                 if ($first) {
                     $first = false;
+                    $query .= $query[strlen($query) - 1] == ')' ? " and " : "";
                     $query .= "(";
-                    $query .= "branch  = \'" . $branch . "\'";
+                    $query .= " brand  = '" . $brand . "' ";
                 } else {
-                    $query .= "or branch  = \'" . $branch . "\'";
+                    $query .= " or brand  = '" . $brand . "' ";
                 }
             }
-            $query = $query[strlen($query) - 1] == '(' ? substr($query, 0, strlen($query) - 2) : $query . ")";
+            $query = count($brands) > 0 ? $query . ')' : $query;
+
 
             // filter type
             $first = true;
             foreach ($types as $type) {
                 if ($first) {
                     $first = false;
+                    $query .= $query[strlen($query) - 1] == ')' ? " and " : "";
                     $query .= "(";
-                    $query .= "sex  = \'" . $type . "\'";
+                    $query .= " sex  = '" . $type . "' ";
                 } else {
-                    $query .= "or sex  = \'" . $type . "\'";
+                    $query .= " or sex  = '" . $type . "' ";
                 }
             }
-            $query = $query[strlen($query) - 1] == '(' ? substr($query, 0, strlen($query) - 2) : $query . ")";
+            $query = count($types) > 0 ? $query . ')' : $query;
 
             // filter category
             $first = true;
             foreach ($categories as $category) {
                 if ($first) {
                     $first = false;
+                    $query .= $query[strlen($query) - 1] == ')' ? " and " : "";
                     $query .= "(";
-                    $query .= "category  = \'" . $category . "\'";
+                    $query .= " category  = '" . $category . "' ";
                 } else {
-                    $query .= "or category  = \'" . $category . "\'";
+                    $query .= " or category  = '" . $category . "' ";
                 }
             }
-            $query = $query[strlen($query) - 1] == "(" ? substr($query, 0, strlen($query) - 2) : $query . ")";
+            $query = count($categories) > 0 ? $query . ')' : $query;
         }
 
         $temp = Sql::getInstance()->getData($query);
@@ -204,8 +213,15 @@ class Product
 
     public static function searchProduct($str)
     {
-        $query = "DELETE FROM `product` WHERE `product`.`id` like '%" . $str . "%'";
-        $result = Sql::getInstance()->updateData($query);
-        return $result;
+        $query = "Select * FROM `product` WHERE name like '%" . $str . "%'";
+        $temp = Sql::getInstance()->getData($query);
+        $temp_array = array();
+
+        if ($temp->num_rows > 0) {
+            while ($row = $temp->fetch_assoc()) {
+                $temp_array[] = $row;
+            }
+        }
+        return $temp_array;
     }
 }
