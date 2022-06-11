@@ -1,5 +1,5 @@
 <?php
-include "../models/sql.php";
+include "../../Models/sql.php";
 
 class Product
 {
@@ -72,13 +72,6 @@ class Product
         return new class
         {
         };
-    }
-
-    public static function addProduct($prod)
-    {
-
-
-        return null;
     }
 
     public static function filterProduct($prices, $branchs, $types, $categories)
@@ -171,7 +164,7 @@ class Product
                     $query .= "(";
                     $query .= "category  = \'" . $category . "\'";
                 } else {
-                    $query .= "or sex  = \'" . $category . "\'";
+                    $query .= "or category  = \'" . $category . "\'";
                 }
             }
             $query = $query[strlen($query) - 1] == "(" ? substr($query, 0, strlen($query) - 2) : $query . ")";
@@ -186,5 +179,33 @@ class Product
             }
         }
         return $temp_array;
+    }
+
+    public static function addProduct($prod)
+    {
+        $query = "INSERT INTO `product` VALUES (NULL, '" . $prod->name . "', '" . $prod->image . "', '" . $prod->brand . "', '" . $prod->category . "', '" . $prod->price . "')";
+        $result = Sql::getInstance()->updateData($query);
+        return $result;
+    }
+
+    public static function updateProduct($prod)
+    {
+        $query = "UPDATE `product` SET `price` = '" . $prod->price . "', `name` = '" . $prod->name . "', `image` = '" . $prod->image . "', `brand` = '" . $prod->brand . "', `category` = '" . $prod->category . "' WHERE `product`.`id` = " . $prod->id . "; ";
+        $result = Sql::getInstance()->updateData($query);
+        return $result;
+    }
+
+    public static function deleteProduct($id)
+    {
+        $query = "DELETE FROM `product` WHERE `product`.`id` = " . $id;
+        $result = Sql::getInstance()->updateData($query);
+        return $result;
+    }
+
+    public static function searchProduct($str)
+    {
+        $query = "DELETE FROM `product` WHERE `product`.`id` like '%" . $str . "%'";
+        $result = Sql::getInstance()->updateData($query);
+        return $result;
     }
 }

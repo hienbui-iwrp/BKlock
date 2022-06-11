@@ -1,9 +1,9 @@
 <?php
     // Get 
-    // http://localhost/controllers/getcomment.php?id=1
+    // http://localhost/controllers/comment/get.php?id=1
 
-    include "../models/comment.php";
-    include "./api.php";
+    include "../../models/comment.php";
+    include "../api.php";
     
     $queries = array();
     parse_str($_SERVER['QUERY_STRING'], $queries);
