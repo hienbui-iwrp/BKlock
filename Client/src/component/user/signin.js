@@ -4,6 +4,7 @@ import { TextInput, Button, Container, PasswordInput, Grid, Image, Space, Text }
 import { useForm } from '@mantine/form';
 import Logo from "../general/logo";
 import { useViewportSize } from "@mantine/hooks";
+import axios from "axios";
 import "../../css/signin.css";
 
 export default function Signin() {
@@ -14,6 +15,18 @@ export default function Signin() {
       password: '',
     },
   });
+
+  const handleLogin = (values) => {
+    axios.post('http://localhost/Server/controllers/login.php', values).then((response) => {
+      if (response === 'success') {
+        console.log("login successful");
+      } else {
+        console.log("login failed");
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
 
   return (
     <Grid>
@@ -29,7 +42,7 @@ export default function Signin() {
           <Logo classname="form-company-logo" />
           <Text style={width > 768 ? { fontSize: 34 } : { fontSize: 24 }} weight={500}>Đăng nhập</Text>
           <Space h="md" />
-          <form onSubmit={form.onSubmit((values) => console.log(values))}>
+          <form onSubmit={form.onSubmit((values) => handleLogin(values))}>
             <TextInput
               label="Tài khoản"
               placeholder="username"
