@@ -1,28 +1,28 @@
 <?php
-    // Post
-    // http://localhost/controllers/comment/post.php
+    // Put
+    // http://localhost/controllers/account/update.php
+
     // body json:
     // {
-    //     "id": "",
-    //     "content": "",
-    //     "comDate": "",
-    //     "productId": "",
-    //     "adminId": ""
+    //     "id": 1,
+    //     "fullName": "",
+    //     "address": "",
+    //     "phoneNum": "",
+    //     "password": ""
     // }
 
-    include "../../models/comment.php";
+    include "../../models/account.php";
     include "../api.php";
-    
+
     $temp = json_decode(file_get_contents("php://input"));
+    
     try{
-        if (Comment::postComment($temp)){
+        if (Account::update($temp)){
             sendResponse(200, "success", "text/html");
-        }
-        else{
+        } else {
             sendResponse(200, "fail", "text/html");
         }
     } catch (Exception $e){
         sendResponse(200, $e->getMessage(), "text/html");
     }
-
 ?>

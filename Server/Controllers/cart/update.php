@@ -13,9 +13,13 @@
 
     $temp = json_decode(file_get_contents("php://input"));
 
-    if (Cart::updateCart($temp)){
+    try{
+        if (Cart::updateCart($temp)){
         sendResponse(200, "success", "text/html");
-    } else {
-        sendResponse(200, "fail", "text/html");
+        } else {
+            sendResponse(200, "fail", "text/html");
+        }
+    } catch (Exception $e){
+        sendResponse(200, $e->getMessage(), "text/html");
     }
 ?>
