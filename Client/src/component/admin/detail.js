@@ -1,6 +1,5 @@
 import "../../css/detail.css";
 import React from 'react';
-import CommentSection from '../general/commentSection';
 import {
     Container,
     Grid,
@@ -12,8 +11,10 @@ import {
     List,
     Button,
     Input,
-    Select 
+    Select
 } from "@mantine/core";
+import { TextInput, NumberInput, Box, Textarea, Avatar } from '@mantine/core';
+import { useForm } from '@mantine/form';
 import "../../css/detail.css";
 import { useViewportSize } from "@mantine/hooks";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
@@ -36,6 +37,22 @@ export default function Detail() {
 
 function ProductDetail() {
     const { height, width } = useViewportSize();
+    const form = useForm({
+        initialValues: {
+            name: 'ABC',
+            branch: 'rolex',
+            type: 'đồng hồ nam',
+            category: 'cơ-automatic',
+            price: 2000000
+        },
+        validate: {
+            name: (value) => value,
+            branch: (value) => value,
+            type: (value) => value,
+            category: (value) => value,
+            price: (value) => value,
+        },
+    });
     return (
         <Grid>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -56,82 +73,122 @@ function ProductDetail() {
                 </MediaQuery>
             </Grid.Col>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
+
+                <Box >
+                    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                        <TextInput
+                            required
+                            label="Name"
+                            placeholder="Input Name"
+                            {...form.getInputProps('name')}
+                        />
+                        <Select
+                            label="Branch"
+                            data={[
+                                { value: 'rolex', label: 'Rolex' },
+                                { value: 'seiko', label: 'Seiko' },
+                                { value: 'casio', label: 'Casio' },
+                                { value: 'citizen', label: 'Citizen' },
+                                { value: 'fossil', label: 'Fossil' },
+
+                            ]}
+                            {...form.getInputProps('branch')}
+                        />
+
+                        <Select
+                            label="Type"
+                            data={[
+                                { value: 'đồng hồ nam', label: 'Đồng hồ nam' },
+                                { value: 'đồng hồ nữ', label: 'Đồng hồ nữ' },
+                                { value: 'đồng hồ trẻ em', label: 'Đồng hồ trẻ em' },
+
+                            ]}
+                            {...form.getInputProps('type')}
+                        />
+
+                        <Select
+                            label="Category"
+                            data={[
+                                { value: 'cơ-automatic', label: 'Cơ-automatic' },
+                                { value: 'điện tử', label: 'Điện tử' },
+                                { value: 'treo tường', label: 'Treo tường' },
+                                { value: 'năng lượng mặt trời', label: 'Năng lượng mặt trời' },
+
+                            ]}
+                            {...form.getInputProps('category')}
+                        />
+
+                        <NumberInput
+                            required
+                            label="Price"
+                            placeholder="Input Price"
+                            {...form.getInputProps('price')}
+                        />
+
+
+                        <Group position="right" mt="md">
+                            <Button variant="outline" color="red" className="admin__delete-btn">Delete</Button>
+                            <Button type="submit">Save</Button>
+                        </Group>
+                    </form>
+                </Box>
+            </Grid.Col>
+        </Grid>
+    );
+}
+
+
+function CommentSection() {
+    const { height, width } = useViewportSize();
+    const arr = [1, 2, 3, 4, 5];
+    return (
+        <Grid>
+            <Grid.Col>
                 <MediaQuery
                     query="(max-width: 1800px) and (min-width: 900px)"
                     styles={{
                         fontSize: 36,
                         marginLeft: 40,
                         fontWeight: 600,
-                        marginBottom: 20,
                     }}
                 >
                     <Text className={width < 900 ? "detail-product-name" : ""}>
-                        Tên:
-                        <Input
-                            placeholder="Your email"
-                            radius="md"
-                            size="md"
-                            defaultValue="ABC"
-                        />
+                        Bình luận
                     </Text>
                 </MediaQuery>
-                {width > 900 ? (
-                    <Group direction="column">
-                        <Badge size={"lg"} style={{ marginLeft: 40 }}>
-                            Brand
-                        </Badge>
-                        <List
-                            size="xl"
-                            style={{ marginLeft: 40, marginBottom: 20 }}
-                        >
-                            <List.Item>Sex</List.Item>
-                            <List.Item>Type</List.Item>
-                            <List.Item>Category</List.Item>
-                        </List>
+            </Grid.Col>
+            <Grid.Col>
+                {arr.map(() => {
+                    return <CommentCard />;
+                })}
+            </Grid.Col>
+        </Grid>
+    );
+}
+
+
+function CommentCard() {
+    return (
+        <Grid className="comment-card-container">
+            <Grid.Col>
+                <Group direction="row">
+                    <Avatar
+                        src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg"
+                        alt="avatar"
+                    />
+                    <Group direction="column" spacing={1}>
+                        <Text>Nguyễn Văn A</Text>
+                        <Text color="#cfcfcf">11-06-2022</Text>
                     </Group>
-                ) : (
-                    <Group className={"detail-product-name"}>
-                        <Badge size={"lg"}>Brand</Badge>
-                        <Badge size={"lg"}>Sex</Badge>
-                        <Badge size={"lg"}>Type</Badge>
-                        <Badge size={"lg"}>Category</Badge>
-                    </Group>
-                )}
-
-                <MediaQuery
-                    query="(max-width: 1800px) and (min-width: 900px)"
-                    styles={{
-                        fontSize: 34,
-                        marginLeft: 40,
-                        fontWeight: 500,
-                        marginBottom: 20,
-                    }}
-                >
-                    <Text
-                        className={width < 900 ? "detail-product-name" : ""}
-                        color="red"
-                    >
-                        Giá: 2.000.000 VND
-                    </Text>
-                </MediaQuery>
-
-                <Group direction="row" style={{ marginLeft: 40 }}>
-                    <Button
-                        leftIcon={<SiCashapp />}
-                        variant="outline"
-                        className="product-card-btn"
-                    >
-                        Mua ngay
-                    </Button>
-
-                    <Button
-                        leftIcon={<MdOutlineAddShoppingCart />}
-                        variant="outline"
-                        className="product-card-btn"
-                    >
-                        Thêm vào giỏ hàng
-                    </Button>
+                    <Button variant="outline" color="red" className ="admin__delete-btn">Delete</Button>
                 </Group>
+            </Grid.Col>
+            <Grid.Col>
+                <Text>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+                    facere praesentium eos quis at perspiciatis sint nobis
+                    veritatis exercitationem quam!
+                </Text>
             </Grid.Col>
         </Grid>
     );
