@@ -28,14 +28,14 @@ export default function ProductCard() {
                         variant="outline"
                         className="product-card-btn"
                     >
-                        Buy now
+                        Mua ngay
                     </Button>
 
                     <Button fullWidth leftIcon={<MdOutlineAddShoppingCart />}
                         variant="outline"
                         className="product-card-btn"
                     >
-                        Add to cart
+                        Thêm vào giỏ hàng
                     </Button>
 
                 </Group>

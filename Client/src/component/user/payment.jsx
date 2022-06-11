@@ -7,14 +7,14 @@ import { PaymentItemsContext } from "../general/paymentItemsContext";
 
 export default function Payment() {
     const [total, setTotal] = React.useState(0);
+
     const [paymentItems, setPaymentItems] =
         React.useContext(PaymentItemsContext);
 
-    console.log(paymentItems);
     return (
-        <Grid>
+        <Grid className="payment-container">
             <Grid.Col xl={4} className="payment-col-wrapper">
-                <CheckoutForm />
+                <CheckoutForm total={total} />
             </Grid.Col>
             <Grid.Col xl={8}>
                 {paymentItems.map((item) => (
@@ -26,6 +26,7 @@ export default function Payment() {
                             quantity={item.quantity}
                             brand={item.brand}
                             setTotal={setTotal}
+                            payment={true}
                         />
                     </Grid.Col>
                 ))}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Space, Button, Text, Group } from "@mantine/core";
+import { Space, Button, Text, Popover, Modal } from "@mantine/core";
 import {
     Elements,
     CardElement,
@@ -9,30 +9,41 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import "../../css/payment.css";
 import Logo from "./logo";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const stripePromise = loadStripe(
     "pk_test_51L5VsBHihNXOYuTY3oM7Tf3knsg5gaElFMpmJ83reKHkYVU8EVZF7Na9VlfuL45nm7aJX1qEVjfHgc6zX1SftPe700qT0FsdZd"
 );
 
-const handleSubmit = (stripe, elements) => async () => {
-    const cardElement = elements.getElement(CardElement);
+const handleSubmit =
+    (stripe, elements, setFailed, setMessage, setSuccess) => async () => {
+        const cardElement = elements.getElement(CardElement);
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        card: cardElement,
-    });
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: cardElement,
+        });
 
-    if (error) {
-        console.log("[error]", error);
-    } else {
-        console.log("[PaymentMethod]", paymentMethod);
-        // ... SEND to your API server to process payment intent
-    }
-};
+        if (error) {
+            console.log("[error]", error);
+            setMessage(error.message);
+            setFailed(true);
+        } else {
+            console.log("[PaymentMethod]", paymentMethod);
+            setSuccess(true);
+            setMessage("Thanh toán thành công");
+            // ... SEND to your API server to process payment intent
+        }
+    };
 
-const PaymentForm = () => {
+const PaymentForm = ({ total }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const navigate = useNavigate();
+    const [failed, setFailed] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [message, setMessage] = useState("");
     return (
         <form className="payment-form-wrapper">
             <Logo classname="form-company-logo" />
@@ -49,11 +60,50 @@ const PaymentForm = () => {
                 * Chúng tôi chấp nhận các phương thức thanh toán khác nhau như
                 visa, mastercard, ...
             </Text>
-            <Space h="xl" />
+            <Space h="md" />
+            <Text style={{ fontSize: 30, fontWeight: "500" }}>
+                Tổng tiền: ${total}
+            </Text>
+            <Popover
+                opened={failed}
+                onClose={() => setFailed(false)}
+                target={<div></div>}
+                width={260}
+                position="top"
+                withArrow
+            >
+                <Text size="sm">{message}</Text>
+            </Popover>
+            <Modal
+                opened={success}
+                onClose={() => {
+                    navigate("/");
+                    setSuccess(false);
+                }}
+                size={300}
+                withCloseButton={false}
+                centered
+            >
+                <Text size="xl" style={{ textAlign: "center" }}>
+                    {message}
+                </Text>
+                <Space h="md" />
+                <Link to="/">
+                    <Button color="dark" className="form-signin-submit-btn">
+                        Trở về trang chủ
+                    </Button>
+                </Link>
+            </Modal>
             <CardElement />
             <Space h="md" />
             <Button
-                onClick={handleSubmit(stripe, elements)}
+                onClick={handleSubmit(
+                    stripe,
+                    elements,
+                    setFailed,
+                    setMessage,
+                    setSuccess
+                )}
                 color="dark"
                 className="form-signin-submit-btn"
             >
@@ -63,10 +113,10 @@ const PaymentForm = () => {
     );
 };
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ total }) {
     return (
         <Elements stripe={stripePromise}>
-            <PaymentForm />
+            <PaymentForm total={total} />
         </Elements>
     );
 }
