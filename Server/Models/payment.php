@@ -45,4 +45,18 @@ class Payment
 
         return $result1 && $result2 && $result3;
     }
+
+    public static function getOrderedItems($id){
+        $query = "SELECT image, name, price, quantity, brand FROM `ordered_item`, `product` WHERE `ordered_item`.id = `product`.id AND cusId = " . $id;
+        $temp = Sql::getInstance()->getData($query);
+        $temp_array = array();
+
+        if($temp->num_rows >0){
+            while($row = $temp->fetch_assoc()){
+                $temp_array[] = $row;
+            }
+        }
+        
+        return $temp_array;
+    }
 }

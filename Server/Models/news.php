@@ -17,6 +17,20 @@
             return $temp_array;
         }
 
+        public static function getAllNews(){
+            $query = "SELECT * FROM `news`";
+            $temp = Sql::getInstance()->getData($query);
+            $temp_array = array();
+
+            if($temp->num_rows >0){
+                while($row = $temp->fetch_assoc()){
+                    $temp_array[] = $row;
+                }
+            }
+            
+            return $temp_array;
+        }
+
         public static function addNews($news){
             $query = "INSERT INTO `news`VALUES (NULL, '".$news->title."', '".$news->content."', '".date("Y-m-d")."', '".$news->view."', '".$news->like."', '".$news->adminId."'); ";
             $result = Sql::getInstance()->updateData($query);
