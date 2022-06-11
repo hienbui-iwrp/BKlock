@@ -10,6 +10,11 @@ import SignupPage from './page/signupPage';
 import SigninPage from './page/signinPage';
 import ProductsPage from './page/productsPage';
 import PaymentPage from './page/paymentPage';
+
+import DetailAdminPage from './page/admin/detailPage';
+import MemberAdminPage from './page/admin/memberPage';
+import NewsAdminPage from './page/admin/newsPage';
+import ProductsAdminPage from './page/admin/productsPage';
 import { PaymentItemsContext } from './component/general/paymentItemsContext';
 
 function App() {
@@ -29,6 +34,13 @@ function App() {
           <Route path="/signup" element={<SignupPage />} exact />
           <Route path="/signin" element={<SigninPage />} exact />
           <Route path="/payment" element={<PaymentPage />} exact />
+
+          {/* admin */}
+          <Route path="/admin/detail" element={<DetailAdminPage />} exact />
+          <Route path="/admin/member" element={<MemberAdminPage />} exact />
+          <Route path="/admin/news" element={<NewsAdminPage />} exact />
+          <Route path="/admin/products" element={<ProductsAdminPage />} exact />
+
           <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
       </BrowserRouter>
