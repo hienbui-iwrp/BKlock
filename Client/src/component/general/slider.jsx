@@ -8,7 +8,9 @@ import "../../css/slider.css";
 export default function Slider({ type, items }) {
     let responsive;
     const [hover, setHover] = React.useState(false);
-
+    // React.useEffect(() => {
+    //     console.log(items);
+    // });
     if (type === "homeads") {
         responsive = {
             superLargeDesktop: {

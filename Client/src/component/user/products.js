@@ -6,6 +6,7 @@ import FilterForm from '../../component/general/filterForm';
 import { useLocation } from 'react-router-dom';
 import { useWindowScroll } from '@mantine/hooks';
 import BreadCrumbs from '../general/breadCrumb';
+import axios from 'axios';
 import "../../css/product.css";
 
 
@@ -13,10 +14,11 @@ export default function Products() {
     let location = useLocation();
     const [scroll, scrollTo] = useWindowScroll();
     const [size, setSize] = React.useState([0, 0]);
+    const [data, setData] = React.useState([]);
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     const [activePage, setPage] = React.useState(1);
     const maxItemPerPage = 6;
-    const total = Math.ceil(arr.length / maxItemPerPage);
+    const total = Math.ceil(data.length / maxItemPerPage);
     const items = [
         "https://cdn.watchstore.vn/uploads/brands/orient-logo.jpg",
         "https://cdn.watchstore.vn/uploads/brands/tissot-logo.jpg",
@@ -33,6 +35,17 @@ export default function Products() {
         updateSize();
         return () => window.removeEventListener("resize", updateSize);
     }, []);
+
+    React.useEffect(() => {
+        axios.get("http://localhost/Server/Controllers/product/getIndex.php?index=1")
+            .then((response) => {
+                console.log(response);
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [])
 
     return <>
         <Grid style={{ marginTop: 60 }}>
@@ -55,10 +68,10 @@ export default function Products() {
                         <Grid.Col lg={10}>
                             <Slider type="image" items={items} />
                             <Grid>
-                                {arr.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(x => {
+                                {data.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(product => {
                                     return (
-                                        <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={x}>
-                                            <ProductCard />
+                                        <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={product.id}>
+                                            <ProductCard id={product.id} img={product.image} brand={product.brand} name={product.name} price={product.price} />
                                         </Grid.Col>
                                     );
                                 })}

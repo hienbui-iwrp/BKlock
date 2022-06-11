@@ -4,16 +4,7 @@ import { Title, Group } from "@mantine/core";
 import Slider from "../general/slider";
 import ProductCard from "../general/productCard";
 import HomeAds from "../general/homeAds";
-
-const products = [
-    <ProductCard key={1} />,
-    <ProductCard key={2} />,
-    <ProductCard key={3} />,
-    <ProductCard key={4} />,
-    <ProductCard key={5} />,
-    <ProductCard key={6} />,
-    <ProductCard key={7} />,
-];
+import axios from "axios";
 
 const items = [
     <HomeAds
@@ -38,6 +29,45 @@ const items = [
     />,
 ];
 export default function Home() {
+    const [featuredProd, setFeaturedProd] = React.useState([]);
+    const [newProd, setNewProd] = React.useState([]);
+    React.useEffect(() => {
+        axios
+            .get("http://localhost/Server/Controllers/product/getfeatured.php")
+            .then((response) => {
+                response.data.slice(0, 7).map((product) => {
+                    setFeaturedProd((o) => [
+                        ...o,
+                        <ProductCard
+                            img={product.image}
+                            brand={product.brand}
+                            name={product.name}
+                            price={product.price}
+                            key={product.id}
+                            id={product.id}
+                        />,
+                    ]);
+                });
+
+                response.data.slice(4, 11).map((product) => {
+                    setNewProd((o) => [
+                        ...o,
+                        <ProductCard
+                            img={product.image}
+                            brand={product.brand}
+                            name={product.name}
+                            price={product.price}
+                            key={product.id}
+                            id={product.id}
+                        />,
+                    ]);
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <>
             <div className="home">
@@ -46,13 +76,13 @@ export default function Home() {
                     <Title align="center" order={2} className="home-title">
                         Sản phẩm nổi bật
                     </Title>
-                    <Slider type="product" items={products} />
+                    <Slider type="product" items={featuredProd} />
                 </div>
                 <div className="new-products-site">
                     <Title align="center" order={2} className="home-title">
                         Sản phẩm mới nhất
                     </Title>
-                    <Slider type="product" items={products} />
+                    <Slider type="product" items={newProd} />
                 </div>
             </div>
         </>
