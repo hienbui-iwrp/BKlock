@@ -2,7 +2,6 @@
 <?php
     // Post
     // http://localhost/controllers/payment/make.php
-
     // body json:
     // {
     //     product: [{id: 1, quantity:10}],
