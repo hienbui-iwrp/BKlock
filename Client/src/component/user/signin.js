@@ -1,27 +1,38 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import { TextInput, Button, Container, PasswordInput, Grid, Image, Space, Text } from '@mantine/core';
+import { TextInput, Button, Container, PasswordInput, Grid, Image, Space, Text, Popover } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Logo from "../general/logo";
 import { useViewportSize } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../css/signin.css";
 
 export default function Signin() {
   const { height, width } = useViewportSize();
+  const [failed, setFailed] = useState(false);
+  const navigate = useNavigate();
   const form = useForm({
     initialValues: {
       username: '',
       password: '',
     },
+
+    validate: {
+      username: (value) => value.length === 0 ? "Vui lòng nhập tên đăng nhập" : null,
+      password: (value) => value.length === 0 ? "Vui lòng nhập mật khẩu" : null,
+    }
   });
 
   const handleLogin = (values) => {
     axios.post('http://localhost/Server/controllers/login.php', values).then((response) => {
-      if (response === 'success') {
+      if (response.data === 'success') {
         console.log("login successful");
+        sessionStorage.setItem('user', values.username);
+        navigate("/");
       } else {
         console.log("login failed");
+        setFailed(true);
       }
     }).catch((error) => {
       console.log(error);
@@ -57,7 +68,17 @@ export default function Signin() {
               className="form-password-input"
             />
             <Space h="md" />
-            <Button type="submit" color="dark" className="form-signin-submit-btn">ĐĂNG NHẬP</Button>
+            <Popover
+              opened={failed}
+              onClose={() => setFailed(false)}
+              target={<Button type="submit" color="dark" className="form-signin-submit-btn" onClick={() => setFailed(false)} fullWidth>ĐĂNG NHẬP</Button>}
+              width={260}
+              position="bottom"
+              withArrow
+            >
+              <Text color="gray">Vui lòng kiểm tra lại tài khoản và mật khẩu</Text>
+            </Popover>
+
             <Space h="sm" />
             <Text color="gray">Chưa có tài khoản ? Đăng kí ngay <Link to="/signup">tại đây</Link></Text>
           </form>
