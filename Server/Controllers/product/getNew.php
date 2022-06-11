@@ -5,5 +5,9 @@
     include "../../models/product.php";
     include "../api.php";
     
-    sendResponse(200, json_encode(Product::getNewProduct()), "application/json");
+    try{
+        sendResponse(200, json_encode(Product::getNewProduct()), "application/json");
+    } catch (Exception $e){
+        sendResponse(200, $e->getMessage(), "text/html");
+    }
 ?>

@@ -15,10 +15,13 @@
     include "../api.php";
 
     $temp = json_decode(file_get_contents("php://input"));
-
-    if (News::updateNews($temp)){
-        sendResponse(200, "success", "text/html");
-    } else {
-        sendResponse(200, "fail", "text/html");
+    try{
+        if (News::updateNews($temp)){
+            sendResponse(200, "success", "text/html");
+        } else {
+            sendResponse(200, "fail", "text/html");
+        }
+    } catch (Exception $e){
+        sendResponse(200, $e->getMessage(), "text/html");
     }
 ?>
