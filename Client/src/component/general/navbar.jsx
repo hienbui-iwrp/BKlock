@@ -16,7 +16,7 @@ export default function Navbar() {
     const { height, width } = useViewportSize();
     const [scroll, scrollTo] = useWindowScroll();
     const [opened, setOpened] = React.useState(false);
-    const user = sessionStorage.getItem("user");
+    const user = sessionStorage.getItem("userName");
 
     return (
         <>
@@ -146,7 +146,7 @@ export default function Navbar() {
                                                 component="a"
                                                 onClick={() =>
                                                     sessionStorage.removeItem(
-                                                        "user"
+                                                        "userName"
                                                     )
                                                 }
                                                 href="/"

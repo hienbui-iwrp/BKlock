@@ -7,14 +7,14 @@
             $query = "SELECT * FROM customer WHERE userName = '".$username."' and password = '".$password."'";
             $result = Sql::getInstance()->getData($query);
             if ($result->num_rows > 0){
-                return $result->fetch_assoc();
+                return true;
             }else{
-                return new class{};
+                return false;
             }
         }
 
         public static function signup($username, $password, $phonenum){
-            $query = "INSERT INTO `customer`(`userName`, `password`, `bDate`, `attribute`, `phoneNum`) VALUES ('" . $username . "', '" . $password . "', '" . date("Y-m-d") . "', NULL, '" . $phonenum . "');";
+            $query = "INSERT INTO `customer`(`userName`, `password`, `bDate`, `phoneNum`) VALUES ('" . $username . "', '" . $password . "', '" . date("Y-m-d") . "', '" . $phonenum . "');";
             $result = Sql::getInstance()->updateData($query);
             return $result;
         }

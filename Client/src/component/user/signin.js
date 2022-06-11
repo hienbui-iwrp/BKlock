@@ -26,9 +26,14 @@ export default function Signin() {
 
   const handleLogin = (values) => {
     axios.post('http://localhost/Server/controllers/account/login.php', values).then((response) => {
-      if (response.data === 'success') {
-        console.log("login successful");
-        sessionStorage.setItem('user', values.username);
+      if (response.data) {
+        console.log("login successfull");
+        sessionStorage.setItem('userName', response.data.userName);
+        sessionStorage.setItem('password', response.data.password);
+        sessionStorage.setItem('bDate', response.data.bDate);
+        sessionStorage.setItem('phoneNum', response.data.phoneNum);
+        sessionStorage.setItem('address', response.data.address);
+        sessionStorage.setItem('fullName', response.data.fullName);
         navigate("/");
       } else {
         console.log("login failed");
