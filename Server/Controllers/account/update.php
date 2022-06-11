@@ -1,23 +1,23 @@
 <?php
-    // Post
-    // http://localhost/controllers/news/update.php
+    // Put
+    // http://localhost/controllers/account/update.php
 
     // body json:
     // {
-    //     "id": "",
-    //     "title": "",
-    //     "content": "",
-    //     "view": "",
-    //     "like": "",
-    //     "adminId": 0
+    //     "id": 1,
+    //     "fullName": "",
+    //     "address": "",
+    //     "phoneNum": "",
+    //     "password": ""
     // }
-    include "../../Models/news.php";
+
+    include "../../models/account.php";
     include "../api.php";
 
-    if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $temp = json_decode(file_get_contents("php://input"));
+    $temp = json_decode(file_get_contents("php://input"));
+    if($_SERVER["REQUEST_METHOD"] === "PUT"){
         try{
-            if (News::updateNews($temp)){
+            if (Account::update($temp)){
                 sendResponse(200, "success", "text/html");
             } else {
                 sendResponse(200, "fail", "text/html");

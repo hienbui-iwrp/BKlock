@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { Trash } from "tabler-icons-react";
 import "../../css/product.css";
+import "../../css/admin.css";
 
 export default function Product() {
     return (
@@ -24,8 +25,8 @@ export default function Product() {
                 <Group direction='row' grow style={{ marginTop: 10 }}>
 
                     <Button fullWidth leftIcon={<Trash />}
-                        variant="outline"
-                        className="product-card-btn"
+                        variant="outline" color="red"
+                        className="product-card-btn admin__delete-btn"
                     >
                         Xóa
                     </Button>
