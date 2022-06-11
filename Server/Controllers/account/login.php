@@ -11,10 +11,5 @@
     include "../api.php";
 
     $temp = json_decode(file_get_contents("php://input"));
-
-    if (Account::login($temp->username, $temp->password)){
-        sendResponse(200, "success", "text/html");
-    } else {
-        sendResponse(200, "fail", "text/html");
-    }
+    sendResponse(200, json_encode(Account::login($temp->username, $temp->password)), "application/json");
 ?>
