@@ -78,7 +78,6 @@ CREATE TABLE adds (
 
 CREATE TABLE ordered_item (
     id INT,
-    quantity INT,
     orderDate DATE not null,
     cusId INT,
     PRIMARY KEY (id, cusId),
