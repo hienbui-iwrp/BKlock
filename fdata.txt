@@ -1,0 +1,95 @@
+--Admin
+INSERT INTO admin (userName,password) VALUES ('admin','admin');
+--User
+INSERT INTO customer (userName,firstName,midName,lastName,bdate,address,phoneNum,password) VALUES ('toby','Back','end','python','2001-05-15','Cố đô Huế','0911123456','toby');
+INSERT INTO customer (userName,bdate,address,phoneNum,password) VALUES ('BuEmFullStack','2001-06-15','Cố đô Huế','0911666666','buemfullstack');
+INSERT INTO customer (userName,bdate,address,phoneNum,password) VALUES ('hienbui','2001-06-11','Cao nguyên Lâm Viên','0911444444','hienbui');
+
+
+-- Product
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Rolex-1A",3000000,"https://cdn3.dhht.vn/wp-content/uploads/2021/01/dong-ho-rolex-nam-nu-chinh-hang-gia-bao-nhieu-danh-gia-chi-tiet.jpg","Rolex","Cơ - automatic","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category) VALUES ("Rolex-2A",3500000,"https://cf.shopee.vn/file/1761a7ff3d35d31a6dc7ad8d0581bbbb","Rolex","Treo tường");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Rolex-3PS",3200000,"https://galle.vn/upload_images/images/cau-tao-dong-ho-co.jpg","Rolex","Điện tử","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Rolex-4A",7000000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmmfBv9Oi5hdRw4XpBDwMQL9BcY26Eaa7VpQ&usqp=CAU","Rolex","Điện tử","Đồng hồ nữ");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Rolex-5A",20000000,"https://cdn3.dhht.vn/wp-content/uploads/2021/01/dong-ho-rolex-nam-nu-chinh-hang-gia-bao-nhieu-danh-gia-chi-tiet.jpg","Rolex","Cơ - automatic","Đồng hồ nữ");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Rolex-6A",3000000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTij99SH8lTgUggf8nWoYsqKfC6rdgFnRUvZA&usqp=CAU","Rolex","Cơ - automatic","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Seiko-1A",13000000,"https://galle.vn/upload_images/images/cau-tao-dong-ho-co.jpg","Seiko","Cơ - automatic","Đồng hồ trẻ em");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Seiko-12A",3000000,"https://donghothuysy.vn/upload_images/images/cach-chinh-dong-ho-bao-thuc-de-ban.jpg","Seiko","Năng lượng mặt trời","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Seiko-13A",7000000,"https://st.quantrimang.com/photos/image/2019/07/30/cach-chinh-gio-dong-ho-casio-3-nut-4-nut-2.jpg","Seiko","Điện tử","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Seiko-14A",8000000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTer-dtdSHqXP37qIgsS7zen3p3qkrdN13zVcKUE_PFs-jfS4j55Fzr7Grgsj5lnm0Aaig&usqp=CAU","Seiko","Cơ - automatic","Đồng hồ nữ");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Seiko-15A",5000000,"https://st.quantrimang.com/photos/image/2019/07/30/cach-chinh-gio-dong-ho-casio-3-nut-4-nut-2.jpg","Seiko","Điện tử","Đồng hồ trẻ em");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Seiko-1aA",5500000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTij99SH8lTgUggf8nWoYsqKfC6rdgFnRUvZA&usqp=CAU","Seiko","Cơ - automatic","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Seiko-61A",4500000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmmfBv9Oi5hdRw4XpBDwMQL9BcY26Eaa7VpQ&usqp=CAU","Seiko","Cơ - automatic","Đồng hồ trẻ em");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Casio-16A",3000000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTer-dtdSHqXP37qIgsS7zen3p3qkrdN13zVcKUE_PFs-jfS4j55Fzr7Grgsj5lnm0Aaig&usqp=CAU","Casio","Năng lượng mặt trời","Đồng hồ nữ");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Citizen-1A",9900000,"https://fridayshopping.vn/wp-content/uploads/2020/07/Dong-ho-co-la-gi-Tai-sao-no-lai-duoc-danh-gia-cao-den-the-1.jpg","Citizen","Cơ - automatic","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Casio-2A",23000000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmmfBv9Oi5hdRw4XpBDwMQL9BcY26Eaa7VpQ&usqp=CAU","Casio","Cơ - automatic","Đồng hồ nữ");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Casio-2B",3400000,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTer-dtdSHqXP37qIgsS7zen3p3qkrdN13zVcKUE_PFs-jfS4j55Fzr7Grgsj5lnm0Aaig&usqp=CAU","Casio","Điện tử","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Casio-3A",600000,"https://storehanghieu.com.vn/wp-content/uploads/2020/10/2020_10_20_07_04_IMG_7029.jpg","Casio","Cơ - automatic","Đồng hồ nữ");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Casio-4A",700000,"image.png","Casio","Cơ - automatic","Đồng hồ trẻ em");
+INSERT INTO product (name, price,image,brand,category) VALUES ("Citizen-1W",800000,"https://bizweb.dktcdn.net/100/307/505/products/830-ht-1.jpg?v=1579506607723","Citizen","Treo tường");
+INSERT INTO product (name, price,image,brand,category) VALUES ("Citizen-1WP",2800000,"https://decopro.vn/wp-content/uploads/2019/11/Tranh-dong-ho-go-treo-tuong-ma-dao-thanh-cong-1.jpg","Citizen","Treo tường");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Citizen-1AA",3000000,"https://cdn3.dhht.vn/wp-content/uploads/2021/01/dong-ho-Citizen-nam-nu-chinh-hang-gia-bao-nhieu-danh-gia-chi-tiet.jpg","Citizen","Năng lượng mặt trời","Đồng hồ nữ");
+INSERT INTO product (name, price,image,brand,category) VALUES ("Fossil-2A",9800000,"https://bizweb.dktcdn.net/100/307/505/products/830-ht-1.jpg?v=1579506607723","Fossil","Treo tường");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-1A",3000000,"image.png","Fossil","Năng lượng mặt trời","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-2BA",3000000,"https://cdn3.dhht.vn/wp-content/uploads/2021/01/dong-ho-Fossil-nam-nu-chinh-hang-gia-bao-nhieu-danh-gia-chi-tiet.jpg","Fossil","Năng lượng mặt trời","Đồng hồ trẻ em");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-3A",3000000,"https://muongicungco.com/wp-content/uploads/2021/06/dong-ho-bao-thuc.jpg","Fossil","Năng lượng mặt trời","Đồng hồ nam");
+INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-AA",3000000,"https://donghothuysy.vn/upload_images/images/cach-chinh-dong-ho-bao-thuc-de-ban.jpg","Fossil","Năng lượng mặt trời","Đồng hồ nam");
+--description for product
+UPDATE product
+SET descript='Về chiếc Oyster, ông nói: “Những phẩm chất đặc biệt của chiếc đồng hồ Rolex này khiến nó rất phù hợp với mục đích bay và tôi đề nghị sử dụng nó trên tất cả các chuyến bay đường dài của tôi trong tương lai”.';
+
+--Comment
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',2,'BuEmFullStack');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',2,'BuEmFullStack');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',1,'BuEmFullStack');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Spam ít thôi','2017-06-15',1,'hienbui');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Bạn nói rất đúng','2017-08-15',3,'toby');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',3,'BuEmFullStack');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',3,'BuEmFullStack');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',1,'BuEmFullStack');
+INSERT INTO comment (content,comDate,productId,userName) VALUES ('Bạn nói rất đúng','2017-08-15',2,'toby');
+
+--News
+INSERT INTO news (title, content, newDate, adminId) VALUES ('Giảm 30% Đồng Hồ Chính Hãng - Hè Rực Rỡ Giảm Giá Đến 30%','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.",. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2021-11-6",1);
+
+INSERT INTO news (title, content, newDate, adminId) VALUES ('Bclock nâng tầm trí tuệ nhân tạo, kết hợp công nghệ điện mặt trời','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.","2021-11-6. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2022-1-1",1);
+
+INSERT INTO news (title, content, newDate, adminId) VALUES ('Bclock khởi động sự kiện siêu sale đầu tiên của năm 2022','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.","2021-11-6. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2021-2-6",1);
+
+INSERT INTO news (title, content, newDate, adminId) VALUES ('Đồng hồ Thụy Sỹ, Nhật Bản xịn, GIẢM SỐC ĐỒNG GIÁ','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.","2021-11-6. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2021-2-3",1);
+
+INSERT INTO news (title, content, newDate, adminId) VALUES ('Đồng Hồ Treo Tường Con Công Trang Trí Phòng Khách Chính Hãng Bảo Hành 36 Tháng','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.","2021-11-6. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2021-7-7",1);
+
+-- Adds
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (1,3,'2021-3-3',1);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (1,1,'2021-3-3',1);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (2,7,'2021-3-3',2);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (1,6,'2021-2-2',1);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (3,3,'2021-1-1',1);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (3,8,'2021-3-3',1);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (2,5,'2021-3-5',1);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (2,9,'2021-5-5',1);
+INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (1,14,'2021-7-7',3);
+
+-- Order_items
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (1,6,'2022-1-1',1);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (2,3,'2020-11-11',1);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (1,4,'2021-11-11',2);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (1,6,'2022-1-1',3);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (3,3,'2020-11-5',1);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (2,4,'2021-11-1',2);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (4,3,'2021-12-12',1);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (5,4,'2020-10-10',1);
+INSERT INTO `ordered_item`(`id`,`quantity`, `orderDate`, `cusId`) VALUES (6,2,'2019-7-7',1);
+
+-- Belong
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,1,1,1);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,1,2,2);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,1,3,3);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (2,1,11,2);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (3,1,6,3);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (4,1,1,1);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (5,1,1,1);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,2,1,1);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (2,2,3,3);
+INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,3,7,3);
