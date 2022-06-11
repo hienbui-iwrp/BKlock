@@ -4,7 +4,7 @@
     class Cart{
 
         public static function getCart($id){
-            $query = "SELECT * FROM `adds` WHERE customId = " . $id;
+            $query = "SELECT image, name, price, quantity, brand FROM `adds`, `product` WHERE productId = id AND customId = " . $id;
             $temp = Sql::getInstance()->getData($query);
             $temp_array = array();
 
@@ -15,6 +15,12 @@
             }
             
             return $temp_array;
+        }
+
+        public static function addCart($prod){
+            $query = "INSERT INTO `adds` VALUES ('$prod->customId', '$prod->productId', '".date("Y-m-d")."', '".$prod->quantity."')";
+            $temp = Sql::getInstance()->updateData($query);
+            return $temp;
         }
 
         public static function updateCart($prod){
