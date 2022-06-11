@@ -7,9 +7,9 @@
             $query = "SELECT * FROM customer WHERE userName = '".$user->userName."' and password = '".$user->password."'";
             $result = Sql::getInstance()->getData($query);
             if ($result->num_rows > 0){
-                return true;
+                return $result->fetch_assoc();
             } else {
-                return false;
+                return new class{};
             }
         }
 
