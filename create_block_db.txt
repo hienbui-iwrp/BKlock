@@ -16,9 +16,7 @@ CREATE TABLE admin (
 CREATE TABLE customer (
     id INT auto_increment,
     userName VARCHAR(50) not null,
-    firstName NVARCHAR(9),
-    midName NVARCHAR(9),
-    lastName NVARCHAR(9),
+    fullName NVARCHAR(30),
     address VARCHAR(50),
     password VARCHAR(40) not null,
     bDate DATE not null,
