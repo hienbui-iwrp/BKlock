@@ -16,8 +16,7 @@ export default function Detail() {
 
     React.useEffect(() => {
         axios.get(`http://localhost/Server/controllers/product/getdetail.php?id=${params.id}`).then((response) => {
-            console.log(response.data);
-            setData(() => response.data);
+            setData(response.data);
         }).catch((error) => {
             console.log(error);
         })
@@ -40,7 +39,7 @@ export default function Detail() {
                     />
                 </Grid.Col>
                 <Grid.Col>
-                    <CommentSection />
+                    <CommentSection id={data.id} />
                 </Grid.Col>
             </Grid>
         </Container>

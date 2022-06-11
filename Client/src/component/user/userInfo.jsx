@@ -55,6 +55,17 @@ export default function UserInfo() {
                         />
                         <Space h="md" />
                         <TextInput
+                            label="Tên"
+                            placeholder="Tên của bạn"
+                            className="form-username-input"
+                            value={
+                                sessionStorage.getItem("fullName") === "null"
+                                    ? ""
+                                    : sessionStorage.getItem("fullName")
+                            }
+                        />
+                        <Space h="md" />
+                        <TextInput
                             label="Địa chỉ"
                             placeholder="Địa chỉ"
                             className="form-password-input"
@@ -71,6 +82,7 @@ export default function UserInfo() {
                             className="form-username-input"
                             value={sessionStorage.getItem("phoneNum")}
                         />
+
                         <Space h="md" />
                         <Button
                             type="submit"

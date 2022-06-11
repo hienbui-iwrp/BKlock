@@ -3,10 +3,25 @@ import { useViewportSize } from "@mantine/hooks";
 import CommentCard from "./commentCard";
 import "../../css/detail.css";
 import React from "react";
+import axios from "axios";
 
-export default function CommentSection() {
+export default function CommentSection({ id }) {
     const { height, width } = useViewportSize();
+    const [comments, setComments] = React.useState([]);
     const arr = [1, 2, 3, 4, 5];
+
+    React.useEffect(() => {
+        console.log(id);
+        axios
+            .get(`http://localhost/Server/controllers/comment/get.php?id=${id}`)
+            .then((response) => {
+                setComments(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [id]);
+
     return (
         <Grid>
             <Grid.Col>
@@ -35,9 +50,25 @@ export default function CommentSection() {
                 </Group>
             </Grid.Col>
             <Grid.Col>
-                {arr.map(() => {
-                    return <CommentCard />;
-                })}
+                {comments.length === 0 ? (
+                    <Text
+                        weight={500}
+                        size={width > 900 ? "xl" : "lg"}
+                        align="center"
+                    >
+                        Hãy là người đầu tiên bình luận về sản phẩm này !
+                    </Text>
+                ) : (
+                    comments.map((comment) => {
+                        return (
+                            <CommentCard
+                                name={comment.userName}
+                                date={comment.comDate}
+                                content={comment.content}
+                            />
+                        );
+                    })
+                )}
             </Grid.Col>
         </Grid>
     );

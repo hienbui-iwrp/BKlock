@@ -26,6 +26,7 @@ export default function ProductDetail({
     description,
 }) {
     const { height, width } = useViewportSize();
+
     return (
         <Grid>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -40,7 +41,7 @@ export default function ProductDetail({
                             src={img}
                             alt="watch"
                             height="500px"
-                            fit="contain"
+                            fit="cover"
                         />
                     </Container>
                 </MediaQuery>

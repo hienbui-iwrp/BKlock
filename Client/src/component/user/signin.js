@@ -34,6 +34,7 @@ export default function Signin() {
         sessionStorage.setItem('phoneNum', response.data.phoneNum);
         sessionStorage.setItem('address', response.data.address);
         sessionStorage.setItem('fullName', response.data.fullName);
+        sessionStorage.setItem('id', response.data.id);
         navigate("/");
       } else {
         console.log("login failed");
