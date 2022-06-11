@@ -29,12 +29,13 @@ export default function Navbar() {
                             onClick={() => scrollTo({ y: 0 })}
                         />
 
-                        <Link to="/" onClick={() => scrollTo({ y: 0 })}>
+                        <Link to="/">
                             <Button
                                 color="gray"
                                 radius="xs"
                                 uppercase
                                 className="nav-bar-btn"
+                                onClick={() => scrollTo({ y: 0 })}
                             >
                                 <Text className="nav-bar-btn-text">
                                     Trang chủ
@@ -55,12 +56,13 @@ export default function Navbar() {
                                 </Text>
                             </Button>
                         </Link>
-                        <Link to="/contact" onClick={() => scrollTo({ y: 0 })}>
+                        <Link to="/contact">
                             <Button
                                 color="gray"
                                 radius="xs"
                                 uppercase
                                 className="nav-bar-btn"
+                                onClick={() => scrollTo({ y: 0 })}
                             >
                                 <Text className="nav-bar-btn-text">
                                     Liên hệ
@@ -97,15 +99,13 @@ export default function Navbar() {
                             </Button>
                         </Link>
                         {!user ? (
-                            <Link
-                                to="/signin"
-                                onClick={() => scrollTo({ y: 0 })}
-                            >
+                            <Link to="/signin">
                                 <Button
                                     color="gray"
                                     radius="xs"
                                     uppercase
                                     className="nav-bar-right nav-bar-btn"
+                                    onClick={() => scrollTo({ y: 0 })}
                                 >
                                     <Text className="nav-bar-btn-text">
                                         Đăng nhập/đăng ký
@@ -138,6 +138,9 @@ export default function Navbar() {
                                                 variant="link"
                                                 component="a"
                                                 href="/user_info"
+                                                onClick={() =>
+                                                    scrollTo({ y: 0 })
+                                                }
                                             >
                                                 Xem thông tin{" "}
                                                 <HiUserCircle size={25} />
@@ -161,12 +164,13 @@ export default function Navbar() {
                             </>
                         )}
 
-                        <Link to="/cart" onClick={() => scrollTo({ y: 0 })}>
+                        <Link to="/cart">
                             <Button
                                 color="gray"
                                 radius="xs"
                                 uppercase
                                 className="nav-bar-right nav-bar-btn"
+                                onClick={() => scrollTo({ y: 0 })}
                             >
                                 <Text className="nav-bar-btn-text">
                                     <HiOutlineShoppingBag size={30} />{" "}
@@ -179,12 +183,13 @@ export default function Navbar() {
                         <MenuModal />
                         <Logo classname="nav-bar-center" />
                         <div className="nav-mobile-btn-group">
-                            <Link to="/cart" onClick={() => scrollTo({ y: 0 })}>
+                            <Link to="/cart">
                                 <Button
                                     color="gray"
                                     radius="xs"
                                     uppercase
                                     className="nav-bar-btn"
+                                    onClick={() => scrollTo({ y: 0 })}
                                 >
                                     <Text className="nav-bar-btn-text">
                                         <HiOutlineShoppingBag size={30} />{" "}
@@ -192,15 +197,13 @@ export default function Navbar() {
                                 </Button>
                             </Link>
                             {!user ? (
-                                <Link
-                                    to="/signin"
-                                    onClick={() => scrollTo({ y: 0 })}
-                                >
+                                <Link to="/signin">
                                     <Button
                                         color="gray"
                                         radius="xs"
                                         uppercase
                                         className="nav-bar-btn"
+                                        onClick={() => scrollTo({ y: 0 })}
                                     >
                                         <Text className="nav-bar-btn-text">
                                             <HiOutlineLogin size={30} />
@@ -231,6 +234,9 @@ export default function Navbar() {
                                                 variant="link"
                                                 component="a"
                                                 href="/user_info"
+                                                onClick={() =>
+                                                    scrollTo({ y: 0 })
+                                                }
                                             >
                                                 Xem thông tin{" "}
                                                 <HiUserCircle size={25} />
@@ -240,7 +246,7 @@ export default function Navbar() {
                                                 component="a"
                                                 onClick={() =>
                                                     sessionStorage.removeItem(
-                                                        "user"
+                                                        "userName"
                                                     )
                                                 }
                                                 href="/"

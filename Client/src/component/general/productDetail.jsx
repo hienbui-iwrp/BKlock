@@ -15,7 +15,16 @@ import { useViewportSize } from "@mantine/hooks";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { SiCashapp } from "react-icons/si";
 
-export default function ProductDetail() {
+export default function ProductDetail({
+    id,
+    name,
+    img,
+    brand,
+    sex,
+    category,
+    price,
+    description,
+}) {
     const { height, width } = useViewportSize();
     return (
         <Grid>
@@ -28,7 +37,7 @@ export default function ProductDetail() {
                 >
                     <Container className="detail-image-container">
                         <Image
-                            src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png"
+                            src={img}
                             alt="watch"
                             height="500px"
                             fit="contain"
@@ -47,29 +56,32 @@ export default function ProductDetail() {
                     }}
                 >
                     <Text className={width < 900 ? "detail-product-name" : ""}>
-                        ABC
+                        {name}
                     </Text>
                 </MediaQuery>
                 {width > 900 ? (
                     <Group direction="column">
-                        <Badge size={"lg"} style={{ marginLeft: 40 }}>
-                            Brand
-                        </Badge>
-                        <List
-                            size="xl"
+                        <Group
+                            direction="row"
                             style={{ marginLeft: 40, marginBottom: 20 }}
                         >
-                            <List.Item>Sex</List.Item>
-                            <List.Item>Type</List.Item>
-                            <List.Item>Category</List.Item>
-                        </List>
+                            <Badge size={"lg"}>{brand}</Badge>
+                            <Badge size={"lg"}>{sex}</Badge>
+                            <Badge size={"lg"}>{category}</Badge>
+                        </Group>
+                        <Text style={{ marginLeft: 40, marginBottom: 20 }}>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Natus architecto accusantium doloremque esse
+                            ipsum maxime amet odit quibusdam nulla libero
+                            debitis nesciunt aperiam eveniet, quos dolorum
+                            itaque sunt quisquam adipisci!
+                        </Text>
                     </Group>
                 ) : (
                     <Group className={"detail-product-name"}>
-                        <Badge size={"lg"}>Brand</Badge>
-                        <Badge size={"lg"}>Sex</Badge>
-                        <Badge size={"lg"}>Type</Badge>
-                        <Badge size={"lg"}>Category</Badge>
+                        <Badge size={"lg"}>{brand}</Badge>
+                        <Badge size={"lg"}>{sex}</Badge>
+                        <Badge size={"lg"}>{category}</Badge>
                     </Group>
                 )}
 
@@ -86,7 +98,11 @@ export default function ProductDetail() {
                         className={width < 900 ? "detail-product-name" : ""}
                         color="red"
                     >
-                        Giá: 2.000.000 VND
+                        Giá:{" "}
+                        {new Intl.NumberFormat("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                        }).format(price)}
                     </Text>
                 </MediaQuery>
 

@@ -10,7 +10,7 @@ import SignupPage from './page/signupPage';
 import SigninPage from './page/signinPage';
 import ProductsPage from './page/productsPage';
 import PaymentPage from './page/paymentPage';
-
+import UserInfoPage from './page/userInfoPage';
 import DetailAdminPage from './page/admin/detailPage';
 import MemberAdminPage from './page/admin/memberPage';
 import NewsAdminPage from './page/admin/newsPage';
@@ -28,19 +28,18 @@ function App() {
           <Route path="/cart" element={<CartPage />} exact />
           <Route path="/products" element={<ProductsPage />} exact />
           <Route path="/contact" element={<ContactPage />} exact />
-          <Route path="/detail" element={<DetailPage />} exact />
+          <Route path="/detail/:id" element={<DetailPage />} exact />
           <Route path="/introduction" element={<IntroPage />} exact />
           <Route path="/news" element={<NewsPage />} exact />
           <Route path="/signup" element={<SignupPage />} exact />
           <Route path="/signin" element={<SigninPage />} exact />
           <Route path="/payment" element={<PaymentPage />} exact />
-
+          <Route path="/user_info" element={<UserInfoPage />} exact />
           {/* admin */}
           <Route path="/admin/detail" element={<DetailAdminPage />} exact />
           <Route path="/admin/member" element={<MemberAdminPage />} exact />
           <Route path="/admin/news" element={<NewsAdminPage />} exact />
           <Route path="/admin/products" element={<ProductsAdminPage />} exact />
-
           <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
       </BrowserRouter>
