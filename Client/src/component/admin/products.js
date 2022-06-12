@@ -9,9 +9,12 @@ import { useViewportSize } from "@mantine/hooks";
 import { useLocation } from 'react-router-dom';
 import { useWindowScroll } from '@mantine/hooks';
 import { Search } from "tabler-icons-react";
+import axios from 'axios';
+
 
 export default function Products() {
     let location = useLocation();
+    const [data, setData] = React.useState([]);
     const [scroll, scrollTo] = useWindowScroll();
     const [size, setSize] = React.useState([0, 0]);
     const [opened, setOpened] = React.useState(false);
@@ -36,6 +39,17 @@ export default function Products() {
         return () => window.removeEventListener("resize", updateSize);
     }, []);
 
+    React.useEffect(() => {
+        axios.get("http://localhost/Server/Controllers/product/getIndex.php?index=1")
+            .then((response) => {
+                console.log(response);
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [])
+
     return <>
         <Stack justify="space-around">
             <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5% 0", borderBottom: "1px solid #000" }}>
@@ -56,10 +70,10 @@ export default function Products() {
         <Grid style={{ marginTop: 30 }}>
             <Grid.Col>
                 <Grid>
-                    {arr.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(x => {
+                    {data.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(product => {
                         return (
-                            <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={x}>
-                                <Product />
+                            <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={product.id}>
+                                <Product id={product.id} img={product.image} brand={product.brand} name={product.name} price={product.price} setData={setData} />
                             </Grid.Col>
                         );
                     })}
@@ -94,11 +108,11 @@ function ProductDetail() {
     const { height, width } = useViewportSize();
     const form = useForm({
         initialValues: {
-            name: 'ABC',
-            branch: 'rolex',
-            type: 'đồng hồ nam',
-            category: 'cơ-automatic',
-            price: 2000000
+            name: '',
+            branch: 'Rolex',
+            type: 'Đồng hồ nam',
+            category: 'Cơ - automatic',
+            price: 0
         },
         validate: {
             name: (value) => value,
@@ -143,11 +157,11 @@ function ProductDetail() {
                         <Select
                             label="Branch"
                             data={[
-                                { value: 'rolex', label: 'Rolex' },
-                                { value: 'seiko', label: 'Seiko' },
-                                { value: 'casio', label: 'Casio' },
-                                { value: 'citizen', label: 'Citizen' },
-                                { value: 'fossil', label: 'Fossil' },
+                                { value: 'Rolex', label: 'Rolex' },
+                                { value: 'Seiko', label: 'Seiko' },
+                                { value: 'Casio', label: 'Casio' },
+                                { value: 'Citizen', label: 'Citizen' },
+                                { value: 'Fossil', label: 'Fossil' },
 
                             ]}
                             {...form.getInputProps('branch')}
@@ -156,9 +170,9 @@ function ProductDetail() {
                         <Select
                             label="Type"
                             data={[
-                                { value: 'đồng hồ nam', label: 'Đồng hồ nam' },
-                                { value: 'đồng hồ nữ', label: 'Đồng hồ nữ' },
-                                { value: 'đồng hồ trẻ em', label: 'Đồng hồ trẻ em' },
+                                { value: 'Đồng hồ nam', label: 'Đồng hồ nam' },
+                                { value: 'Đồng hồ nữ', label: 'Đồng hồ nữ' },
+                                { value: 'Đồng hồ trẻ em', label: 'Đồng hồ trẻ em' },
 
                             ]}
                             {...form.getInputProps('type')}
@@ -167,10 +181,10 @@ function ProductDetail() {
                         <Select
                             label="Category"
                             data={[
-                                { value: 'cơ-automatic', label: 'Cơ-automatic' },
-                                { value: 'điện tử', label: 'Điện tử' },
-                                { value: 'treo tường', label: 'Treo tường' },
-                                { value: 'năng lượng mặt trời', label: 'Năng lượng mặt trời' },
+                                { value: 'Cơ - automatic', label: 'Cơ-automatic' },
+                                { value: 'Điện tử', label: 'Điện tử' },
+                                { value: 'Treo tường', label: 'Treo tường' },
+                                { value: 'Năng lượng mặt trời', label: 'Năng lượng mặt trời' },
 
                             ]}
                             {...form.getInputProps('category')}
