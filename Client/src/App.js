@@ -39,7 +39,7 @@ function App() {
           <Route path="/admin/detail" element={<DetailAdminPage />} exact />
           <Route path="/admin/member" element={<MemberAdminPage />} exact />
           <Route path="/admin/news" element={<NewsAdminPage />} exact />
-          <Route path="/admin/products" element={<ProductsAdminPage />} exact />
+          <Route path="/admin" element={<ProductsAdminPage />} exact />
           <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
       </BrowserRouter>
