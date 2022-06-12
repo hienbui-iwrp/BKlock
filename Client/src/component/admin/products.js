@@ -109,19 +109,36 @@ function ProductDetail() {
     const form = useForm({
         initialValues: {
             name: '',
-            branch: 'Rolex',
-            type: 'Đồng hồ nam',
+            image: '',
+            brand: 'Rolex',
+            sex: 'Đồng hồ nam',
             category: 'Cơ - automatic',
-            price: 0
-        },
-        validate: {
-            name: (value) => value,
-            branch: (value) => value,
-            type: (value) => value,
-            category: (value) => value,
-            price: (value) => value,
-        },
+            price: 0,
+            descript: '',
+        }
     });
+
+    function Add(values) {
+        const data = {
+            name: values.name,
+            image: values.image,
+            brand: values.brand,
+            sex: values.sex,
+            category: values.category,
+            price: values.price,
+            descript: values.descript
+        }
+        console.log(JSON.stringify(data));
+        axios.post("http://localhost/Server/Controllers/product/add.php", JSON.stringify(data))
+            .then((response) => {
+                console.log(response);
+                param.setRender(!param.render);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     return (
         <Grid>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -147,7 +164,7 @@ function ProductDetail() {
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
 
                 <Box >
-                    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                    <form onSubmit={form.onSubmit((values) => Add(values))}>
                         <TextInput
                             required
                             label="Name"
@@ -199,7 +216,7 @@ function ProductDetail() {
 
 
                         <Group position="right" mt="md">
-                            <Button type="submit" color="green">Thêm sản phẩm</Button>
+                            <Button color="green" type="submit">Thêm sản phẩm</Button>
                         </Group>
                     </form>
                 </Box>
