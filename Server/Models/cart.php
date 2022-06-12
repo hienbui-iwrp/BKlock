@@ -24,11 +24,11 @@
         }
 
         public static function updateCart($prod){
-            $prods = $prod["product"];
-            $cusId = $prod["userId"];
+            $prods = $prod->product;
+            $cusId = $prod->userId;
             $query = "";
             foreach($prods as $p){
-                $query .= "UPDATE `adds` SET `quantity` = '".$p["quantity"]."' WHERE `adds`.`customId` = ".$cusId." AND `adds`.`productId` = ".$p["id"].";";
+                $query .= "UPDATE `adds` SET `quantity` = '".$p->quantity."' WHERE `adds`.`customId` = ".$cusId." AND `adds`.`productId` = ".$p->id.";";
             }
             $temp = Sql::getInstance()->updateData($query);
             return $temp;
