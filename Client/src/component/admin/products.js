@@ -44,6 +44,21 @@ export default function Products() {
                 console.log(error);
             })
     }, [render])
+    const form = useForm({
+        initialValues: {
+            search: '',
+        }
+    });
+
+    const handleSearch = (values) => {
+        axios.get(`http://localhost/Server/controllers/product/search.php?search=${values.search}`)
+            .then((response) => {
+                console.log(response);
+                setData(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
 
     return <>
         <Stack justify="space-around">
@@ -52,14 +67,17 @@ export default function Products() {
             </Group>
             <Group position="apart" direction="row" style={{ padding: "5px 5%" }}>
                 <Button radius="xl" onClick={() => setOpened(true)}>Thêm mới </Button>
-                <Group direction="row" style={{ width: 300 }}>
-                    <Input
-                        placeholder="Tìm kiếm"
-                        radius="xl"
-                        style={{ marginRight: '3%', width: '30%', minWidth: '200px' }}
-                    />
-                    <Button radius="xl"><Search /></Button>
-                </Group>
+                <form onSubmit={form.onSubmit((values) => handleSearch(values))} style={{ width: 300 }}>
+                    <Group direction="row" >
+                        <Input
+                            placeholder="Tìm kiếm"
+                            radius="xl"
+                            style={{ marginRight: '3%', width: '30%', minWidth: '200px' }}
+                            {...form.getInputProps('search')}
+                        />
+                        <Button radius="xl" type="submit" ><Search /></Button>
+                    </Group>
+                </form>
             </Group>
         </Stack>
         <Grid style={{ marginTop: 30 }}>

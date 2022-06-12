@@ -11,12 +11,13 @@ import {
     Title,
     Button
 } from "@mantine/core";
-import { Container, MediaQuery,TextInput,Box, Modal, Stack, Textarea } from '@mantine/core';
+import { Container, MediaQuery, TextInput, Box, Modal, Stack, Textarea } from '@mantine/core';
 import "../../css/news.css";
 import { useLocation } from "react-router-dom";
 import { useViewportSize } from "@mantine/hooks";
 import { Trash } from "tabler-icons-react";
 import "../../css/product.css";
+import axios from 'axios';
 
 
 import { useForm } from '@mantine/form';
@@ -28,6 +29,7 @@ export default function News() {
     const maxItemPerPage = 6;
     const total = Math.ceil(arr.length / maxItemPerPage);
     let location = useLocation();
+    const [render, setRender] = React.useState(true);
     const { height, width } = useViewportSize();
     return (
         <>
@@ -35,13 +37,13 @@ export default function News() {
                 <Title order={1} >Quản Lý Tin Tức </Title>
             </Group> */}
             <Stack justify="space-around">
-            <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5% 0", borderBottom: "1px solid #000" }}>
-                <Title order={1} >Quản lý Tin Tức </Title>
-            </Group>
-            <Group position="apart" direction="row" style={{ padding: "5px 5%" }}>
-                <Button radius="xl" onClick={() => setOpened(true)}>Thêm tin tức</Button>
-            </Group>
-        </Stack>
+                <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5% 0", borderBottom: "1px solid #000" }}>
+                    <Title order={1} >Quản lý Tin Tức </Title>
+                </Group>
+                <Group position="apart" direction="row" style={{ padding: "5px 5%" }}>
+                    <Button radius="xl" onClick={() => setOpened(true)}>Thêm tin tức</Button>
+                </Group>
+            </Stack>
             <div className="news">
 
                 <Grid style={{ margin: 0 }}>
@@ -79,17 +81,17 @@ export default function News() {
             </div>
 
             <Modal centered
-                    opened={opened}
-                    onClose={() => setOpened(false)}
-                    title="Thêm tin tức mới"
-                    size="lg"
-                >
-                    <Grid>
-                        <Grid.Col>
-                            <ProductDetail />
-                        </Grid.Col>
-                    </Grid>
-                </Modal>
+                opened={opened}
+                onClose={() => setOpened(false)}
+                title="Thêm tin tức mới"
+                size="lg"
+            >
+                <Grid>
+                    <Grid.Col>
+                        <NewsAdd render={render} setRender={setRender} />
+                    </Grid.Col>
+                </Grid>
+            </Modal>
 
         </>
     );
@@ -150,18 +152,35 @@ function Item() {
 }
 
 
-function ProductDetail() {
+function NewsAdd(param) {
     const { height, width } = useViewportSize();
     const form = useForm({
         initialValues: {
-            title: 'ABC',
-            content: 'rolex',
+            title: '',
+            content: '',
         },
         validate: {
             title: (value) => value,
             content: (value) => value
         },
     });
+
+    function Add() {
+        axios.post("http://localhost/Server/Controllers/news/add.php", {
+            "title": form.values.title,
+            "content": form.values.content,
+            "view": "0",
+            "like": "0",
+            "adminId": 1
+        })
+            .then((response) => {
+                console.log(response);
+                param.setRender(!param.render);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
     return (
         <Grid>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -203,7 +222,7 @@ function ProductDetail() {
                             {...form.getInputProps('content')}
                         />
                         <Group position="right" mt="md">
-                            <Button type="submit" color="green">Thêm tin tức</Button>
+                            <Button color="green" onClick={() => Add()}>Thêm tin tức</Button>
                         </Group>
                     </form>
                 </Box>
