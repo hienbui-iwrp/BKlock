@@ -15,6 +15,7 @@ import { PaymentItemsContext } from "../general/paymentItemsContext";
 import "../../css/cart.css";
 
 export default function CartCard({
+    id,
     img,
     name,
     price,
@@ -39,6 +40,15 @@ export default function CartCard({
     const handleDecrement = () => {
         count > 0 ? setCount(count - 1) : setCount(0);
     };
+
+    React.useEffect(() => {
+        for (var i = 0; i < paymentItems.length; i++) {
+            if (paymentItems[i].name == name) {
+                setChecked(true);
+                break;
+            }
+        }
+    }, []);
 
     React.useEffect(() => {
         setTotal((money) => money + count * price - totalLocal);
@@ -138,6 +148,7 @@ export default function CartCard({
                                         setPaymentItems((o) => [
                                             ...o,
                                             {
+                                                id,
                                                 img,
                                                 name,
                                                 price,

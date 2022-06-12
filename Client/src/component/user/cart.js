@@ -30,7 +30,7 @@ export default function Cart() {
                     </Title>
                 </Grid.Col>
                 {cartList.map(item => <Grid.Col>
-                    <CartCard img={item.image} name={item.name} price={item.price} quantity={item.quantity} brand={item.brand} setTotal={setTotal} />
+                    <CartCard id={item.id} img={item.image} name={item.name} price={item.price} quantity={item.quantity} brand={item.brand} setTotal={setTotal} />
                 </Grid.Col>)}
                 <Grid.Col>
                     <Group direction="row" position="right">

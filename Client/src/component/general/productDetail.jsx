@@ -87,42 +87,33 @@ export default function ProductDetail({
                         fontSize: 36,
                         marginLeft: 40,
                         fontWeight: 600,
-                        marginBottom: 20,
                     }}
                 >
-                    <Popover
-                        opened={!failed ? success : failed}
-                        onClose={() => setFailed(false)}
-                        target={
-                            <Text
-                                className={
-                                    width < 900 ? "detail-product-name" : ""
-                                }
-                            >
-                                {name}
-                            </Text>
-                        }
-                        width={260}
-                        position="right"
-                        withArrow
-                    >
-                        {failed ? (
-                            <Text color="gray">
-                                Sản phẩm đã có trong giỏ hàng <X color="red" />
-                            </Text>
-                        ) : (
-                            <Text color="gray">
-                                Thêm thành công <Check color="green" />
-                            </Text>
-                        )}
-                    </Popover>
+                    <Text className={width < 900 ? "detail-product-name" : ""}>
+                        {name}
+                    </Text>
                 </MediaQuery>
+                <Popover
+                    opened={!failed ? success : failed}
+                    onClose={() => setFailed(false)}
+                    target={<div></div>}
+                    width={260}
+                    position="right"
+                    withArrow
+                >
+                    {failed ? (
+                        <Text color="gray">
+                            Sản phẩm đã có trong giỏ hàng <X color="red" />
+                        </Text>
+                    ) : (
+                        <Text color="gray">
+                            Thêm thành công <Check color="green" />
+                        </Text>
+                    )}
+                </Popover>
                 {width > 900 ? (
                     <Group direction="column">
-                        <Group
-                            direction="row"
-                            style={{ marginLeft: 40, marginBottom: 20 }}
-                        >
+                        <Group direction="row" style={{ marginLeft: 40 }}>
                             <Badge size={"lg"}>{brand}</Badge>
                             <Badge size={"lg"}>{sex}</Badge>
                             <Badge size={"lg"}>{category}</Badge>

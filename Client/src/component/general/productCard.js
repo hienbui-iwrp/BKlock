@@ -54,8 +54,8 @@ export default function ProductCard({ id, img, brand, name, price }) {
                     withArrow
                 >
                     {failed ?
-                        <Text color="gray">Sản phẩm đã có trong giỏ hàng <X color='red' /></Text> :
-                        <Text color="gray">Thêm thành công  <Check color='green' /></Text>}
+                        <Text color="gray">Sản phẩm đã có trong giỏ hàng <X color='red' /></Text> : success ?
+                            <Text color="gray">Thêm thành công  <Check color='green' /></Text> : null}
                 </Popover>
 
                 <Link to={`/detail/${id}`} style={{ textDecoration: 'none' }} onClick={() => scrollTo({ y: 0 })}>

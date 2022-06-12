@@ -11,13 +11,16 @@ import "../../css/payment.css";
 import Logo from "./logo";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { PaymentItemsContext } from "../general/paymentItemsContext";
+import axios from "axios";
 
 const stripePromise = loadStripe(
     "pk_test_51L5VsBHihNXOYuTY3oM7Tf3knsg5gaElFMpmJ83reKHkYVU8EVZF7Na9VlfuL45nm7aJX1qEVjfHgc6zX1SftPe700qT0FsdZd"
 );
 
 const handleSubmit =
-    (stripe, elements, setFailed, setMessage, setSuccess) => async () => {
+    (stripe, elements, setFailed, setMessage, setSuccess, paymentItems) =>
+    async () => {
         const cardElement = elements.getElement(CardElement);
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -34,6 +37,29 @@ const handleSubmit =
             setSuccess(true);
             setMessage("Thanh toán thành công");
             // ... SEND to your API server to process payment intent
+            const products = paymentItems.map((paymentItem) => {
+                return JSON.stringify({
+                    id: paymentItem.id,
+                    quantity: paymentItem.count,
+                });
+            });
+
+            const billInfo = {
+                product: products,
+                userId: sessionStorage.getItem("id"),
+            };
+            console.log(billInfo);
+            axios
+                .post(
+                    "http://localhost/Server/controllers/payment/make.php",
+                    JSON.stringify(billInfo)
+                )
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     };
 
@@ -44,6 +70,9 @@ const PaymentForm = ({ total }) => {
     const [failed, setFailed] = useState(false);
     const [success, setSuccess] = useState(false);
     const [message, setMessage] = useState("");
+    const [paymentItems, setPaymentItems] =
+        React.useContext(PaymentItemsContext);
+
     return (
         <form className="payment-form-wrapper">
             <Logo classname="form-company-logo" />
@@ -106,13 +135,20 @@ const PaymentForm = ({ total }) => {
                     elements,
                     setFailed,
                     setMessage,
-                    setSuccess
+                    setSuccess,
+                    paymentItems
                 )}
                 color="dark"
                 className="form-signin-submit-btn"
+                style={{ marginBottom: 10 }}
             >
                 MUA
             </Button>
+            <Link to="/cart">
+                <Button color="dark" className="form-signin-submit-btn">
+                    Quay lại giỏ hàng
+                </Button>
+            </Link>
         </form>
     );
 };
