@@ -6,20 +6,15 @@ import axios from 'axios';
 import "../../css/product.css";
 import "../../css/admin.css";
 
-export default function Product({ id, img, brand, name, price, setData }) {
+export default function Product({ id, img, brand, name, price, setRender, render }) {
 
 
     function remove() {
         if (window.confirm(`Bạn muốn xóa ${name}?`)) {
-            axios.delete(`http://localhost/Server/Controllers/product/delete.php?id=${id}`, {}, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'Access-Control-Allow-Origin': '*',
-                }
-            })
+            axios.post(`http://localhost/Server/Controllers/product/delete.php?id=${id}`)
                 .then((response) => {
                     console.log(response);
-                    setData(response.data);
+                    setRender(!render);
                 })
                 .catch((error) => {
                     console.log(error);

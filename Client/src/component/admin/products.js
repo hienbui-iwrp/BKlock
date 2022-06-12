@@ -1,7 +1,7 @@
 import React from 'react';
 import Product from '../../component/admin/product';
 
-import { Container, MediaQuery, Image, Text, Modal, Select } from '@mantine/core';
+import { Container, MediaQuery, Image, Modal, Select, Textarea } from '@mantine/core';
 import { Grid, Pagination, Group, Input, Button, Title, Stack } from '@mantine/core';
 import { TextInput, NumberInput, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -17,18 +17,13 @@ export default function Products() {
     const [data, setData] = React.useState([]);
     const [scroll, scrollTo] = useWindowScroll();
     const [size, setSize] = React.useState([0, 0]);
+    const [render, setRender] = React.useState(true);
     const [opened, setOpened] = React.useState(false);
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     const [activePage, setPage] = React.useState(1);
     const maxItemPerPage = 6;
     const total = Math.ceil(arr.length / maxItemPerPage);
-    const items = [
-        "https://cdn.watchstore.vn/uploads/brands/orient-logo.jpg",
-        "https://cdn.watchstore.vn/uploads/brands/tissot-logo.jpg",
-        "https://cdn.watchstore.vn/uploads/brands/casio-logo.jpg",
-        "https://cdn.watchstore.vn/uploads/brands/seiko-logo.jpg",
-        "https://cdn.watchstore.vn/uploads/brands/citizen-logo.jpg",
-    ];
+
 
     React.useLayoutEffect(() => {
         function updateSize() {
@@ -48,7 +43,7 @@ export default function Products() {
             .catch((error) => {
                 console.log(error);
             })
-    }, [])
+    }, [render])
 
     return <>
         <Stack justify="space-around">
@@ -73,7 +68,7 @@ export default function Products() {
                     {data.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(product => {
                         return (
                             <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={product.id}>
-                                <Product id={product.id} img={product.image} brand={product.brand} name={product.name} price={product.price} setData={setData} />
+                                <Product id={product.id} img={product.image} brand={product.brand} name={product.name} price={product.price} setRender={setRender} render={render} />
                             </Grid.Col>
                         );
                     })}
@@ -88,7 +83,7 @@ export default function Products() {
                 >
                     <Grid>
                         <Grid.Col>
-                            <ProductDetail />
+                            <ProductAdd render={render} setRender={setRender} />
                         </Grid.Col>
                     </Grid>
                 </Modal>
@@ -104,24 +99,45 @@ export default function Products() {
 
 }
 
-function ProductDetail() {
+function ProductAdd(param) {
     const { height, width } = useViewportSize();
     const form = useForm({
         initialValues: {
             name: '',
-            branch: 'Rolex',
+            image: '',
+            brand: 'Rolex',
             type: 'Đồng hồ nam',
             category: 'Cơ - automatic',
-            price: 0
+            price: 0,
+            descript: '',
         },
         validate: {
             name: (value) => value,
-            branch: (value) => value,
+            image: (value) => value,
+            brand: (value) => value,
             type: (value) => value,
             category: (value) => value,
             price: (value) => value,
+            descript: (value) => value,
         },
     });
+
+    function Add() {
+        axios.post("http://localhost/Server/Controllers/product/add.php", form.values, {
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*',
+            }
+        })
+            .then((response) => {
+                console.log(response);
+                param.setRender(!param.render);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     return (
         <Grid>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -150,12 +166,20 @@ function ProductDetail() {
                     <form onSubmit={form.onSubmit((values) => console.log(values))}>
                         <TextInput
                             required
-                            label="Name"
+                            label="Tên"
                             placeholder="Input Name"
                             {...form.getInputProps('name')}
                         />
+
+                        <TextInput
+                            required
+                            label="Link ảnh"
+                            placeholder="Input Link"
+                            {...form.getInputProps('image')}
+                        />
+
                         <Select
-                            label="Branch"
+                            label="Thương hiệu"
                             data={[
                                 { value: 'Rolex', label: 'Rolex' },
                                 { value: 'Seiko', label: 'Seiko' },
@@ -164,11 +188,11 @@ function ProductDetail() {
                                 { value: 'Fossil', label: 'Fossil' },
 
                             ]}
-                            {...form.getInputProps('branch')}
+                            {...form.getInputProps('brand')}
                         />
 
                         <Select
-                            label="Type"
+                            label="Loại"
                             data={[
                                 { value: 'Đồng hồ nam', label: 'Đồng hồ nam' },
                                 { value: 'Đồng hồ nữ', label: 'Đồng hồ nữ' },
@@ -179,7 +203,7 @@ function ProductDetail() {
                         />
 
                         <Select
-                            label="Category"
+                            label="Động cơ"
                             data={[
                                 { value: 'Cơ - automatic', label: 'Cơ-automatic' },
                                 { value: 'Điện tử', label: 'Điện tử' },
@@ -197,9 +221,18 @@ function ProductDetail() {
                             {...form.getInputProps('price')}
                         />
 
+                        <Textarea
+                            label="Mô tả"
+                            placeholder="Input content"
+                            autosize
+                            minRows={3}
+                            maxRows={6}
+                            {...form.getInputProps('descript')}
+                        />
+
 
                         <Group position="right" mt="md">
-                            <Button type="submit" color="green">Thêm sản phẩm</Button>
+                            <Button color="green" onClick={() => { Add() }}>Thêm sản phẩm</Button>
                         </Group>
                     </form>
                 </Box>
