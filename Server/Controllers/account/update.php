@@ -10,7 +10,7 @@
     //     "phoneNum": "",
     //     "password": ""
     // }
-
+    header("Access-Control-Allow-Origin: *");
     include "../../models/account.php";
     include "../api.php";
 

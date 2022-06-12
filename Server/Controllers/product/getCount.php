@@ -4,7 +4,7 @@
 
     include "../../models/product.php";
     include "../api.php";
-
+    header("Access-Control-Allow-Origin: *");
     if($_SERVER["REQUEST_METHOD"] === "GET"){
         try{
             sendResponse(200, json_encode(Product::getCount()), "text/html");

@@ -9,7 +9,7 @@
     // }
     include "../../models/cart.php";
     include "../api.php";
-
+    header("Access-Control-Allow-Origin: *");
     $temp = json_decode(file_get_contents("php://input"));
     
     if($_SERVER["REQUEST_METHOD"] === "DELETE"){

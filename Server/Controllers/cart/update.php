@@ -10,7 +10,7 @@
     // }
     include "../../models/cart.php";
     include "../api.php";
-
+    header("Access-Control-Allow-Origin: *");
     if($_SERVER["REQUEST_METHOD"] === "PUT"){
         $temp = json_decode(file_get_contents("php://input"));
 

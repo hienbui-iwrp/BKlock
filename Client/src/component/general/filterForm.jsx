@@ -99,7 +99,7 @@ export default function FilterForm({ setData }) {
         console.log(JSON.stringify(filters));
         async function fetchFilter() {
             await axios
-                .get(
+                .post(
                     "http://localhost/Server/Controllers/product/filter.php",
                     JSON.stringify(filters)
                 )

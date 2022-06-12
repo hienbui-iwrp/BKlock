@@ -3,7 +3,7 @@
     // http://localhost/controllers/product/delete.php?id=1
     include "../../models/product.php";
     include "../api.php";
-
+    header("Access-Control-Allow-Origin: *");
     if($_SERVER["REQUEST_METHOD"] === "DELETE"){
         $queries = array();
         parse_str($_SERVER['QUERY_STRING'], $queries);

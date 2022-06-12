@@ -3,7 +3,7 @@
     // http://localhost/controllers/news/getall.php
     include "../../models/news.php";
     include "../api.php";
-    
+    header("Access-Control-Allow-Origin: *");
     if($_SERVER["REQUEST_METHOD"] === "GET"){
         $queries = array();
         try{
