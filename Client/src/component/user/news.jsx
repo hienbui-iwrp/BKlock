@@ -14,14 +14,29 @@ import "../../css/news.css";
 import { useLocation } from "react-router-dom";
 import { useViewportSize } from "@mantine/hooks";
 import BreadCrumbs from "../general/breadCrumb";
+import axios from "axios";
 
 export default function News() {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    const [data, setData] = React.useState([]);
     const [activePage, setPage] = React.useState(1);
     const maxItemPerPage = 6;
-    const total = Math.ceil(arr.length / maxItemPerPage);
+    const total = Math.ceil(data.length / maxItemPerPage);
     let location = useLocation();
     const { height, width } = useViewportSize();
+
+    React.useEffect(() => {
+        axios
+            .get("http://localhost/Server/controllers/news/getall.php")
+            .then((response) => {
+                console.log(response.data);
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <>
             <div className="news">
@@ -34,12 +49,12 @@ export default function News() {
                 </Title>
                 <Space h="xl" />
                 <Grid style={{ margin: 0 }}>
-                    {arr
+                    {data
                         .slice(
                             (activePage - 1) * maxItemPerPage,
                             activePage * maxItemPerPage
                         )
-                        .map((x) => {
+                        .map((item) => {
                             return (
                                 <Grid.Col
                                     xl={4}
@@ -47,9 +62,16 @@ export default function News() {
                                     md={6}
                                     sm={6}
                                     xs={12}
-                                    key={x}
+                                    key={item.id}
                                 >
-                                    <Item />
+                                    <Item
+                                        id={item.id}
+                                        title={item.title}
+                                        view={item.view}
+                                        like={item.liked}
+                                        date={item.newDate}
+                                        content={item.content}
+                                    />
                                 </Grid.Col>
                             );
                         })}
@@ -70,7 +92,7 @@ export default function News() {
     );
 }
 
-function Item() {
+function Item({ id, title, date, view, like, content }) {
     return (
         <div
             className="new-item"
@@ -79,36 +101,26 @@ function Item() {
             <Card shadow="sm" p="lg">
                 <Card.Section>
                     <Image
-                        src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png"
+                        src="https://cdn.tgdd.vn/Files/2020/07/11/1269604/16_800x450.jpg"
                         height={300}
                         alt="watch"
                         className="product-img-zoom"
                     />
                 </Card.Section>
-                <Text weight={600} size="lg" className="news__title">
-                    Sales
+                <Text weight={500} size="md" className="news__title">
+                    {title}
                 </Text>
                 <Group direction="row" style={{ marginTop: 20 }}>
-                    <Text weight={500}>6/1/2022</Text>
+                    <Text weight={500}>{date}</Text>
                     <Space w="xl" />
-                    <Text weight={500}>100 views</Text>
+                    <Text weight={500}>{view} views</Text>
                     <Space w="xl" />
-                    <Text weight={500}>100 likes</Text>
+                    <Text weight={500}>{like} likes</Text>
                 </Group>
 
                 <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
                     <Text weight={500} className="news__content">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and
-                        more recently with desktop publishing software like
-                        Aldus PageMaker including versions of Lorem Ipsum.
+                        {content}
                     </Text>
                 </Spoiler>
             </Card>
