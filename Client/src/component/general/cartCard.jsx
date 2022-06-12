@@ -41,7 +41,7 @@ export default function CartCard({
             if (cartList[i].id === id) {
                 let carts = [...cartList];
                 let newCart = cartList[i];
-                newCart.quantity = (count + 1).toString();
+                newCart.quantity = (parseInt(newCart.quantity) + 1).toString();
                 cartList[i] = newCart;
                 setCartList(carts);
             }
@@ -54,7 +54,11 @@ export default function CartCard({
             if (cartList[i].id === id) {
                 let carts = [...cartList];
                 let newCart = cartList[i];
-                newCart.quantity = (count > 0 ? count - 1 : 0).toString();
+                newCart.quantity = (
+                    parseInt(newCart.quantity) > 0
+                        ? parseInt(newCart.quantity) - 1
+                        : 0
+                ).toString();
                 cartList[i] = newCart;
                 setCartList(carts);
             }
@@ -74,6 +78,7 @@ export default function CartCard({
             .then((response) => {
                 console.log(response);
                 if (response.data === "success") {
+                    setTotal((money) => money);
                     const newCart = cartList.filter((item) => item.id !== id);
                     setCartList(newCart);
                 }
@@ -93,9 +98,11 @@ export default function CartCard({
     }, []);
 
     React.useEffect(() => {
-        setTotal((money) => money + count * price - totalLocal);
-        setTotalLocal(count * price);
-    }, [count, cartList]);
+        setTotal(
+            (money) => money + parseInt(quantity) * parseInt(price) - totalLocal
+        );
+        setTotalLocal(parseInt(quantity) * parseInt(price));
+    }, [cartList]);
 
     return (
         <Grid className="cart-card-container" align="center">
@@ -128,7 +135,7 @@ export default function CartCard({
                 </Text>
                 <Group direction="row" className="cart-card-quantity-container">
                     <Text weight={600} size="lg">
-                        {count}
+                        {quantity}
                     </Text>
                     {!payment ? (
                         <Group direction="column" align="center">
