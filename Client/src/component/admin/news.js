@@ -38,7 +38,7 @@ export default function News() {
                 <Title order={1} >Quản lý Tin Tức </Title>
             </Group>
             <Group position="apart" direction="row" style={{ padding: "5px 5%" }}>
-                <Button radius="xl" onClick={() => setOpened(true)}>Thêm mới </Button>
+                <Button radius="xl" onClick={() => setOpened(true)}>Thêm tin tức</Button>
             </Group>
         </Stack>
             <div className="news">
@@ -198,7 +198,7 @@ function ProductDetail() {
                             {...form.getInputProps('content')}
                         />
                         <Group position="right" mt="md">
-                            <Button type="submit" color="green">Thêm sản phẩm</Button>
+                            <Button type="submit" color="green">Thêm tin tức</Button>
                         </Group>
                     </form>
                 </Box>
