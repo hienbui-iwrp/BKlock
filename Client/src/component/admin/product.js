@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Image, Text, Button, Group, Badge } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { Trash } from "tabler-icons-react";
 import "../../css/product.css";
 import "../../css/admin.css";

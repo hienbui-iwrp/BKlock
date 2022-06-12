@@ -1,6 +1,6 @@
 import React from 'react';
 import Product from '../../component/admin/product';
-import { Grid, Pagination, Text, Input, Button } from '@mantine/core';
+import { Grid, Pagination, Group, Input, Button, Title, Stack } from '@mantine/core';
 import { useLocation } from 'react-router-dom';
 import { useWindowScroll } from '@mantine/hooks';
 import { Search } from "tabler-icons-react";
@@ -33,14 +33,22 @@ export default function Products() {
     }, []);
 
     return <>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: ' 19px 5%', backgroundColor: '#eee' }}>
-            <Input
-                placeholder="Tìm kiếm"
-                radius="xl"
-                style={{ marginRight: '3%', width: '30%', minWidth: '200px' }}
-            />
-            <Button radius="xl"><Search /></Button>
-        </div>
+        <Stack justify="space-around">
+            <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5% 0", borderBottom: "1px solid #000" }}>
+                <Title order={1} >Quản lý Sản Phẩm </Title>
+            </Group>
+            <Group position="apart" direction="row" style={{ padding: "5px 5%" }}>
+                <Button radius="xl">Thêm mới </Button>
+                <Group direction="row" style={{ width: 300 }}>
+                    <Input
+                        placeholder="Tìm kiếm"
+                        radius="xl"
+                        style={{ marginRight: '3%', width: '30%', minWidth: '200px' }}
+                    />
+                    <Button radius="xl"><Search /></Button>
+                </Group>
+            </Group>
+        </Stack>
         <Grid style={{ marginTop: 30 }}>
             <Grid.Col>
                 <Grid>

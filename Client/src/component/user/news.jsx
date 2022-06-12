@@ -85,6 +85,9 @@ function Item() {
                         className="product-img-zoom"
                     />
                 </Card.Section>
+                <Text weight={600} size="lg" className="news__title">
+                    Sales
+                </Text>
                 <Group direction="row" style={{ marginTop: 20 }}>
                     <Text weight={500}>6/1/2022</Text>
                     <Space w="xl" />
@@ -92,11 +95,9 @@ function Item() {
                     <Space w="xl" />
                     <Text weight={500}>100 likes</Text>
                 </Group>
-                <Text weight={600} size="lg">
-                    Sales
-                </Text>
+
                 <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
-                    <Text weight={500}>
+                    <Text weight={500} className="news__content">
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
                         industry's standard dummy text ever since the 1500s,
