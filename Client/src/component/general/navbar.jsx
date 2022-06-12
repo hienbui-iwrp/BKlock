@@ -1,12 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Text, Popover, Group } from "@mantine/core";
+import {
+    Button,
+    Text,
+    Popover,
+    Group,
+    TextInput,
+    Container,
+} from "@mantine/core";
 import {
     HiOutlineShoppingBag,
     HiUserCircle,
     HiUser,
     HiOutlineLogout,
     HiOutlineLogin,
+    HiOutlineSearch,
 } from "react-icons/hi";
 import Logo from "../general/logo";
 import MenuModal from "../general/menuModal";
@@ -28,7 +36,6 @@ export default function Navbar() {
                             classname="nav-bar-btn"
                             onClick={() => scrollTo({ y: 0 })}
                         />
-
                         <Link to="/">
                             <Button
                                 color="gray"
@@ -42,7 +49,6 @@ export default function Navbar() {
                                 </Text>
                             </Button>
                         </Link>
-
                         <Link to="/products">
                             <Button
                                 color="gray"
@@ -69,7 +75,6 @@ export default function Navbar() {
                                 </Text>
                             </Button>
                         </Link>
-
                         <Link
                             to="/introduction"
                             onClick={() => scrollTo({ y: 0 })}
@@ -85,7 +90,6 @@ export default function Navbar() {
                                 </Text>
                             </Button>
                         </Link>
-
                         <Link to="/news" onClick={() => scrollTo({ y: 0 })}>
                             <Button
                                 color="gray"
@@ -163,7 +167,6 @@ export default function Navbar() {
                                 </Button>
                             </>
                         )}
-
                         <Link to="/cart">
                             <Button
                                 color="gray"
@@ -174,6 +177,18 @@ export default function Navbar() {
                             >
                                 <Text className="nav-bar-btn-text">
                                     <HiOutlineShoppingBag size={30} />{" "}
+                                </Text>
+                            </Button>
+                        </Link>
+                        <Link to="/products">
+                            <Button
+                                color="gray"
+                                radius="xs"
+                                uppercase
+                                className="nav-bar-right nav-bar-btn"
+                            >
+                                <Text className="nav-bar-btn-text">
+                                    <HiOutlineSearch size={30} />
                                 </Text>
                             </Button>
                         </Link>

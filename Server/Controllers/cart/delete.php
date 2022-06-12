@@ -12,7 +12,7 @@
     header("Access-Control-Allow-Origin: *");
     $temp = json_decode(file_get_contents("php://input"));
     
-    if($_SERVER["REQUEST_METHOD"] === "DELETE"){
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
         try{
             if (Cart::deleteCart($temp)){
                 sendResponse(200, "success", "text/html");
