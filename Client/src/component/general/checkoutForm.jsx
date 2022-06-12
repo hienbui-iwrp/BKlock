@@ -19,7 +19,15 @@ const stripePromise = loadStripe(
 );
 
 const handleSubmit =
-    (stripe, elements, setFailed, setMessage, setSuccess, paymentItems) =>
+    (
+        stripe,
+        elements,
+        setFailed,
+        setMessage,
+        setSuccess,
+        paymentItems,
+        setPaymentItems
+    ) =>
     async () => {
         const cardElement = elements.getElement(CardElement);
 
@@ -38,17 +46,17 @@ const handleSubmit =
             setMessage("Thanh toán thành công");
             // ... SEND to your API server to process payment intent
             const products = paymentItems.map((paymentItem) => {
-                return JSON.stringify({
+                return {
                     id: paymentItem.id,
                     quantity: paymentItem.count,
-                });
+                };
             });
 
             const billInfo = {
                 product: products,
                 userId: sessionStorage.getItem("id"),
             };
-            console.log(billInfo);
+
             axios
                 .post(
                     "http://localhost/Server/controllers/payment/make.php",
@@ -60,6 +68,8 @@ const handleSubmit =
                 .catch((error) => {
                     console.log(error);
                 });
+
+            setPaymentItems([]);
         }
     };
 
@@ -136,7 +146,8 @@ const PaymentForm = ({ total }) => {
                     setFailed,
                     setMessage,
                     setSuccess,
-                    paymentItems
+                    paymentItems,
+                    setPaymentItems
                 )}
                 color="dark"
                 className="form-signin-submit-btn"

@@ -21,6 +21,9 @@ export default function Cart() {
             })
     }, [])
 
+    React.useEffect(() => {
+        console.log(cartList);
+    }, [cartList])
     return (
         <Container style={{ marginTop: 80 }} className="cart-container">
             <Grid >

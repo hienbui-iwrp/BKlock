@@ -31,34 +31,58 @@ const type = [
     { value: "Năng lượng mặt trời", checked: false },
 ];
 
-export default function FilterForm() {
-    const [filters, setFilters] = React.useState([]);
+export default function FilterForm({ setData }) {
+    const [filters, setFilters] = React.useState({
+        price: [],
+        brand: [],
+        sex: [],
+        category: [],
+    });
     const [unCheck, setUnCheck] = React.useState(false);
     const [badgeValue, setBadgeValue] = React.useState(null);
     const [size, setSize] = React.useState([0, 0]);
 
     const handleClear = () => {
         setUnCheck(true);
-        setFilters([]);
+        setFilters({ price: [], brand: [], sex: [], category: [] });
     };
 
-    const handleCloseBadge = (value) => {
+    const handleCloseBadge = (value, type) => {
+        let tempFilters = { ...filters };
+        const index = tempFilters[type].indexOf(value);
+        if (index > -1) {
+            tempFilters[type].splice(index, 1);
+        }
+        setFilters(tempFilters);
+        value = [0, 1, 2, 3, 4, 5].includes(value) ? trueValue(value) : value;
         setBadgeValue(value);
-        setFilters(filters.filter((ele) => ele !== value));
     };
 
-    const RemoveButton = ({ value }) => {
+    const RemoveButton = ({ value, type }) => {
         return (
             <ActionIcon
                 size="xs"
                 color="dark"
                 radius="xl"
                 variant="transparent"
-                onClick={() => handleCloseBadge(value)}
+                onClick={() => handleCloseBadge(value, type)}
             >
                 <HiX />
             </ActionIcon>
         );
+    };
+
+    const trueValue = (value) => {
+        const arr = [
+            "0 - 1.000.000đ",
+            "1.000.000 - 2.000.000đ",
+            "2.000.000 - 3.000.000đ",
+            "3.000.000 - 5.000.000đ",
+            "5.000.000 - 10.000.000đ",
+            "Trên 10.000.000đ",
+        ];
+
+        return arr[value];
     };
 
     React.useLayoutEffect(() => {
@@ -82,13 +106,65 @@ export default function FilterForm() {
                     Lọc sản phẩm
                 </Text>
                 <div>
-                    {filters.map((filter) => {
+                    {filters["price"].map((filter) => {
                         return (
                             <Badge
                                 variant="outline"
                                 color="dark"
                                 key={filter}
-                                rightSection={<RemoveButton value={filter} />}
+                                rightSection={
+                                    <RemoveButton value={filter} type="price" />
+                                }
+                                size="lg"
+                            >
+                                {[0, 1, 2, 3, 4, 5].includes(filter)
+                                    ? trueValue(filter)
+                                    : filter}
+                            </Badge>
+                        );
+                    })}
+                    {filters["brand"].map((filter) => {
+                        return (
+                            <Badge
+                                variant="outline"
+                                color="dark"
+                                key={filter}
+                                rightSection={
+                                    <RemoveButton value={filter} type="brand" />
+                                }
+                                size="lg"
+                            >
+                                {filter}
+                            </Badge>
+                        );
+                    })}
+                    {filters["sex"].map((filter) => {
+                        return (
+                            <Badge
+                                variant="outline"
+                                color="dark"
+                                key={filter}
+                                rightSection={
+                                    <RemoveButton value={filter} type="sex" />
+                                }
+                                size="lg"
+                            >
+                                {filter}
+                            </Badge>
+                        );
+                    })}
+                    {filters["category"].map((filter) => {
+                        return (
+                            <Badge
+                                variant="outline"
+                                color="dark"
+                                key={filter}
+                                rightSection={
+                                    <RemoveButton
+                                        value={filter}
+                                        type="category"
+                                    />
+                                }
                                 size="lg"
                             >
                                 {filter}
@@ -127,6 +203,7 @@ export default function FilterForm() {
                         uncheck={unCheck}
                         setUnCheck={setUnCheck}
                         badgeValue={badgeValue}
+                        type="price"
                     />
                 ) : (
                     <Selects
@@ -134,6 +211,7 @@ export default function FilterForm() {
                         label="Mức giá"
                         filters={filters}
                         setFilters={setFilters}
+                        type="price"
                     />
                 )}
             </Grid.Col>
@@ -152,6 +230,7 @@ export default function FilterForm() {
                         uncheck={unCheck}
                         setUnCheck={setUnCheck}
                         badgeValue={badgeValue}
+                        type="brand"
                     />
                 ) : (
                     <Selects
@@ -159,6 +238,7 @@ export default function FilterForm() {
                         label="Thương hiệu"
                         filters={filters}
                         setFilters={setFilters}
+                        type="brand"
                     />
                 )}
             </Grid.Col>
@@ -177,6 +257,7 @@ export default function FilterForm() {
                         uncheck={unCheck}
                         setUnCheck={setUnCheck}
                         badgeValue={badgeValue}
+                        type="sex"
                     />
                 ) : (
                     <Selects
@@ -184,6 +265,7 @@ export default function FilterForm() {
                         label="Loại đồng hồ"
                         filters={filters}
                         setFilters={setFilters}
+                        type="sex"
                     />
                 )}
             </Grid.Col>
@@ -202,6 +284,7 @@ export default function FilterForm() {
                         uncheck={unCheck}
                         setUnCheck={setUnCheck}
                         badgeValue={badgeValue}
+                        type="category"
                     />
                 ) : (
                     <Selects
@@ -209,6 +292,7 @@ export default function FilterForm() {
                         label="Dòng máy"
                         filters={filters}
                         setFilters={setFilters}
+                        type="category"
                     />
                 )}
             </Grid.Col>

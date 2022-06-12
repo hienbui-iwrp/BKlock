@@ -13,6 +13,7 @@ import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import React from "react";
 import { PaymentItemsContext } from "../general/paymentItemsContext";
 import "../../css/cart.css";
+import axios from "axios";
 
 export default function CartCard({
     id,
@@ -39,6 +40,20 @@ export default function CartCard({
 
     const handleDecrement = () => {
         count > 0 ? setCount(count - 1) : setCount(0);
+        quantity = count;
+    };
+
+    const handleDelete = async () => {
+        await axios
+            .delete("http://localhost/Server/controllers/cart/delete.php", {
+                data: { customId: sessionStorage.getItem("id"), productId: id },
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     React.useEffect(() => {
@@ -175,6 +190,7 @@ export default function CartCard({
                                 className="cart-card-btn-delete"
                                 onMouseEnter={() => setTooltip2(true)}
                                 onMouseLeave={() => setTooltip2(false)}
+                                onClick={() => handleDelete()}
                             >
                                 <AiOutlineCloseCircle size={30} />
                             </Button>

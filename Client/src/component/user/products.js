@@ -63,7 +63,7 @@ export default function Products() {
                 >
                     <Grid>
                         <Grid.Col lg={2}>
-                            <FilterForm />
+                            <FilterForm setData={setData} />
                         </Grid.Col>
                         <Grid.Col lg={10}>
                             <Slider type="image" items={items} />
