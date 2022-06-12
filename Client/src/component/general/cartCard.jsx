@@ -24,6 +24,8 @@ export default function CartCard({
     brand,
     setTotal,
     payment,
+    cartList,
+    setCartList,
 }) {
     const [paymentItems, setPaymentItems] =
         React.useContext(PaymentItemsContext);
@@ -35,21 +37,46 @@ export default function CartCard({
 
     const handleIncrement = () => {
         setCount(count + 1);
-        quantity = count;
+        for (let i = 0; i < cartList.length; i++) {
+            if (cartList[i].id === id) {
+                let carts = [...cartList];
+                let newCart = cartList[i];
+                newCart.quantity = (count + 1).toString();
+                cartList[i] = newCart;
+                setCartList(carts);
+            }
+        }
     };
 
     const handleDecrement = () => {
         count > 0 ? setCount(count - 1) : setCount(0);
-        quantity = count;
+        for (let i = 0; i < cartList.length; i++) {
+            if (cartList[i].id === id) {
+                let carts = [...cartList];
+                let newCart = cartList[i];
+                newCart.quantity = (count > 0 ? count - 1 : 0).toString();
+                cartList[i] = newCart;
+                setCartList(carts);
+            }
+        }
     };
 
     const handleDelete = async () => {
+        const data = {
+            customId: sessionStorage.getItem("id"),
+            productId: id,
+        };
         await axios
-            .delete("http://localhost/Server/controllers/cart/delete.php", {
-                data: { customId: sessionStorage.getItem("id"), productId: id },
-            })
+            .post(
+                "http://localhost/Server/controllers/cart/delete.php",
+                JSON.stringify(data)
+            )
             .then((response) => {
                 console.log(response);
+                if (response.data === "success") {
+                    const newCart = cartList.filter((item) => item.id !== id);
+                    setCartList(newCart);
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -68,7 +95,7 @@ export default function CartCard({
     React.useEffect(() => {
         setTotal((money) => money + count * price - totalLocal);
         setTotalLocal(count * price);
-    }, [count]);
+    }, [count, cartList]);
 
     return (
         <Grid className="cart-card-container" align="center">

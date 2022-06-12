@@ -57,7 +57,7 @@ const handleSubmit =
                 userId: sessionStorage.getItem("id"),
             };
 
-            axios
+            await axios
                 .post(
                     "http://localhost/Server/controllers/payment/make.php",
                     JSON.stringify(billInfo)

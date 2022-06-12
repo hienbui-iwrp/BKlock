@@ -190,7 +190,10 @@ export default function FilterForm({ setData }) {
                     })}
                 </div>
 
-                {filters.length > 0 ? (
+                {filters["price"].length > 0 ||
+                filters["brand"].length > 0 ||
+                filters["category"].length > 0 ||
+                filters["sex"].length > 0 ? (
                     <Button
                         variant="outline"
                         style={{

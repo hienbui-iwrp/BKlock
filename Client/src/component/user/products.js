@@ -1,10 +1,11 @@
 import React from 'react';
 import ProductCard from '../../component/general/productCard';
-import { Grid, Pagination, Text, Image, MediaQuery } from '@mantine/core';
+import { Grid, Pagination, Text, Image, MediaQuery, TextInput } from '@mantine/core';
 import Slider from '../general/slider';
 import FilterForm from '../../component/general/filterForm';
 import { useLocation } from 'react-router-dom';
 import { useWindowScroll } from '@mantine/hooks';
+import { useForm } from '@mantine/form';
 import BreadCrumbs from '../general/breadCrumb';
 import axios from 'axios';
 import "../../css/product.css";
@@ -15,7 +16,6 @@ export default function Products() {
     const [scroll, scrollTo] = useWindowScroll();
     const [size, setSize] = React.useState([0, 0]);
     const [data, setData] = React.useState([]);
-    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     const [activePage, setPage] = React.useState(1);
     const maxItemPerPage = 6;
     const total = Math.ceil(data.length / maxItemPerPage);
@@ -26,6 +26,12 @@ export default function Products() {
         "https://cdn.watchstore.vn/uploads/brands/seiko-logo.jpg",
         "https://cdn.watchstore.vn/uploads/brands/citizen-logo.jpg",
     ];
+
+    const form = useForm({
+        initialValues: {
+            search: '',
+        }
+    });
 
     React.useLayoutEffect(() => {
         function updateSize() {
@@ -47,6 +53,16 @@ export default function Products() {
             })
     }, [])
 
+    const handleSearch = (values) => {
+        axios.get(`http://localhost/Server/controllers/product/search.php?search=${values.search}`)
+            .then((response) => {
+                console.log(response);
+                setData(response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+
     return <>
         <Grid style={{ marginTop: 60 }}>
             <Grid.Col lg={12} className="product-ad-container">
@@ -66,16 +82,33 @@ export default function Products() {
                             <FilterForm setData={setData} />
                         </Grid.Col>
                         <Grid.Col lg={10}>
-                            <Slider type="image" items={items} />
                             <Grid>
-                                {data.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(product => {
-                                    return (
-                                        <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={product.id}>
-                                            <ProductCard id={product.id} img={product.image} brand={product.brand} name={product.name} price={product.price} />
-                                        </Grid.Col>
-                                    );
-                                })}
+                                <Grid.Col>
+                                    <Slider type="image" items={items} />
+                                </Grid.Col>
+                                <Grid.Col>
+                                    <form onSubmit={form.onSubmit((values) => handleSearch(values))}>
+                                        <TextInput
+                                            style={{ marginLeft: 10, marginRight: 10 }}
+                                            placeholder="Tên sản phẩm"
+                                            label="Tìm kiếm sản phẩm"
+                                            {...form.getInputProps('search')}
+                                        />
+                                    </form>
+                                </Grid.Col>
+                                <Grid.Col>
+                                    <Grid>
+                                        {data.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(product => {
+                                            return (
+                                                <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={product.id}>
+                                                    <ProductCard id={product.id} img={product.image} brand={product.brand} name={product.name} price={product.price} />
+                                                </Grid.Col>
+                                            );
+                                        })}
+                                    </Grid>
+                                </Grid.Col>
                             </Grid>
+
                         </Grid.Col>
                     </Grid>
                 </MediaQuery>

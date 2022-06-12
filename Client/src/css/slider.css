@@ -38,6 +38,7 @@
 .custom-right-arrow {
     height: 30%;
     position: absolute;
+    max-width: 10%;
     right: 1%;
     top: 30%;
     color: rgba(0, 0, 0, 0.5);
@@ -46,6 +47,7 @@
 
 .custom-left-arrow {
     left: 10px;
+    max-width: 5% !important;
 }
 
 .custom-right-arrow:hover {

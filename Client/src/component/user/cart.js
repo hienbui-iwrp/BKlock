@@ -10,6 +10,29 @@ export default function Cart() {
     const [total, setTotal] = useState(0);
     const [cartList, setCartList] = useState([])
 
+    const handlePayment = async () => {
+        const products = cartList.map((cartItem) => {
+            return {
+                id: cartItem.id,
+                quantity: cartItem.quantity,
+            };
+        });
+
+        const newCart = {
+            product: products,
+            userId: sessionStorage.getItem("id"),
+        };
+
+        console.log(JSON.stringify(newCart));
+        await axios.put('http://localhost/Server/Controllers/cart/update.php', JSON.stringify(newCart))
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     React.useEffect(() => {
         const id = sessionStorage.getItem('id');
         axios.get(`http://localhost/Server/controllers/cart/get.php?id=${id}`)
@@ -24,6 +47,7 @@ export default function Cart() {
     React.useEffect(() => {
         console.log(cartList);
     }, [cartList])
+
     return (
         <Container style={{ marginTop: 80 }} className="cart-container">
             <Grid >
@@ -33,7 +57,7 @@ export default function Cart() {
                     </Title>
                 </Grid.Col>
                 {cartList.map(item => <Grid.Col>
-                    <CartCard id={item.id} img={item.image} name={item.name} price={item.price} quantity={item.quantity} brand={item.brand} setTotal={setTotal} />
+                    <CartCard id={item.id} img={item.image} name={item.name} price={item.price} quantity={item.quantity} brand={item.brand} setTotal={setTotal} cartList={cartList} setCartList={setCartList} />
                 </Grid.Col>)}
                 <Grid.Col>
                     <Group direction="row" position="right">
@@ -42,7 +66,7 @@ export default function Cart() {
                             currency: "VND",
                         }).format(total)}</Text>
                         <Link to="/payment">
-                            <Button variant='outline' color="#339af0" size='lg' >Thanh toán</Button>
+                            <Button variant='outline' color="#339af0" size='lg' onClick={() => handlePayment()}>Thanh toán</Button>
                         </Link>
                     </Group>
                 </Grid.Col>
