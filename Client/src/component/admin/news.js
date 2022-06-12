@@ -18,6 +18,7 @@ import { useViewportSize } from "@mantine/hooks";
 import { Trash } from "tabler-icons-react";
 import "../../css/product.css";
 
+
 import { useForm } from '@mantine/form';
 
 export default function News() {
@@ -42,6 +43,7 @@ export default function News() {
             </Group>
         </Stack>
             <div className="news">
+
                 <Grid style={{ margin: 0 }}>
                     {arr
                         .slice(
@@ -75,6 +77,7 @@ export default function News() {
                 />
                 ;
             </div>
+
             <Modal centered
                     opened={opened}
                     onClose={() => setOpened(false)}
@@ -87,6 +90,7 @@ export default function News() {
                         </Grid.Col>
                     </Grid>
                 </Modal>
+
         </>
     );
 }
@@ -144,6 +148,7 @@ function Item() {
         </div>
     );
 }
+
 
 function ProductDetail() {
     const { height, width } = useViewportSize();
@@ -206,3 +211,4 @@ function ProductDetail() {
         </Grid>
     );
 }
+

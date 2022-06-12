@@ -12,9 +12,9 @@ class Payment
         foreach ($products as $product) {
             if ($first) {
                 $first = false;
-                $where .= "productId = " . $product["id"];
+                $where .= "productId = " . $product->id;
             } else {
-                $where .= " or productId = " . $product["id"];
+                $where .= " or productId = " . $product->id;
             }
         }
         $query1 = "delete from adds " . $where . " and customId =" . $user;
@@ -38,7 +38,7 @@ class Payment
 
         $query3 = "";
         foreach ($products as $product) {
-            $query3 .= "insert into belong (ordCusId, ordItemId, productId, quantity) values(" . $user . ", " . $curId . ", " . $product["id"] . ", " . $product["quantity"] . ");";
+            $query3 .= "insert into belong (ordCusId, ordItemId, productId, quantity) values(" . $user . ", " . $curId . ", " . $product->id . ", " . $product->quantity . ");";
         }
 
         $result3 = Sql::getInstance()->updateData($query3);

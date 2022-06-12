@@ -16,7 +16,7 @@
 
         try{
             if (Cart::updateCart($temp)){
-            sendResponse(200, "success", "text/html");
+                sendResponse(200, "success", "text/html");
             } else {
                 sendResponse(200, "fail", "text/html");
             }

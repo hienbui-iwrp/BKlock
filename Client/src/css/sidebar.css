@@ -1,5 +1,5 @@
 .sidebar {
-    background-color: #eeeeee;
+    background-color: #eee;
     height: 100vh;
     padding: 0;
     width: 25%;
@@ -9,15 +9,23 @@
     box-shadow: 3px 1px #666;
 }
 
+.sidebar__part {
+    margin-bottom: 40px;
+}
+
 .sidebar__title {
     text-align: center;
-    background-color: #00dacb;
+    background-color: #009144;
     padding: 10px 0;
+    color: #fff;
+    font-size: 40px;
 }
 
 .sidebar__item {
     width: 100%;
     text-decoration: none;
+    font-size: 20px;
+    color: #00af52;
 }
 
 .sidebar__logo {
@@ -28,6 +36,7 @@
 
 .sidebar__item--selected {
     background: #7cf3ba;
+    color: #fff;
 }
 
 .sidebar__item--selected:hover {
@@ -35,7 +44,7 @@
 }
 
 .sidebar__item--out {
-    color: rgb(241, 183, 101);
+    color: rgb(247, 150, 13);
 }
 
 @media screen and (max-width:770px) {
