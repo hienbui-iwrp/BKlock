@@ -36,7 +36,7 @@ function App() {
           <Route path="/payment" element={<PaymentPage />} exact />
           <Route path="/user_info" element={<UserInfoPage />} exact />
           {/* admin */}
-          <Route path="/admin/detail" element={<DetailAdminPage />} exact />
+          <Route path="/admin/detail/:id" element={<DetailAdminPage />} exact />
           <Route path="/admin/member" element={<MemberAdminPage />} exact />
           <Route path="/admin/news" element={<NewsAdminPage />} exact />
           <Route path="/admin" element={<ProductsAdminPage />} exact />
