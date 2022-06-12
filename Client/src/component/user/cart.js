@@ -24,7 +24,7 @@ export default function Cart() {
         };
 
         console.log(JSON.stringify(newCart));
-        await axios.put('http://localhost/Server/Controllers/cart/update.php', JSON.stringify(newCart))
+        await axios.post('http://localhost/Server/Controllers/cart/update.php', JSON.stringify(newCart))
             .then((response) => {
                 console.log(response);
             })

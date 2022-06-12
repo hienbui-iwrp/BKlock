@@ -124,29 +124,25 @@ function ProductAdd(param) {
             name: '',
             image: '',
             brand: 'Rolex',
-            type: 'Đồng hồ nam',
+            sex: 'Đồng hồ nam',
             category: 'Cơ - automatic',
             price: 0,
             descript: '',
-        },
-        validate: {
-            name: (value) => value,
-            image: (value) => value,
-            brand: (value) => value,
-            type: (value) => value,
-            category: (value) => value,
-            price: (value) => value,
-            descript: (value) => value,
-        },
+        }
     });
 
-    function Add() {
-        axios.post("http://localhost/Server/Controllers/product/add.php", form.values, {
-            headers: {
-                "Content-Type": "application/json",
-                'Access-Control-Allow-Origin': '*',
-            }
-        })
+    function Add(values) {
+        const data = {
+            name: values.name,
+            image: values.image,
+            brand: values.brand,
+            sex: values.sex,
+            category: values.category,
+            price: values.price,
+            descript: values.descript
+        }
+        console.log(JSON.stringify(data));
+        axios.post("http://localhost/Server/Controllers/product/add.php", JSON.stringify(data))
             .then((response) => {
                 console.log(response);
                 param.setRender(!param.render);
@@ -181,7 +177,7 @@ function ProductAdd(param) {
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
 
                 <Box >
-                    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                    <form onSubmit={form.onSubmit((values) => Add(values))}>
                         <TextInput
                             required
                             label="Tên"
@@ -250,7 +246,7 @@ function ProductAdd(param) {
 
 
                         <Group position="right" mt="md">
-                            <Button color="green" onClick={() => { Add() }}>Thêm sản phẩm</Button>
+                            <Button color="green" type="submit">Thêm sản phẩm</Button>
                         </Group>
                     </form>
                 </Box>
