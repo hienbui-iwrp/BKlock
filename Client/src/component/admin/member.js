@@ -70,7 +70,7 @@ export default function Member() {
                             <Grid>
                                 {arr.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(x => {
                                     return (                                     
-                                        <Grid.Col xs={11} key={x} style={{margin:"0 auto"}}>
+                                        <Grid.Col key={x} 
                                             <p>hi</p>
                                         </Grid.Col>
                                     );

@@ -11,14 +11,18 @@ import {
     Title,
     Button
 } from "@mantine/core";
+import { Container, MediaQuery,TextInput,Box, Modal, Stack, Textarea } from '@mantine/core';
 import "../../css/news.css";
 import { useLocation } from "react-router-dom";
 import { useViewportSize } from "@mantine/hooks";
 import { Trash } from "tabler-icons-react";
 import "../../css/product.css";
-import "../../css/admin.css";
+
+
+import { useForm } from '@mantine/form';
 
 export default function News() {
+    const [opened, setOpened] = React.useState(false);
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     const [activePage, setPage] = React.useState(1);
     const maxItemPerPage = 6;
@@ -27,11 +31,19 @@ export default function News() {
     const { height, width } = useViewportSize();
     return (
         <>
-            <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5%", borderBottom: "1px solid #000" }}>
+            {/* <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5%", borderBottom: "1px solid #000" }}>
                 <Title order={1} >Quản Lý Tin Tức </Title>
+            </Group> */}
+            <Stack justify="space-around">
+            <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5% 0", borderBottom: "1px solid #000" }}>
+                <Title order={1} >Quản lý Tin Tức </Title>
             </Group>
+            <Group position="apart" direction="row" style={{ padding: "5px 5%" }}>
+                <Button radius="xl" onClick={() => setOpened(true)}>Thêm mới </Button>
+            </Group>
+        </Stack>
             <div className="news">
-                <Space h="xl" />
+
                 <Grid style={{ margin: 0 }}>
                     {arr
                         .slice(
@@ -65,6 +77,20 @@ export default function News() {
                 />
                 ;
             </div>
+
+            <Modal centered
+                    opened={opened}
+                    onClose={() => setOpened(false)}
+                    title="Thêm tin tức mới"
+                    size="lg"
+                >
+                    <Grid>
+                        <Grid.Col>
+                            <ProductDetail />
+                        </Grid.Col>
+                    </Grid>
+                </Modal>
+
         </>
     );
 }
@@ -122,3 +148,67 @@ function Item() {
         </div>
     );
 }
+
+
+function ProductDetail() {
+    const { height, width } = useViewportSize();
+    const form = useForm({
+        initialValues: {
+            title: 'ABC',
+            content: 'rolex',
+        },
+        validate: {
+            title: (value) => value,
+            content: (value) => value
+        },
+    });
+    return (
+        <Grid>
+            <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
+                <MediaQuery
+                    query="(max-width: 1800px) and (min-width: 900px)"
+                    styles={{
+                        border: "1px solid #f1f1f1",
+                    }}
+                >
+                    <Container className="detail-image-container">
+                        <Image
+                            src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png"
+                            alt="watch"
+                            height="320px"
+                            fit="contain"
+                        />
+                    </Container>
+                </MediaQuery>
+                <Group position="left" mt="md">
+                    <Button variant="outline" color="dark">Chọn ảnh</Button>
+                </Group>
+            </Grid.Col>
+            <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
+
+                <Box >
+                    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                        <TextInput
+                            required
+                            label="Title"
+                            placeholder="Input title"
+                            {...form.getInputProps('title')}
+                        />
+                        <Textarea
+                            label="Content"
+                            placeholder="Input content"
+                            autosize
+                            minRows={10}
+                            maxRows={10}
+                            {...form.getInputProps('content')}
+                        />
+                        <Group position="right" mt="md">
+                            <Button type="submit" color="green">Thêm sản phẩm</Button>
+                        </Group>
+                    </form>
+                </Box>
+            </Grid.Col>
+        </Grid>
+    );
+}
+
