@@ -11,6 +11,7 @@ import {
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import React from "react";
+import { PaymentItemsContext } from "../general/paymentItemsContext";
 import "../../css/cart.css";
 
 export default function CartCard({
@@ -22,7 +23,9 @@ export default function CartCard({
     setTotal,
     payment,
 }) {
-    const [count, setCount] = React.useState(quantity);
+    const [paymentItems, setPaymentItems] =
+        React.useContext(PaymentItemsContext);
+    const [count, setCount] = React.useState(parseInt(quantity));
     const [totalLocal, setTotalLocal] = React.useState(0);
     const [checked, setChecked] = React.useState(false);
     const [tooltip1, setTooltip1] = React.useState(false);
@@ -36,14 +39,10 @@ export default function CartCard({
     const handleDecrement = () => {
         count > 0 ? setCount(count - 1) : setCount(0);
     };
-    React.useEffect(() => {
-        console.log(totalLocal);
-    }, []);
 
     React.useEffect(() => {
         setTotal((money) => money + count * price - totalLocal);
         setTotalLocal(count * price);
-        console.log(quantity);
     }, [count]);
 
     return (
@@ -134,7 +133,19 @@ export default function CartCard({
                                     className="cart-card-btn-check"
                                     onMouseEnter={() => setTooltip1(true)}
                                     onMouseLeave={() => setTooltip1(false)}
-                                    onClick={() => setChecked(true)}
+                                    onClick={() => {
+                                        setChecked(true);
+                                        setPaymentItems((o) => [
+                                            ...o,
+                                            {
+                                                img,
+                                                name,
+                                                price,
+                                                count,
+                                                brand,
+                                            },
+                                        ]);
+                                    }}
                                 >
                                     <AiOutlineCheckCircle size={30} />
                                 </Button>

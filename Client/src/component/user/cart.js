@@ -3,14 +3,11 @@ import { Button, Container, Grid, Group, Text, Title } from '@mantine/core';
 import '../../css/cart.css';
 import { useState, useContext, useEffect } from 'react';
 import CartCard from '../general/cartCard';
-import { PaymentItemsContext } from '../general/paymentItemsContext';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Cart() {
     const [total, setTotal] = useState(0);
-    const [paymentItems, setPaymentItems] = useContext(PaymentItemsContext);
-
     const [cartList, setCartList] = useState([])
 
     React.useEffect(() => {
@@ -37,9 +34,12 @@ export default function Cart() {
                 </Grid.Col>)}
                 <Grid.Col>
                     <Group direction="row" position="right">
-                        <Text style={{ fontSize: 30, fontWeight: '500' }}>Tổng tiền: ${total}</Text>
+                        <Text style={{ fontSize: 30, fontWeight: '500' }}>Tổng tiền: {new Intl.NumberFormat("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                        }).format(total)}</Text>
                         <Link to="/payment">
-                            <Button variant='outline' color="#339af0" size='lg' onClick={() => setPaymentItems(cartList)}>Thanh toán</Button>
+                            <Button variant='outline' color="#339af0" size='lg' >Thanh toán</Button>
                         </Link>
                     </Group>
                 </Grid.Col>

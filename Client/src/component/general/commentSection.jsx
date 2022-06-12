@@ -12,11 +12,12 @@ export default function CommentSection({ id }) {
     const user = sessionStorage.getItem("userName");
 
     React.useEffect(() => {
-        console.log(id);
         axios
             .get(`http://localhost/Server/controllers/comment/get.php?id=${id}`)
             .then((response) => {
-                setComments(response.data);
+                if (typeof response.data !== "string") {
+                    setComments(response.data);
+                }
             })
             .catch((error) => {
                 console.log(error);

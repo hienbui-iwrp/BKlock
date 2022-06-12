@@ -6,14 +6,19 @@ import {
     MediaQuery,
     Badge,
     Group,
-    List,
+    Popover,
     Button,
 } from "@mantine/core";
 import "../../css/detail.css";
 import React from "react";
 import { useViewportSize } from "@mantine/hooks";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Check, X } from "tabler-icons-react";
 import { SiCashapp } from "react-icons/si";
+import { useWindowScroll } from "@mantine/hooks";
+import { PaymentItemsContext } from "../general/paymentItemsContext";
 
 export default function ProductDetail({
     id,
@@ -26,6 +31,35 @@ export default function ProductDetail({
     description,
 }) {
     const { height, width } = useViewportSize();
+    const [failed, setFailed] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const [paymentItems, setPaymentItems] =
+        React.useContext(PaymentItemsContext);
+    const [scroll, scrollTo] = useWindowScroll();
+
+    const handleAddToCart = () => {
+        const data = {
+            customId: sessionStorage.getItem("id"),
+            productId: id,
+            quantity: 1,
+        };
+
+        axios
+            .post(
+                "http://localhost/Server/controllers/cart/add.php",
+                JSON.stringify(data)
+            )
+            .then((response) => {
+                if (response.data !== "success") {
+                    setFailed(true);
+                } else {
+                    setSuccess(true);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <Grid>
@@ -56,9 +90,32 @@ export default function ProductDetail({
                         marginBottom: 20,
                     }}
                 >
-                    <Text className={width < 900 ? "detail-product-name" : ""}>
-                        {name}
-                    </Text>
+                    <Popover
+                        opened={!failed ? success : failed}
+                        onClose={() => setFailed(false)}
+                        target={
+                            <Text
+                                className={
+                                    width < 900 ? "detail-product-name" : ""
+                                }
+                            >
+                                {name}
+                            </Text>
+                        }
+                        width={260}
+                        position="right"
+                        withArrow
+                    >
+                        {failed ? (
+                            <Text color="gray">
+                                Sản phẩm đã có trong giỏ hàng <X color="red" />
+                            </Text>
+                        ) : (
+                            <Text color="gray">
+                                Thêm thành công <Check color="green" />
+                            </Text>
+                        )}
+                    </Popover>
                 </MediaQuery>
                 {width > 900 ? (
                     <Group direction="column">
@@ -108,18 +165,34 @@ export default function ProductDetail({
                 </MediaQuery>
 
                 <Group direction="row" style={{ marginLeft: 40 }}>
-                    <Button
-                        leftIcon={<SiCashapp />}
-                        variant="outline"
-                        className="product-card-btn"
-                    >
-                        Mua ngay
-                    </Button>
+                    <Link to="/payment" style={{ textDecoration: "none" }}>
+                        <Button
+                            leftIcon={<SiCashapp />}
+                            variant="outline"
+                            className="product-card-btn"
+                            onClick={() => {
+                                setPaymentItems([
+                                    {
+                                        id,
+                                        img,
+                                        brand,
+                                        name,
+                                        price,
+                                        count: 1,
+                                    },
+                                ]);
+                                scrollTo({ y: 0 });
+                            }}
+                        >
+                            Mua ngay
+                        </Button>
+                    </Link>
 
                     <Button
                         leftIcon={<MdOutlineAddShoppingCart />}
                         variant="outline"
                         className="product-card-btn"
+                        onClick={handleAddToCart}
                     >
                         Thêm vào giỏ hàng
                     </Button>

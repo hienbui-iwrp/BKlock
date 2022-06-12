@@ -11,6 +11,9 @@ export default function Payment() {
     const [paymentItems, setPaymentItems] =
         React.useContext(PaymentItemsContext);
 
+    React.useEffect(() => {
+        console.log(paymentItems);
+    }, []);
     return (
         <Grid className="payment-container">
             <Grid.Col xl={4} className="payment-col-wrapper">
@@ -23,7 +26,9 @@ export default function Payment() {
                             img={item.img}
                             name={item.name}
                             price={item.price}
-                            quantity={item.quantity ? item.quantity : 1}
+                            quantity={
+                                item.quantity ? item.quantity : item.count
+                            }
                             brand={item.brand}
                             setTotal={setTotal}
                             payment={true}
