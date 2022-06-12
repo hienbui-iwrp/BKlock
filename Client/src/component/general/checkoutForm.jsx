@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Space, Button, Text, Popover, Modal } from "@mantine/core";
+import { Space, Button, Text, Popover, Modal, TextInput } from "@mantine/core";
 import {
     Elements,
     CardElement,
@@ -83,83 +83,99 @@ const PaymentForm = ({ total }) => {
     const [paymentItems, setPaymentItems] =
         React.useContext(PaymentItemsContext);
 
+    const user = sessionStorage.getItem("userName");
+
     return (
         <form className="payment-form-wrapper">
-            <Logo classname="form-company-logo" />
-            <Space h="md" />
-            <Text weight={600} style={{ fontSize: 36, textAlign: "center" }}>
-                Thanh toán
-            </Text>
-            <Space h="md" />
-            <Text style={{ textAlign: "left" }}>
-                Vui lòng điền đầy đủ thông tin thẻ
-            </Text>
-            <Space h="md" />
-            <Text style={{ textAlign: "left" }}>
-                * Chúng tôi chấp nhận các phương thức thanh toán khác nhau như
-                visa, mastercard, ...
-            </Text>
-            <Space h="md" />
-            <Text style={{ fontSize: 30, fontWeight: "500" }}>
-                Tổng tiền:{" "}
-                {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                }).format(total)}
-            </Text>
-            <Popover
-                opened={failed}
-                onClose={() => setFailed(false)}
-                target={<div></div>}
-                width={260}
-                position="top"
-                withArrow
-            >
-                <Text size="sm">{message}</Text>
-            </Popover>
-            <Modal
-                opened={success}
-                onClose={() => {
-                    navigate("/");
-                    setSuccess(false);
-                }}
-                size={300}
-                withCloseButton={false}
-                centered
-            >
-                <Text size="xl" style={{ textAlign: "center" }}>
-                    {message}
-                </Text>
-                <Space h="md" />
-                <Link to="/">
-                    <Button color="dark" className="form-signin-submit-btn">
-                        Trở về trang chủ
+            {user ? (
+                <>
+                    <Logo classname="form-company-logo" />
+                    <Space h="md" />
+                    <Text
+                        weight={600}
+                        style={{ fontSize: 36, textAlign: "center" }}
+                    >
+                        Thanh toán
+                    </Text>
+                    <Space h="md" />
+                    <Text style={{ textAlign: "left" }}>
+                        Vui lòng điền đầy đủ thông tin thẻ
+                    </Text>
+                    <Space h="md" />
+                    <Text style={{ textAlign: "left" }}>
+                        * Chúng tôi chấp nhận các phương thức thanh toán khác
+                        nhau như visa, mastercard, ...
+                    </Text>
+                    <Space h="md" />
+                    <Text style={{ fontSize: 30, fontWeight: "500" }}>
+                        Tổng tiền:{" "}
+                        {new Intl.NumberFormat("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                        }).format(total)}
+                    </Text>
+                    <Popover
+                        opened={failed}
+                        onClose={() => setFailed(false)}
+                        target={<div></div>}
+                        width={260}
+                        position="top"
+                        withArrow
+                    >
+                        <Text size="sm">{message}</Text>
+                    </Popover>
+                    <Modal
+                        opened={success}
+                        onClose={() => {
+                            navigate("/");
+                            setSuccess(false);
+                        }}
+                        size={300}
+                        withCloseButton={false}
+                        centered
+                    >
+                        <Text size="xl" style={{ textAlign: "center" }}>
+                            {message}
+                        </Text>
+                        <Space h="md" />
+                        <Link to="/">
+                            <Button
+                                color="dark"
+                                className="form-signin-submit-btn"
+                            >
+                                Trở về trang chủ
+                            </Button>
+                        </Link>
+                    </Modal>
+                    <CardElement />
+                    <Space h="md" />
+                    <Button
+                        onClick={handleSubmit(
+                            stripe,
+                            elements,
+                            setFailed,
+                            setMessage,
+                            setSuccess,
+                            paymentItems,
+                            setPaymentItems
+                        )}
+                        color="dark"
+                        className="form-signin-submit-btn"
+                        style={{ marginBottom: 10 }}
+                    >
+                        MUA
                     </Button>
-                </Link>
-            </Modal>
-            <CardElement />
-            <Space h="md" />
-            <Button
-                onClick={handleSubmit(
-                    stripe,
-                    elements,
-                    setFailed,
-                    setMessage,
-                    setSuccess,
-                    paymentItems,
-                    setPaymentItems
-                )}
-                color="dark"
-                className="form-signin-submit-btn"
-                style={{ marginBottom: 10 }}
-            >
-                MUA
-            </Button>
-            <Link to="/cart">
-                <Button color="dark" className="form-signin-submit-btn">
-                    Quay lại giỏ hàng
-                </Button>
-            </Link>
+                    <Link to="/cart">
+                        <Button color="dark" className="form-signin-submit-btn">
+                            Quay lại giỏ hàng
+                        </Button>
+                    </Link>
+                </>
+            ) : (
+                <Text>
+                    Vui lòng <Link to="/signin">Đăng nhập</Link> để thanh toán
+                </Text>
+            )}
         </form>
     );
 };

@@ -3,6 +3,7 @@ import { Grid, Text, Divider, Button, Badge, ActionIcon } from "@mantine/core";
 import { HiOutlineFilter, HiX } from "react-icons/hi";
 import CheckBoxes from "./checkBoxGroup";
 import Selects from "./multiSelect";
+import axios from "axios";
 
 const prices = [
     { value: "0 - 1.000.000đ", checked: false },
@@ -95,7 +96,23 @@ export default function FilterForm({ setData }) {
     }, []);
 
     React.useEffect(() => {
-        console.log(filters);
+        console.log(JSON.stringify(filters));
+        async function fetchFilter() {
+            await axios
+                .get(
+                    "http://localhost/Server/Controllers/product/filter.php",
+                    JSON.stringify(filters)
+                )
+                .then((response) => {
+                    console.log(response);
+                    setData(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+
+        fetchFilter();
     }, [filters]);
 
     return (
