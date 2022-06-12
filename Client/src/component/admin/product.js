@@ -2,30 +2,51 @@ import React from 'react';
 import { Card, Image, Text, Button, Group, Badge } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { Trash } from "tabler-icons-react";
+import axios from 'axios';
 import "../../css/product.css";
 import "../../css/admin.css";
 
-export default function Product() {
+export default function Product({ id, img, brand, name, price, setData }) {
+
+
+    function remove() {
+        if (window.confirm(`Bạn muốn xóa ${name}?`)) {
+            axios.delete(`http://localhost/Server/Controllers/product/delete.php?id=${id}`, {}, {
+                headers: {
+                    "Content-Type": "application/json",
+                    'Access-Control-Allow-Origin': '*',
+                }
+            })
+                .then((response) => {
+                    console.log(response);
+                    setData(response.data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+    }
     return (
         <div style={{ width: "auto", marginLeft: 10, marginRight: 10 }}>
             <Card shadow="lg" p="lg">
                 <Card.Section>
-                    <Link to="/admin/detail">
-                        <Image src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png" height="50vh" alt="watch" className='product-img-zoom' />
+                    <Link to={`/admin/detail/${id}`}>
+                        <Image src={img} height="50vh" alt="watch" className='product-img-zoom' />
                     </Link>
                 </Card.Section>
                 <Badge size="lg" color="red">
-                    Rolex
+                    {brand}
                 </Badge>
                 <Link to="/admin/detail" style={{ textDecoration: 'none' }}>
-                    <Text weight={500} className="product-name">Rolex abc xyz</Text>
+                    <Text weight={500} className="product-name">{name}</Text>
                 </Link>
-                <Text weight={500} color="red" align='right' size="xl">$2,000</Text>
+                <Text weight={500} color="red" align='right' size="xl">${price}</Text>
                 <Group direction='row' grow style={{ marginTop: 10 }}>
 
                     <Button fullWidth leftIcon={<Trash />}
                         variant="outline" color="red"
                         className="product-card-btn admin__delete-btn"
+                        onClick={() => remove()}
                     >
                         Xóa
                     </Button>
@@ -36,3 +57,5 @@ export default function Product() {
         </div>
     );
 }
+
+
