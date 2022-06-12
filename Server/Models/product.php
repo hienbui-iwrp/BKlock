@@ -76,10 +76,10 @@ class Product
 
     public static function filterProduct($body)
     {
-        $prices = $body['price'];
-        $brands = $body['brand'];
-        $types = $body['sex'];
-        $categories = $body['category'];
+        $prices = $body->price;
+        $brands = $body->brand;
+        $types = $body->sex;
+        $categories = $body->category;
 
         $query = "select * from product ";
         if (count($prices) != 0 || count($brands) != 0 || count($types) != 0 || count($categories) != 0) {

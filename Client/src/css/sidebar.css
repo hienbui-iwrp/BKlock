@@ -6,6 +6,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    box-shadow: 3px 1px #666;
 }
 
 .sidebar__part {
@@ -27,6 +28,12 @@
     color: #00af52;
 }
 
+.sidebar__logo {
+    width: 100%;
+    height:80px;
+    background: black;
+}
+
 .sidebar__item--selected {
     background: #7cf3ba;
     color: #fff;
@@ -37,7 +44,7 @@
 }
 
 .sidebar__item--out {
-    color: rgb(247, 150, 13);
+    color: rgb(247, 10, 13);
 }
 
 @media screen and (max-width:770px) {
