@@ -12,7 +12,7 @@
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         $temp = json_decode(file_get_contents("php://input"));
 
-        if (Payment::makePayment($temp["product"], $temp['userId'])) {
+        if (Payment::makePayment($temp->product, $temp->userId)) {
             sendResponse(200, "success", "text/html");
         } else {
             sendResponse(200, "fail", "text/html");
