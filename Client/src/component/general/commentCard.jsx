@@ -2,7 +2,7 @@ import { Grid, Group, Avatar, Text } from "@mantine/core";
 import "../../css/detail.css";
 import React from "react";
 
-export default function CommentCard() {
+export default function CommentCard({ name, date, content }) {
     return (
         <Grid className="comment-card-container">
             <Grid.Col>
@@ -12,17 +12,13 @@ export default function CommentCard() {
                         alt="avatar"
                     />
                     <Group direction="column" spacing={1}>
-                        <Text>Nguyễn Văn A</Text>
-                        <Text color="#cfcfcf">11-06-2022</Text>
+                        <Text>{name}</Text>
+                        <Text color="#cfcfcf">{date}</Text>
                     </Group>
                 </Group>
             </Grid.Col>
             <Grid.Col>
-                <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-                    facere praesentium eos quis at perspiciatis sint nobis
-                    veritatis exercitationem quam!
-                </Text>
+                <Text>{content}</Text>
             </Grid.Col>
         </Grid>
     );

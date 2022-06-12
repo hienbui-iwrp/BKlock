@@ -12,7 +12,7 @@
     // }
     include "../../models/product.php";
     include "../api.php";
-
+    header("Access-Control-Allow-Origin: *");
     if($_SERVER["REQUEST_METHOD"] === "POST"){
         $temp = json_decode(file_get_contents("php://input"));
 

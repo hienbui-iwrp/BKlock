@@ -14,18 +14,18 @@ export default function Signin() {
   const navigate = useNavigate();
   const form = useForm({
     initialValues: {
-      username: '',
+      userName: '',
       password: '',
     },
 
     validate: {
-      username: (value) => value.length === 0 ? "Vui lòng nhập tên đăng nhập" : null,
+      userName: (value) => value.length === 0 ? "Vui lòng nhập tên đăng nhập" : null,
       password: (value) => value.length === 0 ? "Vui lòng nhập mật khẩu" : null,
     }
   });
 
   const handleLogin = (values) => {
-    axios.post('http://localhost/Server/controllers/account/login.php', values).then((response) => {
+    axios.post('http://localhost/Server/controllers/account/login.php', JSON.stringify(values)).then((response) => {
       if (response.data) {
         console.log("login successfull");
         sessionStorage.setItem('userName', response.data.userName);
@@ -34,6 +34,7 @@ export default function Signin() {
         sessionStorage.setItem('phoneNum', response.data.phoneNum);
         sessionStorage.setItem('address', response.data.address);
         sessionStorage.setItem('fullName', response.data.fullName);
+        sessionStorage.setItem('id', response.data.id);
         navigate("/");
       } else {
         console.log("login failed");
@@ -62,7 +63,7 @@ export default function Signin() {
             <TextInput
               label="Tài khoản"
               placeholder="username"
-              {...form.getInputProps('username')}
+              {...form.getInputProps('userName')}
               className="form-username-input"
             />
             <Space h="md" />

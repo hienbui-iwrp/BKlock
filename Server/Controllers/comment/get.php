@@ -4,7 +4,7 @@
 
     include "../../models/comment.php";
     include "../api.php";
-    
+    header("Access-Control-Allow-Origin: *");
     if($_SERVER["REQUEST_METHOD"] === "GET"){
         $queries = array();
         parse_str($_SERVER['QUERY_STRING'], $queries);

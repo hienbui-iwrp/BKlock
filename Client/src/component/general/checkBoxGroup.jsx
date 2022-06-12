@@ -11,6 +11,7 @@ export default function CheckBoxes({
     uncheck,
     setUnCheck,
     badgeValue,
+    type,
 }) {
     const [values, handlers] = useListState(items);
     React.useEffect(() => {
@@ -25,6 +26,21 @@ export default function CheckBoxes({
         let index = values.findIndex((ele) => ele.value === badgeValue);
         handlers.setItemProp(index, "checked", false);
     }, [badgeValue]);
+
+    const handleCheck = (value, type) => {
+        let tempFilters = { ...filters };
+        tempFilters[type] = [...tempFilters[type], value];
+        setFilters(tempFilters);
+    };
+
+    const handleUncheck = (value, type) => {
+        let tempFilters = { ...filters };
+        const index = tempFilters[type].indexOf(value);
+        if (index > -1) {
+            tempFilters[type].splice(index, 1);
+        }
+        setFilters(tempFilters);
+    };
 
     return (
         <>
@@ -44,11 +60,13 @@ export default function CheckBoxes({
                         onChange={(event) => {
                             /* Set the filter array */
                             event.currentTarget.checked
-                                ? setFilters((arr) => [...arr, item.value])
-                                : setFilters(
-                                      filters.filter(
-                                          (ele) => ele !== item.value
-                                      )
+                                ? handleCheck(
+                                      type !== "price" ? item.value : index,
+                                      type
+                                  )
+                                : handleUncheck(
+                                      type !== "price" ? item.value : index,
+                                      type
                                   );
 
                             /* set checked value of checkbox */

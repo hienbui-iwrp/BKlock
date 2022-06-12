@@ -6,8 +6,8 @@
 
 include "../../models/product.php";
 include "../api.php";
-
-if ($_SERVER["REQUEST_METHOD"] === "GET") {
+header("Access-Control-Allow-Origin: *");
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $body = json_decode(file_get_contents("php://input"));
 
     sendResponse(200, json_encode(Product::filterProduct($body)), "application/json");

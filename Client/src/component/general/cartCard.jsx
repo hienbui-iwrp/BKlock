@@ -11,9 +11,12 @@ import {
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import React from "react";
+import { PaymentItemsContext } from "../general/paymentItemsContext";
 import "../../css/cart.css";
+import axios from "axios";
 
 export default function CartCard({
+    id,
     img,
     name,
     price,
@@ -22,7 +25,9 @@ export default function CartCard({
     setTotal,
     payment,
 }) {
-    const [count, setCount] = React.useState(quantity);
+    const [paymentItems, setPaymentItems] =
+        React.useContext(PaymentItemsContext);
+    const [count, setCount] = React.useState(parseInt(quantity));
     const [totalLocal, setTotalLocal] = React.useState(0);
     const [checked, setChecked] = React.useState(false);
     const [tooltip1, setTooltip1] = React.useState(false);
@@ -35,26 +40,48 @@ export default function CartCard({
 
     const handleDecrement = () => {
         count > 0 ? setCount(count - 1) : setCount(0);
+        quantity = count;
     };
+
+    const handleDelete = async () => {
+        await axios
+            .delete("http://localhost/Server/controllers/cart/delete.php", {
+                data: { customId: sessionStorage.getItem("id"), productId: id },
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    React.useEffect(() => {
+        for (var i = 0; i < paymentItems.length; i++) {
+            if (paymentItems[i].name == name) {
+                setChecked(true);
+                break;
+            }
+        }
+    }, []);
 
     React.useEffect(() => {
         setTotal((money) => money + count * price - totalLocal);
         setTotalLocal(count * price);
-        console.log(quantity);
     }, [count]);
 
     return (
         <Grid className="cart-card-container" align="center">
-            <Grid.Col xl={2} lg={2} md={2} className="cart-card-img-container">
+            <Grid.Col xl={3} lg={3} md={3} className="cart-card-img-container">
                 <Image
                     src={img}
                     className="cart-card-img"
                     height="25vh"
-                    width="auto"
+                    width="100%"
                     fit="contain"
                 />
             </Grid.Col>
-            <Grid.Col xl={3} lg={3} md={3}>
+            <Grid.Col xl={2} lg={2} md={2}>
                 <Grid className="cart-card-product-container">
                     <Grid.Col>
                         <Badge size="lg" color="red">
@@ -101,10 +128,22 @@ export default function CartCard({
             <Grid.Col xl={3} lg={3} md={3}>
                 <Group direction="column">
                     <Text weight={500} color="red" align="right" size="xl">
-                        Giá: <b>${price}</b>
+                        Giá:{" "}
+                        <b>
+                            {new Intl.NumberFormat("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }).format(price)}
+                        </b>
                     </Text>
                     <Text weight={500} color="red" align="right" size="xl">
-                        Thành tiền: <b>${totalLocal}</b>
+                        Thành tiền:{" "}
+                        <b>
+                            {new Intl.NumberFormat("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }).format(totalLocal)}
+                        </b>
                     </Text>
                 </Group>
             </Grid.Col>
@@ -119,7 +158,20 @@ export default function CartCard({
                                     className="cart-card-btn-check"
                                     onMouseEnter={() => setTooltip1(true)}
                                     onMouseLeave={() => setTooltip1(false)}
-                                    onClick={() => setChecked(true)}
+                                    onClick={() => {
+                                        setChecked(true);
+                                        setPaymentItems((o) => [
+                                            ...o,
+                                            {
+                                                id,
+                                                img,
+                                                name,
+                                                price,
+                                                count,
+                                                brand,
+                                            },
+                                        ]);
+                                    }}
                                 >
                                     <AiOutlineCheckCircle size={30} />
                                 </Button>
@@ -138,6 +190,7 @@ export default function CartCard({
                                 className="cart-card-btn-delete"
                                 onMouseEnter={() => setTooltip2(true)}
                                 onMouseLeave={() => setTooltip2(false)}
+                                onClick={() => handleDelete()}
                             >
                                 <AiOutlineCloseCircle size={30} />
                             </Button>

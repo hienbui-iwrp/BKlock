@@ -15,12 +15,12 @@ export default function Detail() {
     const { height, width } = useViewportSize();
 
     React.useEffect(() => {
-        axios.get(`http://localhost/Server/controllers/product/getdetail.php?id=${params.id}`).then((response) => {
-            console.log(response.data);
-            setData(() => response.data);
-        }).catch((error) => {
-            console.log(error);
-        })
+        axios.get(`http://localhost/Server/controllers/product/getdetail.php?id=${params.id}`)
+            .then((response) => {
+                setData(() => response.data);
+            }).catch((error) => {
+                console.log(error);
+            })
     }, [])
 
     return (
@@ -40,7 +40,7 @@ export default function Detail() {
                     />
                 </Grid.Col>
                 <Grid.Col>
-                    <CommentSection />
+                    <CommentSection id={data.id} />
                 </Grid.Col>
             </Grid>
         </Container>

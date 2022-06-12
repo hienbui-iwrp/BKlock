@@ -4,7 +4,7 @@
     class Cart{
 
         public static function getCart($id){
-            $query = "SELECT image, name, price, quantity, brand FROM `adds`, `product` WHERE productId = id AND customId = " . $id;
+            $query = "SELECT id, image, name, price, quantity, brand FROM `adds`, `product` WHERE productId = id AND customId = " . $id;
             $temp = Sql::getInstance()->getData($query);
             $temp_array = array();
 
