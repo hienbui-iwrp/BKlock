@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Stack, Button, Title, Anchor, Grid } from '@mantine/core';
-
+import { Stack, Button, Text, Anchor, Grid } from '@mantine/core';
+import { SiClockify } from "react-icons/si";
 import { Power } from "tabler-icons-react";
 import '../../css/sidebar.css'
 

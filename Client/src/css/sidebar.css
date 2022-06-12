@@ -44,7 +44,7 @@
 }
 
 .sidebar__item--out {
-    color: rgb(247, 150, 13);
+    color: rgb(247, 10, 13);
 }
 
 @media screen and (max-width:770px) {
