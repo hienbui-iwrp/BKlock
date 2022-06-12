@@ -1,6 +1,8 @@
 import React from 'react';
 import Product from '../../component/admin/product';
-import { Container, MediaQuery, Grid, Image, Pagination, Stack,Title, Input, Button, Modal, Group, Select } from '@mantine/core';
+
+import { Container, MediaQuery, Image, Text, Modal, Select } from '@mantine/core';
+import { Grid, Pagination, Group, Input, Button, Title, Stack } from '@mantine/core';
 import { TextInput, NumberInput, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useViewportSize } from "@mantine/hooks";
@@ -40,7 +42,7 @@ export default function Products() {
                 <Title order={1} >Quản lý Sản Phẩm </Title>
             </Group>
             <Group position="apart" direction="row" style={{ padding: "5px 5%" }}>
-                <Button radius="xl" onClick={() => setOpened(true)}>Thêm sản phẩm </Button>
+                <Button radius="xl" onClick={() => setOpened(true)}>Thêm mới </Button>
                 <Group direction="row" style={{ width: 300 }}>
                     <Input
                         placeholder="Tìm kiếm"
@@ -64,7 +66,7 @@ export default function Products() {
                 </Grid>
             </Grid.Col>
             <Grid.Col>
-                <Modal centered 
+                <Modal centered
                     opened={opened}
                     onClose={() => setOpened(false)}
                     title="Thêm sản phẩm mới"
@@ -77,9 +79,6 @@ export default function Products() {
                     </Grid>
                 </Modal>
 
-                <Group position="center">
-                    <Button onClick={() => setOpened(true)}>Open Modal</Button>
-                </Group>
             </Grid.Col>
         </Grid>
         <Pagination onChange={(page) => {
@@ -128,7 +127,7 @@ function ProductDetail() {
                     </Container>
                 </MediaQuery>
                 <Group position="left" mt="md">
-                            <Button variant="outline" color="dark">Chọn ảnh</Button>
+                    <Button variant="outline" color="dark">Chọn ảnh</Button>
                 </Group>
             </Grid.Col>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
