@@ -1,6 +1,6 @@
 import React from 'react';
 import Product from '../../component/admin/product';
-import { Container, MediaQuery, Grid, Image, Pagination, Text, Input, Button, Modal, Group, Select } from '@mantine/core';
+import { Container, MediaQuery, Grid, Image, Pagination, Stack,Title, Input, Button, Modal, Group, Select } from '@mantine/core';
 import { TextInput, NumberInput, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useViewportSize } from "@mantine/hooks";
