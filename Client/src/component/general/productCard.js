@@ -24,6 +24,7 @@ export default function ProductCard({ id, img, brand, name, price }) {
 
         axios.post('http://localhost/Server/controllers/cart/add.php', JSON.stringify(data))
             .then((response) => {
+                console.log(response);
                 if (response.data !== "success") {
                     setFailed(true);
                 }
