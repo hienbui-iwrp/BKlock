@@ -22,5 +22,11 @@
             $temp = Sql::getInstance()->updateData($query);
             return $temp;
         }
+
+        public static function delete($cmt){
+            $query = "DELETE FROM `comment` WHERE `id` = '$cmt->id' AND `productId` = '$cmt->productId';";
+            $temp = Sql::getInstance()->updateData($query);
+            return $temp;
+        }
     }
 ?>
