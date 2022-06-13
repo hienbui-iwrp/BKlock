@@ -153,9 +153,7 @@ export default function Navbar() {
                                                 variant="link"
                                                 component="a"
                                                 onClick={() =>
-                                                    sessionStorage.removeItem(
-                                                        "userName"
-                                                    )
+                                                    sessionStorage.clear()
                                                 }
                                                 href="/"
                                             >
@@ -260,9 +258,7 @@ export default function Navbar() {
                                                 variant="link"
                                                 component="a"
                                                 onClick={() =>
-                                                    sessionStorage.removeItem(
-                                                        "userName"
-                                                    )
+                                                    sessionStorage.clear()
                                                 }
                                                 href="/"
                                             >

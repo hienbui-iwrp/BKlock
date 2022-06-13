@@ -98,13 +98,13 @@ export default function Products() {
                                 </Grid.Col>
                                 <Grid.Col>
                                     <Grid>
-                                        {data.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(product => {
+                                        {data.length > 0 ? data.slice((activePage - 1) * maxItemPerPage, activePage * maxItemPerPage).map(product => {
                                             return (
                                                 <Grid.Col xl={4} lg={4} md={6} sm={6} xs={12} key={product.id}>
                                                     <ProductCard id={product.id} img={product.image} brand={product.brand} name={product.name} price={product.price} />
                                                 </Grid.Col>
                                             );
-                                        })}
+                                        }) : <Text size='lg' weight={500} style={{ marginLeft: 20 }}>Không có sản phẩm phù hợp</Text>}
                                     </Grid>
                                 </Grid.Col>
                             </Grid>

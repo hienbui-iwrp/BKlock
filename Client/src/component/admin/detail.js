@@ -15,7 +15,7 @@ import { TextInput, NumberInput, Box, Avatar } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import "../../css/detail.css";
 import { useViewportSize } from "@mantine/hooks";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from 'axios';
 
 export default function Detail() {
@@ -48,7 +48,7 @@ function ProductDetail() {
             descript: ""
         },
         validate: {
-            name: (value) => value? value : data.name,
+            name: (value) => value ? value : data.name,
             brand: (value) => value ? value : data.brand,
             type: (value) => value ? value : data.type,
             category: (value) => value ? value : data.category,
@@ -61,8 +61,8 @@ function ProductDetail() {
         axios.get(`http://localhost/Server/Controllers/product/getdetail.php?id=${params.id}`)
             .then((response) => {
                 setData(() => response.data);
-                form.setValues({ 
-                    name:response.data.name,
+                form.setValues({
+                    name: response.data.name,
                     brand: response.data.brand,
                     type: response.data.sex,
                     price: response.data.price,
@@ -75,8 +75,8 @@ function ProductDetail() {
             })
     }, [])
 
-    
-    const handleAddProduct = (values) => {
+
+    const handleUpdateProduct = (values) => {
         console.log(values);
         const data = {
             id: params.id,
@@ -92,10 +92,11 @@ function ProductDetail() {
         axios.post("http://localhost/Server/Controllers/product/update.php", JSON.stringify(data))
             .then((response) => {
                 console.log(response);
+                alert("Cập nhật thành công");
             })
             .catch((error) => {
                 console.log(error);
-        })
+            })
     }
     return (
         <Grid>
@@ -187,7 +188,7 @@ function ProductDetail() {
                         />
 
                         <Group position="right" mt="md">
-                            <Button onClick={()=>handleAddProduct(form.values)}>Lưu</Button>
+                            <Button onClick={() => handleUpdateProduct(form.values)}>Lưu</Button>
                         </Group>
                     </form>
                 </Box>
@@ -233,14 +234,14 @@ function CommentSection() {
             </Grid.Col>
             <Grid.Col>
                 {comments.map((comment, i) => {
-                    return <CommentCard 
-                                name={comment.userName}
-                                date={comment.comDate}
-                                content={comment.content}
-                                id={comment.id}
-                                productId={params.id}
-                                key={i}
-                                />;
+                    return <CommentCard
+                        name={comment.userName}
+                        date={comment.comDate}
+                        content={comment.content}
+                        id={comment.id}
+                        productId={params.id}
+                        key={i}
+                    />;
                 })}
             </Grid.Col>
         </Grid>
@@ -259,36 +260,36 @@ function CommentCard({ name, date, content,id, productId }) {
             axios.post(`http://localhost/Server/Controllers/comment/delete.php`,JSON.stringify(obj))
                 .then((response) => {
                     setRend(true);
-                     console.log(response);
+                    console.log(response);
                 })
                 .catch((error) => {
                     console.log(error);
                 })
         }
-        
+
     }
     return (
         <>
-        {rend ? <></> : (<Grid className="comment-card-container">
-            <Grid.Col>
-                <Group direction="row">
-                    <Avatar
-                        src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg"
-                        alt="avatar"
-                    />
-                    <Group direction="column" spacing={1}>
-                        <Text>{name}</Text>
-                        <Text color="#cfcfcf">{date}</Text>
+            {rend ? <></> : (<Grid className="comment-card-container">
+                <Grid.Col>
+                    <Group direction="row">
+                        <Avatar
+                            src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg"
+                            alt="avatar"
+                        />
+                        <Group direction="column" spacing={1}>
+                            <Text>{name}</Text>
+                            <Text color="#cfcfcf">{date}</Text>
+                        </Group>
+                        <Button variant="outline" color="red" className="admin__delete-btn" onClick={() => handleDelete()}>Delete</Button>
                     </Group>
-                    <Button variant="outline" color="red" className ="admin__delete-btn" onClick={()=>handleDelete()}>Delete</Button>
-                </Group>
-            </Grid.Col>
-            <Grid.Col>
-                <Text>
-                {content}
-                </Text>
-            </Grid.Col>
-        </Grid>)}
+                </Grid.Col>
+                <Grid.Col>
+                    <Text>
+                        {content}
+                    </Text>
+                </Grid.Col>
+            </Grid>)}
         </>
     );
 }

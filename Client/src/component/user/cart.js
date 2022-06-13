@@ -34,18 +34,29 @@ export default function Cart() {
     }
 
     React.useEffect(() => {
-        const id = sessionStorage.getItem('id');
-        axios.get(`http://localhost/Server/controllers/cart/get.php?id=${id}`)
-            .then((response) => {
-                console.log(response.data);
-                setCartList(response.data)
-            }).catch((error) => {
-                console.log(error);
-            })
+        if (localStorage.getItem("cart")) {
+            setCartList(JSON.parse(localStorage.getItem("cart")));
+        } else {
+            const id = sessionStorage.getItem('id');
+            axios.get(`http://localhost/Server/controllers/cart/get.php?id=${id}`)
+                .then((response) => {
+                    console.log(response.data);
+                    setCartList(response.data)
+                }).catch((error) => {
+                    console.log(error);
+                })
+        }
     }, [])
 
     React.useEffect(() => {
-        console.log(cartList);
+        if (cartList.length > 0) {
+            const totals = cartList.reduce((total, item) => total + parseInt(item.quantity) * parseInt(item.price), 0)
+            setTotal(totals);
+        }
+        else {
+            setTotal(0);
+        }
+        console.log(total);
     }, [cartList])
 
     return (
