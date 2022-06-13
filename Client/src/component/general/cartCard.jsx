@@ -78,16 +78,18 @@ export default function CartCard({
             )
             .then((response) => {
                 console.log(response);
-                if (response.data === "success") {
-                    setTotalLocal((money) => count * price);
-                    setTotal((money) => money - totalLocal);
-                    const newCart = cartList.filter((item) => item.id !== id);
-                    setCartList(newCart);
-                }
             })
             .catch((error) => {
                 console.log(error);
             });
+
+        setTotalLocal((money) => count * price);
+        setTotal((money) => money - totalLocal);
+        const newCart = cartList.filter((item) => item.id !== id);
+        setCartList(newCart);
+        if (localStorage.getItem("cart")) {
+            localStorage.setItem("cart", JSON.stringify(newCart));
+        }
     };
 
     React.useEffect(() => {

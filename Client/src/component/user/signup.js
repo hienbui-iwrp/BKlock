@@ -104,7 +104,6 @@ export default function Signup() {
               width={200}
               position="bottom"
               withArrow
-              style={{ backgroundColor: "black" }}
             >
               <Text color="gray">Tài khoản đã tồn tại <X size={20} color="red" /></Text>
             </Popover>
