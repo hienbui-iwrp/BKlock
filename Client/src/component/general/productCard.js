@@ -12,10 +12,29 @@ import axios from 'axios';
 export default function ProductCard({ id, img, brand, name, price }) {
     const [scroll, scrollTo] = useWindowScroll();
     const [paymentItems, setPaymentItems] = React.useContext(PaymentItemsContext);
+    const [reqLogin, setReqLogin] = React.useState(false);
     const [failed, setFailed] = React.useState(false);
     const [success, setSuccess] = React.useState(false);
 
     const handleAddToCart = () => {
+        const userid = sessionStorage.getItem("id");
+        if (!userid) {
+            if (!localStorage.getItem("cart")) {
+                localStorage.setItem("cart", JSON.stringify([]));
+            }
+            let tempCart = JSON.parse(localStorage.getItem("cart"));
+            for (let i = 0; i < tempCart.length; i++) {
+                if (tempCart[i].id === id) {
+                    console.log(tempCart[i].id);
+                    setFailed(true);
+                    return false;
+                }
+            }
+            tempCart.push({ id: id, image: img, brand: brand, name: name, price: price, quantity: 1 });
+            localStorage.setItem("cart", JSON.stringify(tempCart));
+            setSuccess(true);
+            return false;
+        }
         const data = {
             "customId": sessionStorage.getItem("id"),
             "productId": id,
@@ -46,7 +65,7 @@ export default function ProductCard({ id, img, brand, name, price }) {
                 </Card.Section>
                 <Popover
                     opened={!failed ? success : failed}
-                    onClose={() => setFailed(false)}
+                    onClose={() => { setFailed(false); setSuccess(false) }}
                     target={<Badge size="lg" color="red">
                         {brand}
                     </Badge>}
@@ -54,7 +73,7 @@ export default function ProductCard({ id, img, brand, name, price }) {
                     position="right"
                     withArrow
                 >
-                    {failed ?
+                    {reqLogin ? <Text color="gray">Vui lòng đăng nhập để mua hàng <X color='red' /></Text> : failed ?
                         <Text color="gray">Sản phẩm đã có trong giỏ hàng <X color='red' /></Text> : success ?
                             <Text color="gray">Thêm thành công  <Check color='green' /></Text> : null}
                 </Popover>

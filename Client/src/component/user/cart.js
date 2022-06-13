@@ -34,14 +34,18 @@ export default function Cart() {
     }
 
     React.useEffect(() => {
-        const id = sessionStorage.getItem('id');
-        axios.get(`http://localhost/Server/controllers/cart/get.php?id=${id}`)
-            .then((response) => {
-                console.log(response.data);
-                setCartList(response.data)
-            }).catch((error) => {
-                console.log(error);
-            })
+        if (localStorage.getItem("cart")) {
+            setCartList(JSON.parse(localStorage.getItem("cart")));
+        } else {
+            const id = sessionStorage.getItem('id');
+            axios.get(`http://localhost/Server/controllers/cart/get.php?id=${id}`)
+                .then((response) => {
+                    console.log(response.data);
+                    setCartList(response.data)
+                }).catch((error) => {
+                    console.log(error);
+                })
+        }
     }, [])
 
     React.useEffect(() => {

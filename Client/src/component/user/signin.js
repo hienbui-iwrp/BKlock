@@ -35,6 +35,7 @@ export default function Signin() {
         sessionStorage.setItem('address', response.data.address);
         sessionStorage.setItem('fullName', response.data.fullName);
         sessionStorage.setItem('id', response.data.id);
+        localStorage.removeItem('cart');
         navigate("/");
       } else {
         console.log("login failed");

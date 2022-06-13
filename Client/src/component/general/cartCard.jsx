@@ -22,6 +22,7 @@ export default function CartCard({
     price,
     quantity,
     brand,
+    setTotal,
     payment,
     cartList,
     setCartList,
@@ -79,6 +80,7 @@ export default function CartCard({
                 console.log(response);
                 if (response.data === "success") {
                     setTotalLocal((money) => count * price);
+                    setTotal((money) => money - totalLocal);
                     const newCart = cartList.filter((item) => item.id !== id);
                     setCartList(newCart);
                 }
@@ -99,6 +101,9 @@ export default function CartCard({
 
     React.useEffect(() => {
         setTotalLocal(parseInt(quantity) * parseInt(price));
+        setTotal(
+            (money) => money + parseInt(quantity) * parseInt(price) - totalLocal
+        );
     }, [cartList]);
 
     return (
