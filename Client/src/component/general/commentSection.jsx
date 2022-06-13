@@ -1,5 +1,6 @@
 import { Grid, Text, MediaQuery, Textarea, Button, Group } from "@mantine/core";
 import { useViewportSize } from "@mantine/hooks";
+import { useForm } from "@mantine/form";
 import CommentCard from "./commentCard";
 import "../../css/detail.css";
 import React from "react";
@@ -8,8 +9,12 @@ import axios from "axios";
 export default function CommentSection({ id }) {
     const { height, width } = useViewportSize();
     const [comments, setComments] = React.useState([]);
-    const arr = [1, 2, 3, 4, 5];
     const user = sessionStorage.getItem("userName");
+    const form = useForm({
+        initialValues: {
+            comment: "",
+        },
+    });
 
     React.useEffect(() => {
         axios
@@ -23,6 +28,35 @@ export default function CommentSection({ id }) {
                 console.log(error);
             });
     }, [id]);
+
+    const handleComment = (values) => {
+        const data = {
+            content: values.comment,
+            productId: id,
+            userName: sessionStorage.getItem("userName"),
+        };
+
+        axios
+            .post(
+                "http://localhost/Server/controllers/comment/post.php",
+                JSON.stringify(data)
+            )
+            .then((response) => {
+                if (response.data === "success") {
+                    setComments((o) => [
+                        ...o,
+                        {
+                            content: values.comment,
+                            userName: sessionStorage.getItem("userName"),
+                            comDate: "Hôm nay",
+                        },
+                    ]);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <Grid>
@@ -42,17 +76,22 @@ export default function CommentSection({ id }) {
             </Grid.Col>
             <Grid.Col>
                 {user ? (
-                    <>
+                    <form
+                        onSubmit={form.onSubmit((values) =>
+                            handleComment(values)
+                        )}
+                    >
                         <Textarea
                             placeholder="Bình luận của bạn"
                             label="Bình luận của bạn"
                             radius="md"
                             size="md"
+                            {...form.getInputProps("comment")}
                         />
                         <Group position="right" style={{ marginTop: 10 }}>
-                            <Button>Đăng</Button>
+                            <Button type="submit">Đăng</Button>
                         </Group>{" "}
-                    </>
+                    </form>
                 ) : (
                     <Text size={width > 900 ? "xl" : "lg"} align="left">
                         Vui lòng đăng nhập để bình luận

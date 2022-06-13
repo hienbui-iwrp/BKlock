@@ -18,7 +18,7 @@
         }
 
         public static function postComment($cmt){
-            $query = "INSERT INTO `comment` VALUES ('$cmt->content', '".date("Y-m-d")."', '$cmt->productId', '$cmt->userName');";
+            $query = "INSERT INTO `comment` VALUES (NULL, '$cmt->content', '".date("Y-m-d")."', '$cmt->productId', '$cmt->userName');";
             $temp = Sql::getInstance()->updateData($query);
             return $temp;
         }
