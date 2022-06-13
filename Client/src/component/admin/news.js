@@ -26,16 +26,29 @@ export default function News() {
     const [opened, setOpened] = React.useState(false);
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     const [activePage, setPage] = React.useState(1);
+    const [data, setData] = React.useState([]);
     const maxItemPerPage = 6;
     const total = Math.ceil(arr.length / maxItemPerPage);
     let location = useLocation();
     const [render, setRender] = React.useState(true);
     const { height, width } = useViewportSize();
+
+    React.useEffect(() => {
+        axios
+            .get("http://localhost/Server/controllers/news/getall.php")
+            .then((response) => {
+                console.log(response.data);
+                setData(response.data);
+                setOpened(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [render]);
+
+
     return (
         <>
-            {/* <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5%", borderBottom: "1px solid #000" }}>
-                <Title order={1} >Quản Lý Tin Tức </Title>
-            </Group> */}
             <Stack justify="space-around">
                 <Group position="center" style={{ paddingBottom: "2%", margin: "2% 5% 0", borderBottom: "1px solid #000" }}>
                     <Title order={1} >Quản lý Tin Tức </Title>
@@ -47,12 +60,12 @@ export default function News() {
             <div className="news">
 
                 <Grid style={{ margin: 0 }}>
-                    {arr
+                    {data
                         .slice(
                             (activePage - 1) * maxItemPerPage,
                             activePage * maxItemPerPage
                         )
-                        .map((x) => {
+                        .map((item) => {
                             return (
                                 <Grid.Col
                                     xl={4}
@@ -60,9 +73,16 @@ export default function News() {
                                     md={6}
                                     sm={6}
                                     xs={12}
-                                    key={x}
+                                    key={item.id}
                                 >
-                                    <Item />
+                                    <Item
+                                        render={render}
+                                        setRender={setRender}
+                                        id={item.id}
+                                        title={item.title}
+                                        date={item.newDate}
+                                        content={item.content}
+                                    />
                                 </Grid.Col>
                             );
                         })}
@@ -97,7 +117,19 @@ export default function News() {
     );
 }
 
-function Item() {
+function Item(props) {
+    function remove() {
+        if (window.confirm(`Bạn muốn xóa ${props.title}?`)) {
+            axios.post(`http://localhost/Server/Controllers/news/delete.php?id=${props.id}`)
+                .then((response) => {
+                    console.log(response);
+                    props.setRender(!props.render);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+    }
     return (
         <div
             className="new-item"
@@ -114,36 +146,24 @@ function Item() {
                 </Card.Section>
                 <Group position="apart" spacing="xs">
                     <Text weight={700} size="xl" className="news__title">
-                        Sales
+                        {props.title}
                     </Text>
                     <Button leftIcon={<Trash />}
                         variant="outline" color="red"
                         className="product-card-btn admin__delete-btn"
+                        onClick={() => { remove() }}
                     >
                         Xóa
                     </Button>
                 </Group>
 
                 <Group direction="row" style={{ marginTop: 20 }}>
-                    <Text weight={500}>6/1/2022</Text>
+                    <Text weight={500}>{props.date}</Text>
                     <Space w="xs" />
-                    <Text weight={500}>100 views</Text>
-                    <Space w="xs" />
-                    <Text weight={500}>100 likes</Text>
                 </Group>
                 <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
                     <Text weight={400} className="news__content">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into
-                        electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of
-                        Letraset sheets containing Lorem Ipsum passages, and
-                        more recently with desktop publishing software like
-                        Aldus PageMaker including versions of Lorem Ipsum.
+                        {props.content}
                     </Text>
                 </Spoiler>
             </Card>
@@ -165,14 +185,15 @@ function NewsAdd(param) {
         },
     });
 
-    function Add() {
-        axios.post("http://localhost/Server/Controllers/news/add.php", {
-            "title": form.values.title,
-            "content": form.values.content,
-            "view": "0",
-            "like": "0",
-            "adminId": 1
-        })
+    function Add(value) {
+        let data = {
+            title: value.title,
+            content: value.content,
+            view: 0,
+            like: 0,
+            adminId: 1
+        };
+        axios.post("http://localhost/Server/Controllers/news/add.php", JSON.stringify(data))
             .then((response) => {
                 console.log(response);
                 param.setRender(!param.render);
@@ -181,6 +202,7 @@ function NewsAdd(param) {
                 console.log(error);
             })
     }
+
     return (
         <Grid>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -222,7 +244,7 @@ function NewsAdd(param) {
                             {...form.getInputProps('content')}
                         />
                         <Group position="right" mt="md">
-                            <Button color="green" onClick={() => Add()}>Thêm tin tức</Button>
+                            <Button color="green" onClick={() => Add(form.values)}>Thêm tin tức</Button>
                         </Group>
                     </form>
                 </Box>

@@ -39,6 +39,7 @@ export default function Products() {
             .then((response) => {
                 console.log(response);
                 setData(response.data);
+                setOpened(false);
             })
             .catch((error) => {
                 console.log(error);
