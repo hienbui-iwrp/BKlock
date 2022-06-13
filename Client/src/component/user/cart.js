@@ -45,7 +45,14 @@ export default function Cart() {
     }, [])
 
     React.useEffect(() => {
-        console.log(cartList);
+        if (cartList.length > 0) {
+            const totals = cartList.reduce((total, item) => total + parseInt(item.quantity) * parseInt(item.price), 0)
+            setTotal(totals);
+        }
+        else {
+            setTotal(0);
+        }
+        console.log(total);
     }, [cartList])
 
     return (

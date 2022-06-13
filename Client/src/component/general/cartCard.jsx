@@ -22,7 +22,6 @@ export default function CartCard({
     price,
     quantity,
     brand,
-    setTotal,
     payment,
     cartList,
     setCartList,
@@ -34,6 +33,7 @@ export default function CartCard({
     const [checked, setChecked] = React.useState(false);
     const [tooltip1, setTooltip1] = React.useState(false);
     const [tooltip2, setTooltip2] = React.useState(false);
+    const [prices, setPrices] = React.useState(parseInt(price));
 
     const handleIncrement = () => {
         setCount(count + 1);
@@ -78,7 +78,7 @@ export default function CartCard({
             .then((response) => {
                 console.log(response);
                 if (response.data === "success") {
-                    setTotal((money) => money);
+                    setTotalLocal((money) => count * price);
                     const newCart = cartList.filter((item) => item.id !== id);
                     setCartList(newCart);
                 }
@@ -98,9 +98,6 @@ export default function CartCard({
     }, []);
 
     React.useEffect(() => {
-        setTotal(
-            (money) => money + parseInt(quantity) * parseInt(price) - totalLocal
-        );
         setTotalLocal(parseInt(quantity) * parseInt(price));
     }, [cartList]);
 
