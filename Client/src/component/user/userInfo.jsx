@@ -13,7 +13,6 @@ import { useViewportSize } from "@mantine/hooks";
 import BreadCrumbs from "../general/breadCrumb";
 import { useForm } from "@mantine/form";
 import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function UserInfo() {
