@@ -10,7 +10,8 @@
     include "../../models/comment.php";
     include "../api.php";
     header("Access-Control-Allow-Origin: *");
-    if($_SERVER["REQUEST_METHOD"] === "DELETE"){
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
+
         $temp = json_decode(file_get_contents("php://input"));
         try{
             if (Comment::delete($temp)){

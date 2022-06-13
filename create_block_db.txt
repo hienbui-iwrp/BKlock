@@ -20,6 +20,8 @@ CREATE TABLE customer (
     address VARCHAR(50),
     password VARCHAR(40) not null,
     bDate DATE not null,
+    block BOOLEAN not null default 0,
+    active BOOLEAN not null default 0,
     phoneNum VARCHAR(12),
     PRIMARY KEY (id),
     UNIQUE (userName)

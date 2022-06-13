@@ -9,7 +9,6 @@ import {
     Group,
     Button,
     Textarea,
-    Input,
     Select
 } from "@mantine/core";
 import { TextInput, NumberInput, Box, Avatar } from '@mantine/core';
@@ -18,7 +17,6 @@ import "../../css/detail.css";
 import { useViewportSize } from "@mantine/hooks";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { Id } from "tabler-icons-react";
 
 export default function Detail() {
     return (
@@ -251,11 +249,15 @@ function CommentSection() {
 }
 
 
-function CommentCard({ name, date, content, id, productId }) {
-    const [rend, setRend] = React.useState(false);
-    const handleDelete = () => {
-        if (window.confirm(`Bạn muốn xóa bình luận của ${name}?`)) {
-            axios.post(`http://localhost/Server/Controllers/comment/delete.php?id=${id}&productId=${productId}`)
+function CommentCard({ name, date, content,id, productId }) {
+    const [rend,setRend]=React.useState(false);
+    const handleDelete = ()=>{
+        if (window.confirm(`Bạn muốn xóa bình luận của ${name}?`)) {  
+                const obj = {
+                   "id": id,
+                    "productId": productId
+                 };       
+            axios.post(`http://localhost/Server/Controllers/comment/delete.php`,JSON.stringify(obj))
                 .then((response) => {
                     setRend(true);
                     console.log(response);

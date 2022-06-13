@@ -1,6 +1,8 @@
 <?php
     // Post
-    // http://localhost/controllers/account/block.php
+
+    // http://localhost/server/controllers/account/block.php
+
 
     // body json:
     // {
@@ -11,7 +13,9 @@
     header("Access-Control-Allow-Origin: *");
     $temp = json_decode(file_get_contents("php://input"));
 
-    if($_SERVER["REQUEST_METHOD"] === "PUT"){
+
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
+
         try{
             if (Account::block($temp)){
                 sendResponse(200, "success", "text/html");
