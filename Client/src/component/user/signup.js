@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import { TextInput, Button, Container, PasswordInput, Grid, Image, Space, Text } from '@mantine/core';
+import { TextInput, Button, Container, PasswordInput, Grid, Image, Space, Text, Popover } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import Logo from "../general/logo";
+import { X } from 'tabler-icons-react';
 import { useViewportSize } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,6 +12,7 @@ import "../../css/signin.css";
 export default function Signup() {
   const { height, width } = useViewportSize();
   const navigate = useNavigate();
+  const [failed, setFailed] = useState(false);
   const form = useForm({
     initialValues: {
       username: '',
@@ -29,14 +31,16 @@ export default function Signup() {
   });
 
   const handleSignup = (values) => {
-    const obj = JSON.stringify({ "username": values.username, "password": values.password, "phonenum": values.phonenumber });
+    const obj = JSON.stringify({ "userName": values.username, "password": values.password, "phoneNum": values.phonenumber });
     console.log(obj);
     axios.post('http://localhost/Server/controllers/account/signup.php', obj).then((response) => {
+      console.log(response);
       if (response.data === 'success') {
         console.log("signup successful");
         navigate("/signin");
       } else {
         console.log("signup failed");
+        setFailed(true);
       }
     }).catch((error) => {
       console.log(error);
@@ -93,7 +97,17 @@ export default function Signup() {
               className="form-username-input"
             />
             <Space h="md" />
-            <Button type="submit" color="dark" className="form-signin-submit-btn">ĐĂNG KÍ</Button>
+            <Popover
+              opened={failed}
+              onClose={() => setFailed(false)}
+              target={<Button type="submit" color="dark" className="form-signin-submit-btn" onClick={() => setFailed(false)} fullWidth>ĐĂNG KÍ</Button>}
+              width={200}
+              position="bottom"
+              withArrow
+              style={{ backgroundColor: "black" }}
+            >
+              <Text color="gray">Tài khoản đã tồn tại <X size={20} color="red" /></Text>
+            </Popover>
             <Space h="sm" />
             <Text color="gray">Đã có tài khoản ? Đăng nhập ngay <Link to="/signin">tại đây</Link></Text>
           </form>
