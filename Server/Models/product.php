@@ -199,7 +199,7 @@ class Product
 
     public static function updateProduct($prod)
     {
-        $query = "UPDATE `product` SET `price` = '" . $prod->price . "', `name` = '" . $prod->name . "', `image` = '" . $prod->image . "', `brand` = '" . $prod->brand . "', `category` = '" . $prod->category . "' WHERE `product`.`id` = " . $prod->id . "; ";
+        $query = "UPDATE `product` SET `price` = '" . $prod->price . "', `name` = '" . $prod->name . "', `image` = '" . $prod->image . "', `brand` = '" . $prod->brand . "', `category` = '" . $prod->category . "', `sex` = '$prod->sex', `descript` = '$prod->descript' WHERE `product`.`id` = " . $prod->id . "; ";
         $result = Sql::getInstance()->updateData($query);
         return $result;
     }

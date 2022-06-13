@@ -1,12 +1,12 @@
--- Admin
+
 INSERT INTO admin (userName,password) VALUES ('admin','admin');
--- User
+
 INSERT INTO customer (userName,fullName,bdate,address,phoneNum,password) VALUES ('toby','Backend python','2001-05-15','Cố đô Huế','0911123456','toby');
 INSERT INTO customer (userName,bdate,address,phoneNum,password) VALUES ('BuEmFullStack','2001-06-15','Cố đô Huế','0911666666','buemfullstack');
 INSERT INTO customer (userName,bdate,address,phoneNum,password) VALUES ('hienbui','2001-06-11','Cao nguyên Lâm Viên','0911444444','hienbui');
 
 
--- Product
+
 INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Rolex-1A",3000000,"https://cdn3.dhht.vn/wp-content/uploads/2021/01/dong-ho-rolex-nam-nu-chinh-hang-gia-bao-nhieu-danh-gia-chi-tiet.jpg","Rolex","Cơ - automatic","Đồng hồ nam");
 INSERT INTO product (name, price,image,brand,category) VALUES ("Rolex-2A",3500000,"https://cf.shopee.vn/file/1761a7ff3d35d31a6dc7ad8d0581bbbb","Rolex","Treo tường");
 INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Rolex-3PS",3200000,"https://galle.vn/upload_images/images/cau-tao-dong-ho-co.jpg","Rolex","Điện tử","Đồng hồ nam");
@@ -34,11 +34,11 @@ INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-1A",3
 INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-2BA",3000000,"https://cdn3.dhht.vn/wp-content/uploads/2021/01/dong-ho-Fossil-nam-nu-chinh-hang-gia-bao-nhieu-danh-gia-chi-tiet.jpg","Fossil","Năng lượng mặt trời","Đồng hồ trẻ em");
 INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-3A",3000000,"https://muongicungco.com/wp-content/uploads/2021/06/dong-ho-bao-thuc.jpg","Fossil","Năng lượng mặt trời","Đồng hồ nam");
 INSERT INTO product (name, price,image,brand,category,sex) VALUES ("Fossil-AA",3000000,"https://donghothuysy.vn/upload_images/images/cach-chinh-dong-ho-bao-thuc-de-ban.jpg","Fossil","Năng lượng mặt trời","Đồng hồ nam");
--- description for product
+
 UPDATE product
 SET descript='Về chiếc Oyster, ông nói: “Những phẩm chất đặc biệt của chiếc đồng hồ Rolex này khiến nó rất phù hợp với mục đích bay và tôi đề nghị sử dụng nó trên tất cả các chuyến bay đường dài của tôi trong tương lai”.';
 
--- Comment
+
 INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',2,'BuEmFullStack');
 INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',2,'BuEmFullStack');
 INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',1,'BuEmFullStack');
@@ -49,7 +49,7 @@ INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm x
 INSERT INTO comment (content,comDate,productId,userName) VALUES ('Sản phẩm xài cũng ổn, mà hơi nhanh hết pin','2017-06-15',1,'BuEmFullStack');
 INSERT INTO comment (content,comDate,productId,userName) VALUES ('Bạn nói rất đúng','2017-08-15',2,'toby');
 
--- News
+
 INSERT INTO news (title, content, newDate, adminId) VALUES ('Giảm 30% Đồng Hồ Chính Hãng - Hè Rực Rỡ Giảm Giá Đến 30%','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.",. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2021-11-6",1);
 
 INSERT INTO news (title, content, newDate, adminId) VALUES ('Bclock nâng tầm trí tuệ nhân tạo, kết hợp công nghệ điện mặt trời','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.","2021-11-6. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2022-1-1",1);
@@ -60,7 +60,7 @@ INSERT INTO news (title, content, newDate, adminId) VALUES ('Đồng hồ Thụy
 
 INSERT INTO news (title, content, newDate, adminId) VALUES ('Đồng Hồ Treo Tường Con Công Trang Trí Phòng Khách Chính Hãng Bảo Hành 36 Tháng','cụ thể, trong chuỗi hoạt động hưởng ứng sự kiện 15.3, huấn luyện viên Park Hang Seo sẽ tiếp tục đồng hành với Bclock và xuất hiện trong video quảng cáo cho 15.3 Siêu hội tiêu dùng cùng hàng loạt người dùng đến từ nhiều khu vực, ngành nghề và lứa tuổi khác nhau.","2021-11-6. Trước thềm 15.3 Siêu hội tiêu dùng, người dùng có thể giành được những phần thưởng lớn khi tham gia các cuộc thi ảnh và video TikTok với thông điệp "15.3 - Tôi dùng Bclock", diễn ra trên các nền tảng mạng xã hội của Bclock. Người tham gia sẽ có cơ hội nhận được những phần quà vô cùng hấp dẫn như 1 chiếc điện thoại Samsung Galaxy S22, voucher mua sắm trị giá 10 triệu đồng, với tổng giá trị quà tặng lên đến hơn 60 triệu đồng.',"2021-7-7",1);
 
--- Adds
+
 INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (1,3,'2021-3-3',1);
 INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (1,1,'2021-3-3',1);
 INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (2,7,'2021-3-3',2);
@@ -71,7 +71,7 @@ INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (2,5,'
 INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (2,9,'2021-5-5',1);
 INSERT INTO `adds`(`customId`, `productId`, `addDate`, `quantity`) VALUES (1,14,'2021-7-7',3);
 
--- Order_items
+
 INSERT INTO `ordered_item`(`id`, `orderDate`, `cusId`) VALUES (2,'2020-11-11',1);
 INSERT INTO `ordered_item`(`id`, `orderDate`, `cusId`) VALUES (1,'2021-11-11',2);
 INSERT INTO `ordered_item`(`id`, `orderDate`, `cusId`) VALUES (1,'2022-1-1',3);
@@ -82,7 +82,7 @@ INSERT INTO `ordered_item`(`id`, `orderDate`, `cusId`) VALUES (4,'2021-12-12',1)
 INSERT INTO `ordered_item`(`id`, `orderDate`, `cusId`) VALUES (5,'2020-10-10',1);
 INSERT INTO `ordered_item`(`id`, `orderDate`, `cusId`) VALUES (6,'2019-7-7',1);
 
--- Belong
+
 INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,1,1,1);
 INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,1,2,2);
 INSERT INTO `belong`(`ordItemId`, `ordCusId`, `productId`, `quantity`) VALUES (1,1,3,3);

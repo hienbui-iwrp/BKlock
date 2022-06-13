@@ -6,19 +6,17 @@ import {
     Image,
     Text,
     MediaQuery,
-    Badge,
     Group,
-    List,
     Button,
-    Input,
+    Textarea,
     Select
 } from "@mantine/core";
-import { TextInput, NumberInput, Box, Textarea, Avatar } from '@mantine/core';
+import { TextInput, NumberInput, Box, Avatar } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import "../../css/detail.css";
 import { useViewportSize } from "@mantine/hooks";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { SiCashapp } from "react-icons/si";
+import { useParams } from "react-router-dom";
+import axios from 'axios';
 
 export default function Detail() {
     return (
@@ -36,23 +34,70 @@ export default function Detail() {
 }
 
 function ProductDetail() {
+    let params = useParams();
     const { height, width } = useViewportSize();
-    const form = useForm({
+    const [data, setData] = React.useState({});
+    let form = useForm({
         initialValues: {
-            name: 'ABC',
-            branch: 'rolex',
-            type: 'đồng hồ nam',
-            category: 'cơ-automatic',
-            price: 2000000
+            name: "",
+            image: "https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png",
+            brand: "",
+            type: "",
+            category: "",
+            price: "",
+            descript: ""
         },
         validate: {
-            name: (value) => value,
-            branch: (value) => value,
-            type: (value) => value,
-            category: (value) => value,
-            price: (value) => value,
+            name: (value) => value ? value : data.name,
+            brand: (value) => value ? value : data.brand,
+            type: (value) => value ? value : data.type,
+            category: (value) => value ? value : data.category,
+            price: (value) => value ? value : data.price,
+            descript: (value) => value ? value : data.descript
         },
     });
+
+    React.useEffect(() => {
+        axios.get(`http://localhost/Server/Controllers/product/getdetail.php?id=${params.id}`)
+            .then((response) => {
+                setData(() => response.data);
+                form.setValues({
+                    name: response.data.name,
+                    brand: response.data.brand,
+                    type: response.data.sex,
+                    price: response.data.price,
+                    category: response.data.category,
+                    descript: response.data.descript,
+                    image: response.data.image
+                });
+            }).catch((error) => {
+                console.log(error);
+            })
+    }, [])
+
+
+    const handleUpdateProduct = (values) => {
+        console.log(values);
+        const data = {
+            id: params.id,
+            name: values.name,
+            image: values.image,
+            brand: values.brand,
+            sex: values.sex,
+            category: values.category,
+            price: values.price,
+            descript: values.descript
+        }
+        console.log(JSON.stringify(data));
+        axios.post("http://localhost/Server/Controllers/product/update.php", JSON.stringify(data))
+            .then((response) => {
+                console.log(response);
+                alert("Cập nhật thành công");
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
     return (
         <Grid>
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
@@ -64,7 +109,7 @@ function ProductDetail() {
                 >
                     <Container className="detail-image-container">
                         <Image
-                            src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png"
+                            src={form.values.image}
                             alt="watch"
                             height="500px"
                             fit="contain"
@@ -75,32 +120,40 @@ function ProductDetail() {
             <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
 
                 <Box >
-                    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                    <form>
                         <TextInput
                             required
                             label="Name"
-                            placeholder="Input Name"
+                            placeholder={data.name}
                             {...form.getInputProps('name')}
                         />
+                        <TextInput
+                            required
+                            label="Link ảnh"
+                            placeholder="Input Link"
+                            {...form.getInputProps('image')}
+                        />
                         <Select
-                            label="Branch"
+                            label="Brand"
+                            placeholder={data.brand}
                             data={[
-                                { value: 'rolex', label: 'Rolex' },
-                                { value: 'seiko', label: 'Seiko' },
-                                { value: 'casio', label: 'Casio' },
-                                { value: 'citizen', label: 'Citizen' },
-                                { value: 'fossil', label: 'Fossil' },
+                                { value: 'Rolex', label: 'Rolex' },
+                                { value: 'Seiko', label: 'Seiko' },
+                                { value: 'Casio', label: 'Casio' },
+                                { value: 'Citizen', label: 'Citizen' },
+                                { value: 'Fossil', label: 'Fossil' },
 
                             ]}
-                            {...form.getInputProps('branch')}
+                            {...form.getInputProps('brand')}
                         />
 
                         <Select
                             label="Type"
+                            placeholder={data.sex}
                             data={[
-                                { value: 'đồng hồ nam', label: 'Đồng hồ nam' },
-                                { value: 'đồng hồ nữ', label: 'Đồng hồ nữ' },
-                                { value: 'đồng hồ trẻ em', label: 'Đồng hồ trẻ em' },
+                                { value: 'Đồng hồ nam', label: 'Đồng hồ nam' },
+                                { value: 'Đồng hồ nữ', label: 'Đồng hồ nữ' },
+                                { value: 'Đồng hồ trẻ em', label: 'Đồng hồ trẻ em' },
 
                             ]}
                             {...form.getInputProps('type')}
@@ -108,11 +161,12 @@ function ProductDetail() {
 
                         <Select
                             label="Category"
+                            placeholder={data.category}
                             data={[
-                                { value: 'cơ-automatic', label: 'Cơ-automatic' },
-                                { value: 'điện tử', label: 'Điện tử' },
-                                { value: 'treo tường', label: 'Treo tường' },
-                                { value: 'năng lượng mặt trời', label: 'Năng lượng mặt trời' },
+                                { value: 'Cơ-automatic', label: 'Cơ-automatic' },
+                                { value: 'Điện tử', label: 'Điện tử' },
+                                { value: 'Treo tường', label: 'Treo tường' },
+                                { value: 'Năng lượng mặt trời', label: 'Năng lượng mặt trời' },
 
                             ]}
                             {...form.getInputProps('category')}
@@ -121,14 +175,20 @@ function ProductDetail() {
                         <NumberInput
                             required
                             label="Price"
-                            placeholder="Input Price"
+                            placeholder={data.price}
                             {...form.getInputProps('price')}
                         />
-
+                        <Textarea
+                            label="Content"
+                            placeholder={data.descript}
+                            autosize
+                            minRows={10}
+                            maxRows={10}
+                            {...form.getInputProps('content')}
+                        />
 
                         <Group position="right" mt="md">
-                            <Button variant="outline" color="red" className="admin__delete-btn">Delete</Button>
-                            <Button type="submit">Save</Button>
+                            <Button onClick={() => handleUpdateProduct(form.values)}>Lưu</Button>
                         </Group>
                     </form>
                 </Box>
@@ -140,7 +200,22 @@ function ProductDetail() {
 
 function CommentSection() {
     const { height, width } = useViewportSize();
-    const arr = [1, 2, 3, 4, 5];
+    const [comments, setComments] = React.useState([]);
+    const [render, setRender] = React.useState(true);
+    let params = useParams();
+    React.useEffect(() => {
+        axios
+            .get(`http://localhost/Server/controllers/comment/get.php?id=${params.id}`)
+            .then((response) => {
+                if (typeof response.data !== "string") {
+                    setComments(response.data);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [render]);
+
     return (
         <Grid>
             <Grid.Col>
@@ -158,8 +233,15 @@ function CommentSection() {
                 </MediaQuery>
             </Grid.Col>
             <Grid.Col>
-                {arr.map(() => {
-                    return <CommentCard />;
+                {comments.map((comment, i) => {
+                    return <CommentCard
+                        name={comment.userName}
+                        date={comment.comDate}
+                        content={comment.content}
+                        id={comment.id}
+                        productId={params.id}
+                        key={i}
+                    />;
                 })}
             </Grid.Col>
         </Grid>
@@ -167,29 +249,47 @@ function CommentSection() {
 }
 
 
-function CommentCard() {
+function CommentCard({ name, date, content,id, productId }) {
+    const [rend,setRend]=React.useState(false);
+    const handleDelete = ()=>{
+        if (window.confirm(`Bạn muốn xóa bình luận của ${name}?`)) {  
+                const obj = {
+                   "id": id,
+                    "productId": productId
+                 };       
+            axios.post(`http://localhost/Server/Controllers/comment/delete.php`,JSON.stringify(obj))
+                .then((response) => {
+                    setRend(true);
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+
+    }
     return (
-        <Grid className="comment-card-container">
-            <Grid.Col>
-                <Group direction="row">
-                    <Avatar
-                        src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg"
-                        alt="avatar"
-                    />
-                    <Group direction="column" spacing={1}>
-                        <Text>Nguyễn Văn A</Text>
-                        <Text color="#cfcfcf">11-06-2022</Text>
+        <>
+            {rend ? <></> : (<Grid className="comment-card-container">
+                <Grid.Col>
+                    <Group direction="row">
+                        <Avatar
+                            src="https://scr.vn/wp-content/uploads/2020/07/Avatar-Facebook-tr%E1%BA%AFng.jpg"
+                            alt="avatar"
+                        />
+                        <Group direction="column" spacing={1}>
+                            <Text>{name}</Text>
+                            <Text color="#cfcfcf">{date}</Text>
+                        </Group>
+                        <Button variant="outline" color="red" className="admin__delete-btn" onClick={() => handleDelete()}>Delete</Button>
                     </Group>
-                    <Button variant="outline" color="red" className ="admin__delete-btn">Delete</Button>
-                </Group>
-            </Grid.Col>
-            <Grid.Col>
-                <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
-                    facere praesentium eos quis at perspiciatis sint nobis
-                    veritatis exercitationem quam!
-                </Text>
-            </Grid.Col>
-        </Grid>
+                </Grid.Col>
+                <Grid.Col>
+                    <Text>
+                        {content}
+                    </Text>
+                </Grid.Col>
+            </Grid>)}
+        </>
     );
 }
