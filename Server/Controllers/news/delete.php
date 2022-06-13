@@ -4,7 +4,7 @@
     include "../../models/news.php";
     include "../api.php";
     header("Access-Control-Allow-Origin: *");
-    if($_SERVER["REQUEST_METHOD"] === "DELETE"){
+    if($_SERVER["REQUEST_METHOD"] === "POST"){
         $queries = array();
         parse_str($_SERVER['QUERY_STRING'], $queries);
         try{
