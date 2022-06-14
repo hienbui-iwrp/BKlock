@@ -26,6 +26,7 @@ export default function Orders() {
                     setTotal={setTotal}
                     brand={item.brand}
                     payment={true}
+                    order={true}
                 />
             </Grid.Col>
         ))}

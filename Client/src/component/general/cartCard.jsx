@@ -26,6 +26,7 @@ export default function CartCard({
     payment,
     cartList,
     setCartList,
+    order,
 }) {
     const [paymentItems, setPaymentItems] =
         React.useContext(PaymentItemsContext);
@@ -234,12 +235,12 @@ export default function CartCard({
                             </Button>
                         </Tooltip>
                     </Group>
-                ) : (
+                ) : order ? (
                     <Group direction="column">
                         <Text>Người mua: hiennguyen</Text>
                         <Text>Ngày mua: 14-06-2022</Text>
                     </Group>
-                )}
+                ) : null}
             </Grid.Col>
         </Grid>
     );
