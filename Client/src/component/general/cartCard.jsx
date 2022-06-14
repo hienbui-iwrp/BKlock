@@ -110,7 +110,7 @@ export default function CartCard({
 
     return (
         <Grid className="cart-card-container" align="center">
-            <Grid.Col xl={3} lg={3} md={3} className="cart-card-img-container">
+            <Grid.Col xl={2} lg={2} md={2} className="cart-card-img-container">
                 <Image
                     src={img}
                     className="cart-card-img"
@@ -165,7 +165,7 @@ export default function CartCard({
             </Grid.Col>
             <Grid.Col xl={3} lg={3} md={3}>
                 <Group direction="column">
-                    <Text weight={500} color="red" align="right" size="xl">
+                    <Text weight={500} color="red" align="right" size="lg">
                         Giá:{" "}
                         <b>
                             {new Intl.NumberFormat("vi-VN", {
@@ -174,7 +174,7 @@ export default function CartCard({
                             }).format(price)}
                         </b>
                     </Text>
-                    <Text weight={500} color="red" align="right" size="xl">
+                    <Text weight={500} color="red" align="right" size="lg">
                         Thành tiền:{" "}
                         <b>
                             {new Intl.NumberFormat("vi-VN", {
@@ -185,14 +185,14 @@ export default function CartCard({
                     </Text>
                 </Group>
             </Grid.Col>
-            <Grid.Col xl={2} lg={2} md={2}>
+            <Grid.Col xl={3} lg={3} md={3}>
                 {!payment ? (
                     <Group direction="column">
                         {!checked ? (
                             <Tooltip label="Xác nhận" opened={tooltip1}>
                                 <Button
                                     color="green"
-                                    variant="subtle"
+                                    variant="outline"
                                     className="cart-card-btn-check"
                                     onMouseEnter={() => setTooltip1(true)}
                                     onMouseLeave={() => setTooltip1(false)}
@@ -211,7 +211,7 @@ export default function CartCard({
                                         ]);
                                     }}
                                 >
-                                    <AiOutlineCheckCircle size={30} />
+                                    <Text size="lg">Xác nhận</Text>
                                 </Button>
                             </Tooltip>
                         ) : (
@@ -224,17 +224,22 @@ export default function CartCard({
                         <Tooltip label="Xóa" opened={tooltip2}>
                             <Button
                                 color="red"
-                                variant="subtle"
+                                variant="outline"
                                 className="cart-card-btn-delete"
                                 onMouseEnter={() => setTooltip2(true)}
                                 onMouseLeave={() => setTooltip2(false)}
                                 onClick={() => handleDelete()}
                             >
-                                <AiOutlineCloseCircle size={30} />
+                                <Text size="lg">Xóa</Text>
                             </Button>
                         </Tooltip>
                     </Group>
-                ) : null}
+                ) : (
+                    <Group direction="column">
+                        <Text>Người mua: hiennguyen</Text>
+                        <Text>Ngày mua: 14-06-2022</Text>
+                    </Group>
+                )}
             </Grid.Col>
         </Grid>
     );
