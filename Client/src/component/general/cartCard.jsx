@@ -27,6 +27,8 @@ export default function CartCard({
     cartList,
     setCartList,
     order,
+    username,
+    date,
 }) {
     const [paymentItems, setPaymentItems] =
         React.useContext(PaymentItemsContext);
@@ -237,8 +239,8 @@ export default function CartCard({
                     </Group>
                 ) : order ? (
                     <Group direction="column">
-                        <Text>Người mua: hiennguyen</Text>
-                        <Text>Ngày mua: 14-06-2022</Text>
+                        <Text>Người mua: {username}</Text>
+                        <Text>Ngày mua: {date}</Text>
                     </Group>
                 ) : null}
             </Grid.Col>

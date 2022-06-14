@@ -1,6 +1,7 @@
 import React from 'react';
 import CartCard from "../general/cartCard";
 import { Grid } from "@mantine/core";
+import axios from 'axios';
 
 const paymentItems = [{
     id: 1,
@@ -13,11 +14,20 @@ const paymentItems = [{
 
 export default function Orders() {
     const [total, setTotal] = React.useState(0);
+    const [orders, setOrders] = React.useState([])
+    React.useEffect(() => {
+        axios.get('http://localhost/Server/Controllers/payment/getAllOrdered.php').then((response) => {
+            console.log(response);
+            setOrders(response.data)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }, [])
     return <div>
-        {paymentItems.map((item) => (
+        {orders.map((item) => (
             <Grid.Col>
                 <CartCard
-                    img={item.img}
+                    img={item.image}
                     name={item.name}
                     price={item.price}
                     quantity={
@@ -26,6 +36,8 @@ export default function Orders() {
                     setTotal={setTotal}
                     brand={item.brand}
                     payment={true}
+                    username={item.userName}
+                    date={item.orderDate}
                     order={true}
                 />
             </Grid.Col>
