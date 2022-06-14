@@ -1,7 +1,9 @@
 # Cách chạy ứng dụng:
 
-# Để project ở folder htdocs của xampp và chạy các command sau:
+# Để folder Server ở folder htdocs của xampp và chạy các command sau:
 
-## cd client
+## cd client (điều hướng đến folder chứa giao diện)
 
-## npm start
+## npm i (tải các dependency cần thiết)
+
+## npm start (khởi chạy project)
