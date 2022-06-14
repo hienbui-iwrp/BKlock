@@ -192,7 +192,7 @@ class Product
 
     public static function addProduct($prod)
     {
-        $query = "INSERT INTO `product` VALUES ('" . $prod->name . "', '" . $prod->image . "', '" . $prod->descript . "', '" . $prod->brand . "', '" . $prod->category  . "', '" . $prod->sex. "', " . $prod->price . ")";
+        $query = "INSERT INTO `product` VALUES (NULL, '" . $prod->name . "', '" . $prod->image . "', '" . $prod->descript . "', '" . $prod->brand . "', '" . $prod->category  . "', '" . $prod->sex. "', " . $prod->price . ")";
         $result = Sql::getInstance()->updateData($query);
         return $result;
     }

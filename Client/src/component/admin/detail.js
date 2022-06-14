@@ -42,7 +42,7 @@ function ProductDetail() {
             name: "",
             image: "https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png",
             brand: "",
-            type: "",
+            sex: "",
             category: "",
             price: "",
             descript: ""
@@ -50,7 +50,7 @@ function ProductDetail() {
         validate: {
             name: (value) => value ? value : data.name,
             brand: (value) => value ? value : data.brand,
-            type: (value) => value ? value : data.type,
+            sex: (value) => value ? value : data.sex,
             category: (value) => value ? value : data.category,
             price: (value) => value ? value : data.price,
             descript: (value) => value ? value : data.descript
@@ -156,7 +156,7 @@ function ProductDetail() {
                                 { value: 'Đồng hồ trẻ em', label: 'Đồng hồ trẻ em' },
 
                             ]}
-                            {...form.getInputProps('type')}
+                            {...form.getInputProps('sex')}
                         />
 
                         <Select
@@ -249,15 +249,15 @@ function CommentSection() {
 }
 
 
-function CommentCard({ name, date, content,id, productId }) {
-    const [rend,setRend]=React.useState(false);
-    const handleDelete = ()=>{
-        if (window.confirm(`Bạn muốn xóa bình luận của ${name}?`)) {  
-                const obj = {
-                   "id": id,
-                    "productId": productId
-                 };       
-            axios.post(`http://localhost/Server/Controllers/comment/delete.php`,JSON.stringify(obj))
+function CommentCard({ name, date, content, id, productId }) {
+    const [rend, setRend] = React.useState(false);
+    const handleDelete = () => {
+        if (window.confirm(`Bạn muốn xóa bình luận của ${name}?`)) {
+            const obj = {
+                "id": id,
+                "productId": productId
+            };
+            axios.post(`http://localhost/Server/Controllers/comment/delete.php`, JSON.stringify(obj))
                 .then((response) => {
                     setRend(true);
                     console.log(response);

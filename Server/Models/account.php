@@ -40,7 +40,7 @@
         }
 
         public static function delete($user){
-            $query = "UPDATE `customer` SET `active` = true WHERE `customer`.`id` = ".$user->id."; ";
+            $query = "DELETE FROM `customer` WHERE `customer`.`id` = ".$user->id."; ";
             $result = Sql::getInstance()->updateData($query);
             return $result;
         }

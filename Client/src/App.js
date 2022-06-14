@@ -14,6 +14,7 @@ import UserInfoPage from './page/userInfoPage';
 import DetailAdminPage from './page/admin/detailPage';
 import MemberAdminPage from './page/admin/memberPage';
 import NewsAdminPage from './page/admin/newsPage';
+import OrdersAdminPage from './page/admin/ordersPage';
 import ProductsAdminPage from './page/admin/productsPage';
 import ScrollToTop from './component/general/scrollToTop';
 import { PaymentItemsContext } from './component/general/paymentItemsContext';
@@ -41,6 +42,7 @@ function App() {
             <Route path="/admin/detail/:id" element={<DetailAdminPage />} exact />
             <Route path="/admin/member" element={<MemberAdminPage />} exact />
             <Route path="/admin/news" element={<NewsAdminPage />} exact />
+            <Route path="admin/orders" element={<OrdersAdminPage />} exact />
             <Route path="/admin" element={<ProductsAdminPage />} exact />
             <Route path="*" element={<h1>Page not found</h1>} />
           </Routes>
