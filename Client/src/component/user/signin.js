@@ -36,7 +36,13 @@ export default function Signin() {
         sessionStorage.setItem('fullName', response.data.fullName);
         sessionStorage.setItem('id', response.data.id);
         localStorage.removeItem('cart');
-        navigate("/");
+        if (response.data.userName === "admin") {
+          navigate("/admin");
+        }
+        else {
+          navigate("/");
+        }
+
       } else {
         console.log("login failed");
         setFailed(true);

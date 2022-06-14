@@ -9,7 +9,6 @@ import {
     Checkbox,
 } from "@mantine/core";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import React from "react";
 import { PaymentItemsContext } from "../general/paymentItemsContext";
 import "../../css/cart.css";
@@ -26,6 +25,11 @@ export default function CartCard({
     payment,
     cartList,
     setCartList,
+    order,
+    username,
+    date,
+    orderId,
+    ordCusId,
 }) {
     const [paymentItems, setPaymentItems] =
         React.useContext(PaymentItemsContext);
@@ -34,7 +38,7 @@ export default function CartCard({
     const [checked, setChecked] = React.useState(false);
     const [tooltip1, setTooltip1] = React.useState(false);
     const [tooltip2, setTooltip2] = React.useState(false);
-    const [prices, setPrices] = React.useState(parseInt(price));
+    const [exist, setExist] = React.useState(true);
 
     const handleIncrement = () => {
         setCount(count + 1);
@@ -92,6 +96,27 @@ export default function CartCard({
         }
     };
 
+    const handleDeleteOrder = () => {
+        const body = {
+            productId: id,
+            ordCusId: ordCusId,
+            ordItemId: orderId,
+        };
+        console.log(JSON.stringify(body));
+        axios
+            .post(
+                "http://localhost/Server/Controllers/payment/deleteOrdered.php",
+                JSON.stringify(body)
+            )
+            .then((response) => {
+                console.log(response);
+                setExist(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     React.useEffect(() => {
         for (var i = 0; i < paymentItems.length; i++) {
             if (paymentItems[i].name == name) {
@@ -108,7 +133,7 @@ export default function CartCard({
         );
     }, [cartList]);
 
-    return (
+    return exist ? (
         <Grid className="cart-card-container" align="center">
             <Grid.Col xl={2} lg={2} md={2} className="cart-card-img-container">
                 <Image
@@ -234,13 +259,20 @@ export default function CartCard({
                             </Button>
                         </Tooltip>
                     </Group>
-                ) : (
+                ) : order ? (
                     <Group direction="column">
-                        <Text>Người mua: hiennguyen</Text>
-                        <Text>Ngày mua: 14-06-2022</Text>
+                        <Text>Người mua: {username}</Text>
+                        <Text>Ngày mua: {date}</Text>
+                        <Button
+                            variant="outline"
+                            color="red"
+                            onClick={() => handleDeleteOrder()}
+                        >
+                            Xóa
+                        </Button>
                     </Group>
-                )}
+                ) : null}
             </Grid.Col>
         </Grid>
-    );
+    ) : null;
 }
