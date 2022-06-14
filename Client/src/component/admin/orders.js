@@ -39,6 +39,9 @@ export default function Orders() {
                     username={item.userName}
                     date={item.orderDate}
                     order={true}
+                    id={item.productId}
+                    orderId={item.orderId}
+                    ordCusId={item.customerId}
                 />
             </Grid.Col>
         ))}
