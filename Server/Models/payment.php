@@ -59,4 +59,20 @@ class Payment
         
         return $temp_array;
     }
+
+    public static function getAllOrderedItem(){
+        $query = "select product.id as productId, product.name, product.image, product.brand, product.price, belong.quantity, customer.userName, ordered_item.orderDate, ordered_item.id as orderId, customer.id as customerId
+        from ((product join belong on product.id = belong.productId) join ordered_item on belong.ordCusId = ordered_item.cusId and belong.ordItemId = ordered_item.id) join customer on ordered_item.cusId = customer.id";
+
+        $temp = Sql::getInstance()->getData($query);
+        $temp_array = array();
+
+        if($temp->num_rows >0){
+            while($row = $temp->fetch_assoc()){
+                $temp_array[] = $row;
+            }
+        }
+        
+        return $temp_array;
+    }
 }
