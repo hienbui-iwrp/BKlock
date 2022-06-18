@@ -70,7 +70,32 @@ function Warant() {
                 <Stack spacing="xl">
                     <Title order={1}>Chính sách bảo hành</Title>
                     <Text size="md" classname="intro-content-container">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil porro blanditiis culpa totam sint, nesciunt nobis possimus obcaecati labore voluptates exercitationem aspernatur suscipit omnis. Eius dolorem atque mollitia placeat saepe molestiae quidem sed illum eum quibusdam, odio nemo harum hic aliquid porro distinctio explicabo. Obcaecati, omnis minima. Neque aperiam soluta distinctio aut harum eos, dolor accusamus quod blanditiis minima nihil fugit voluptatibus officiis rem, obcaecati maiores nobis quae sapiente excepturi adipisci modi! Pariatur ea quasi officia saepe iusto quibusdam inventore. Vel, error. Nulla officiis ipsum mollitia, placeat nihil praesentium at tempore. Delectus ipsum soluta iure corporis omnis autem ex doloribus dolores, quae accusantium, eveniet reprehenderit aliquam laudantium minima quas? Aperiam animi, ratione repellendus eum, nulla quos quis facilis dicta possimus officiis ea amet! Enim optio ipsum laboriosam dignissimos sit deleniti explicabo officiis, necessitatibus ratione magni. Omnis placeat praesentium quasi dolorem perferendis eaque ipsum fugit iste rerum autem ipsa assumenda, inventore velit in cumque dicta ipsam libero totam sapiente pariatur dignissimos facilis aliquid vel. Ullam, tenetur! Culpa harum voluptatem nesciunt quasi repellendus suscipit? Id facere neque labore, nisi maxime ex deleniti eius recusandae fugiat ratione illo repellat? Sed aut voluptas architecto illum, deleniti libero ducimus facilis possimus tenetur laborum suscipit aliquam.
+                        1) BẢO HÀNH CÓ CAM KẾT TRONG 12 THÁNG
+                        <br />
+                        - RIÊNG Phụ kiện có điện AVA bảo hành 3 tháng. Đồng hồ thời trang chỉ bảo hành bộ máy, không bảo hành dây, vỏ, mặt kính.
+                        <br />
+                        - Chỉ áp dụng cho sản phẩm chính, KHÔNG áp dụng cho phụ kiện đi kèm sản phẩm chính.
+                        <br />
+                        + Bảo hành trong vòng 15 ngày (tính từ ngày TGDĐ nhận máy ở trạng thái lỗi và đến ngày gọi khách hàng ra lấy lại máy đã bảo hành).
+                        <br />
+                        + Sản phẩm không bảo hành lại lần 2 trong 30 ngày kể từ ngày máy được bảo hành xong.
+                        <br />
+                        + Nếu TGDD vi phạm cam kết (bảo hành quá 15 ngày hoặc phải bảo hành lại sản phẩm lần nữa trong 30 ngày kể từ lần bảo hành trước), Khách hàng được áp dụng phương thức Hư gì đổi nấy ngay và luôn hoặc Hoàn tiền với mức phí giảm 50%.
+                        <br />
+                        *Từ tháng thứ 13 trở đi không áp dụng bảo hành cam kết, chỉ áp dụng bảo hành hãng (nếu có).
+                        <br />
+                        <br />
+                        2) HƯ GÌ ĐỔI NẤY NGAY VÀ LUÔN (KHÔNG áp dụng cho Đồng hồ (ngoại trừ 3 hãng ELIO, SKMEI, SMILE KID), phụ kiện có điện)
+                        <br />
+                        Sản phẩm hư gì thì đổi đó (cùng model, cùng dung lượng, cùng màu sắc...) đối với sản phẩm chính và đổi tương đương đối với phụ kiện đi kèm, cụ thể:
+                        <br />
+                        2.1) Hư sản phẩm chính thì đổi sản phẩm chính mới
+                        <br />
+                        - Tháng đầu tiên kể từ ngày mua: miễn phí.
+                        <br />
+                        - Tháng thứ 2 đến tháng thứ 12: phí 10% giá trị hóa đơn/tháng.
+                        <br />
+                        (VD: tháng thứ 2 phí 10%, tháng thứ 3 phí 20%...).
                     </Text>
                 </Stack>
             </Container>

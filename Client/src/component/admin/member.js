@@ -6,6 +6,7 @@ import "../../css/adminMember.css";
 
 export default function Member() {
     // const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    const [ban, setBan] = React.useState(false);
     const [mems, setMems] = React.useState([]);
     const [render, setRender] = React.useState(false);
     React.useEffect(() => {
@@ -29,6 +30,7 @@ export default function Member() {
             console.log(JSON.stringify(data));
             axios.post("http://localhost/Server/Controllers/account/block.php", JSON.stringify(data))
                 .then((response) => {
+                    setBan(true);
                     console.log(response);
                 })
                 .catch((error) => {
@@ -53,7 +55,7 @@ export default function Member() {
         }
     };
     const rows = mems.map((element) => (
-        <tr key={element.name}>
+        <tr key={element.name} style={element.block === "1" ? { backgroundColor: "gray" } : null}>
             <td>
                 <Container className='member-image-container'>
                     <Image

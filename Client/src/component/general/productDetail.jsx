@@ -119,11 +119,7 @@ export default function ProductDetail({
                             <Badge size={"lg"}>{category}</Badge>
                         </Group>
                         <Text style={{ marginLeft: 40, marginBottom: 20 }}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Natus architecto accusantium doloremque esse
-                            ipsum maxime amet odit quibusdam nulla libero
-                            debitis nesciunt aperiam eveniet, quos dolorum
-                            itaque sunt quisquam adipisci!
+                            {description}
                         </Text>
                     </Group>
                 ) : (

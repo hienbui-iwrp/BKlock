@@ -155,27 +155,7 @@ function ProductAdd(param) {
 
     return (
         <Grid>
-            <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
-                <MediaQuery
-                    query="(max-width: 1800px) and (min-width: 900px)"
-                    styles={{
-                        border: "1px solid #f1f1f1",
-                    }}
-                >
-                    <Container className="detail-image-container">
-                        <Image
-                            src="https://bossluxurywatch.vn/uploads/san-pham/rolex/sky-dweller/rolex-sky-dweller-42mm-326938-0005.png"
-                            alt="watch"
-                            height="320px"
-                            fit="contain"
-                        />
-                    </Container>
-                </MediaQuery>
-                <Group position="left" mt="md">
-                    <Button variant="outline" color="dark">Chọn ảnh</Button>
-                </Group>
-            </Grid.Col>
-            <Grid.Col xl={6} lg={6} md={6} sm={6} xs={12}>
+            <Grid.Col >
 
                 <Box >
                     <form onSubmit={form.onSubmit((values) => Add(values))}>

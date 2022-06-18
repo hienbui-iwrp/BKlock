@@ -35,7 +35,10 @@ export default function Product({ id, img, brand, name, price, setRender, render
                 <Link to="/admin/detail" style={{ textDecoration: 'none' }}>
                     <Text weight={500} className="product-name">{name}</Text>
                 </Link>
-                <Text weight={500} color="red" align='right' size="xl">${price}</Text>
+                <Text weight={500} color="red" align='right' size="xl">{new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                }).format(price)}</Text>
                 <Group direction='row' grow style={{ marginTop: 10 }}>
 
                     <Button fullWidth leftIcon={<Trash />}
